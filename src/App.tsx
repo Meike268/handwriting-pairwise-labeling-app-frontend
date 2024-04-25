@@ -3,15 +3,17 @@ import './App.css';
 import {Login} from "./Login";
 import Main from "./Main";
 
-const App: React.FC = () =>  {
+const App: React.FC = () => {
 
-  return (
-    <div className="App">
-      <Login>
-        <Main/>
-      </Login>
-    </div>
-  );
+    return (
+        <div className="App">
+            <header className="App-header">
+                <Login>
+                    <Main/>
+                </Login>
+            </header>
+        </div>
+    );
 }
 
 export default App;
