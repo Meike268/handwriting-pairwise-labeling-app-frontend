@@ -2,11 +2,12 @@ import * as localforage from "localforage";
 import Feature from "./Feature";
 import wordIds from "./wordIds";
 
+export type WordIdType = typeof wordIds[number]
 export class WordRating {
-    wordId: typeof wordIds[number]
+    wordId: WordIdType
     rating: FeatureRating
 
-    constructor(wordId: typeof wordIds[number]) {
+    constructor(wordId: WordIdType) {
         this.wordId = wordId
         this.rating = blankFeatureRating()
     }
@@ -45,7 +46,7 @@ class LocalDatabase {
         ]).then(() => console.log("Created local storage"))
     }
 
-    public async getWordRating(wordId: typeof wordIds[number]): Promise<WordRating> {
+    public async getWordRating(wordId: WordIdType): Promise<WordRating> {
         let value: WordRating | null = await this.store.getItem("word_" + wordId, (err, value) => {
             if (err !== null) {
                 console.error(err)
@@ -58,7 +59,7 @@ class LocalDatabase {
         return value
     }
 
-    public async updateWordRating(wordId: typeof wordIds[number], rating: Partial<FeatureRating>) {
+    public async updateWordRating(wordId: WordIdType, rating: Partial<FeatureRating>) {
         let wordRating = await this.getWordRating(wordId)
         wordRating.rating = {...wordRating.rating, ...rating}
         return await this.store.setItem("word_" + wordId, wordRating, (err, value) => {

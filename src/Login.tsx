@@ -16,6 +16,7 @@ export const Login: React.FC<{ children: ReactNode }> = ({children}) => {
         setCookie("user", newUser)
     }
 
+    console.log("render login")
     if (user === undefined) {
         return <div>
             <input onChange={e => setName(e.target.value)}/>
