@@ -18,8 +18,9 @@ const QuestionPage: React.FC<{wordId: WordIdType, feature: Feature, onSubmit: ()
         onSubmit()
     }
 
+    console.log(wordId + ": " + JSON.stringify(rating))
     if (rating === undefined)
-        return <div>loading...</div>
+        return <div></div>
     return <div>
         <img src={"/words/" + wordId + ".png"}/>
         <div>{feature} for {wordId}</div>
