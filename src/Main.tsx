@@ -5,6 +5,8 @@ import db, {FeatureRating, WordIdType} from "./db";
 import WordIds from "./wordIds";
 import HintPage from "./HintPage";
 import EndPage from "./EndPage";
+import wordIds from "./wordIds";
+import ProgressBar from "./ProgressBar";
 
 const FUTURE_BUFFER_MIN_LENGTH = 3
 const PAST_BUFFER_MAX_LENGTH = 10
@@ -138,11 +140,11 @@ const Main: React.FC = () => {
     const futureBufferLength = pageBuffer.length - bufferPointer - 1
     console.log ("PageBuffer health: " + pastBufferLength + " | " + futureBufferLength)
 
-    const pageData = pageBuffer[bufferPointer].data
-    const header = pageData.feature !== "End" ? as_human_readable(pageData.feature) : "Dankeschön❤️"
+    const page = pageBuffer[bufferPointer]
+    const header = page.data.feature !== "End" ? as_human_readable(page.data.feature) : "Dankeschön❤️"
 
     return <div style={{width: "100vw", height: "100vh", maxWidth: "1024px"}}>
-        <div style={{position: "relative", width: "100%", top: "0", height: "50px", overflow: "hidden", display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderBottom: "4px solid #888"}}>
+        <div style={{position: "relative", width: "100%", top: "0", height: "50px", overflow: "hidden", display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
             { pastBufferLength <= 0 ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
                 <div onClick={() => prevPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", color: "green", fontWeight: "bolder", cursor: "pointer"}}>back</div>
             }
@@ -151,6 +153,7 @@ const Main: React.FC = () => {
                 <div onClick={() => nextPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", color: "green", fontWeight: "bolder", cursor: "pointer"}}>forward</div>
             }
         </div>
+        <ProgressBar current={page.number} end={8 * (1+wordIds.length)}/>
         {pageBuffer[bufferPointer].content}
     </div>
 }
