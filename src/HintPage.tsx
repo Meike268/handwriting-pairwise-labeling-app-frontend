@@ -34,7 +34,7 @@ export default HintPage
 
 const HelpPageBaseline: React.FC = () => {
     return <div>
-        Bitte bewerte nun wie gut sich beim jeweiligen Wort daran gehalten wurde, eine Grundlinie einzuhalten.
+        Bitte bewerte bei den nun folgenden Wörtern, wie gut sich beim jeweiligen Wort daran gehalten wurde, eine einheitliche Grundlinie einzuhalten.
     </div>
 }
 
