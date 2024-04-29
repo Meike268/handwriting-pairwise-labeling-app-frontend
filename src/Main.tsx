@@ -1,6 +1,7 @@
 import React, {ReactNode, useEffect, useRef, useState} from "react";
 import QuestionPage from "./QuestionPage";
 import Feature from "./Feature";
+import db from "./db";
 
 const FUTURE_BUFFER_MIN_LENGTH = 3
 const PAST_BUFFER_MAX_LENGTH = 10
@@ -23,11 +24,12 @@ const Main: React.FC = () => {
     useEffect(() => {
         async function loadInitialPages() {
             const initialBuffer: ReactNode[] = []
-            for (let i = 0; i <= FUTURE_BUFFER_MIN_LENGTH; i++) {
+            let i = await db.getProgressPointer()
+            for (; initialBuffer.length <= FUTURE_BUFFER_MIN_LENGTH; i++) {
                 initialBuffer.push(generateNewPage(i))
             }
             setPageBuffer(initialBuffer)
-            setPageNumber(initialBuffer.length)
+            setPageNumber(i)
         }
 
         loadInitialPages().then(() => console.log("Init finished"))
@@ -35,7 +37,12 @@ const Main: React.FC = () => {
 
     function generateNewPage(n: number): ReactNode | undefined {
         // @ts-ignore
-        return <QuestionPage key={n} wordId={n.toString()} feature={Feature.INCLINATION} onSubmit={() => nextPage()}></QuestionPage>
+        return <QuestionPage key={n} wordId={n.toString()} feature={Feature.INCLINATION} onSubmit={() => onSubmit()}></QuestionPage>
+    }
+
+    function onSubmit() {
+        db.incrementProgressPointer()
+        nextPage()
     }
 
     function nextPage() {

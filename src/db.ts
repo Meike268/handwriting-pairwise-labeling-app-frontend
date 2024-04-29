@@ -35,6 +35,12 @@ function blankFeatureRating() {
     }
 }
 
+function storeDefaultCallback<T>(err: any, value: T): T {
+    if (err !== null)
+        console.error(err)
+    return value
+}
+
 class LocalDatabase {
     store: LocalForage
     constructor(instanceName: string) {
@@ -47,12 +53,7 @@ class LocalDatabase {
     }
 
     public async getWordRating(wordId: WordIdType): Promise<WordRating> {
-        let value: WordRating | null = await this.store.getItem("word_" + wordId, (err, value) => {
-            if (err !== null) {
-                console.error(err)
-            }
-            return value
-        })
+        let value: WordRating | null = await this.store.getItem("word_" + wordId, storeDefaultCallback)
 
         if (value === null)
             value = new WordRating(wordId)
@@ -62,11 +63,18 @@ class LocalDatabase {
     public async updateWordRating(wordId: WordIdType, rating: Partial<FeatureRating>) {
         let wordRating = await this.getWordRating(wordId)
         wordRating.rating = {...wordRating.rating, ...rating}
-        return await this.store.setItem("word_" + wordId, wordRating, (err, value) => {
-            if (err !== null)
-                console.error(err)
-            return value
-        })
+        return await this.store.setItem("word_" + wordId, wordRating, storeDefaultCallback)
+    }
+
+    public async incrementProgressPointer() {
+        let progressPointer = await this.getProgressPointer()
+        progressPointer++
+        return await this.store.setItem("progressPointer", progressPointer, storeDefaultCallback)
+    }
+
+    public async getProgressPointer(): Promise<number> {
+        const currentPointer: number | null = await this.store.getItem("progressPointer", storeDefaultCallback)
+        return currentPointer ?? 0
     }
 }
 
