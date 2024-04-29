@@ -1,18 +1,35 @@
 import React, {ReactNode, useEffect, useRef, useState} from "react";
 import QuestionPage from "./QuestionPage";
-import Feature from "./Feature";
-import db from "./db";
+import Feature, {as_human_readable} from "./Feature";
+import db, {FeatureRating, WordIdType} from "./db";
 import WordIds from "./wordIds";
 import HintPage from "./HintPage";
+import EndPage from "./EndPage";
 
 const FUTURE_BUFFER_MIN_LENGTH = 3
 const PAST_BUFFER_MAX_LENGTH = 10
 
 const NAVIGATION_BUTTON_RELATIVE_WIDTH = 15
 
+type PageData = {
+    content: ReactNode
+    number: number
+    data: HintPageData | QuestionPageData
+}
+
+type HintPageData = {
+    feature: Feature | "End"
+}
+
+type QuestionPageData = {
+    feature: Feature
+    rating: FeatureRating | undefined
+    wordId: WordIdType
+}
+
 const Main: React.FC = () => {
-    const [pageBuffer, setPageBuffer] = useState<ReactNode[]>([])
-    const bufferRef = useRef<ReactNode[]>();
+    const [pageBuffer, setPageBuffer] = useState<PageData[]>([])
+    const bufferRef = useRef<PageData[]>();
     bufferRef.current = pageBuffer
 
     const [bufferPointer, setBufferPointer] = useState<number>(0)
@@ -25,10 +42,11 @@ const Main: React.FC = () => {
 
     useEffect(() => {
         async function loadInitialPages() {
-            const initialBuffer: ReactNode[] = []
+            const initialBuffer: PageData[] = []
             let i = await db.getProgressPointer()
             for (; initialBuffer.length <= FUTURE_BUFFER_MIN_LENGTH; i++) {
-                initialBuffer.push(generateNewPage(i))
+                const newPage = generateNewPage(i)
+                if (newPage !== undefined) initialBuffer.push(newPage)
             }
             setPageBuffer(initialBuffer)
             setPageNumber(i)
@@ -37,7 +55,7 @@ const Main: React.FC = () => {
         loadInitialPages().then(() => console.log("Init finished"))
     }, [])
 
-    function generateNewPage(n: number): ReactNode | undefined {
+    function generateNewPage(n: number): PageData | undefined {
         const pagesPerFeature = 1 + WordIds.length
 
         const currentFeatureIndicator = n / pagesPerFeature
@@ -50,11 +68,31 @@ const Main: React.FC = () => {
         if (currentFeatureIndicator >= 6) currentFeature = Feature.CLOSED_FORMS
         if (currentFeatureIndicator >= 7) currentFeature = Feature.GENERAL_READABILITY
 
+        if (currentFeatureIndicator >= 8) return {
+            content: <EndPage/>,
+            number: n,
+            data: {feature: "End"}
+        }
+
         const featureProgress = n % (pagesPerFeature)
-        if (featureProgress === 0)
-            return <HintPage feature={currentFeature} onStart={() => onSubmit()}/>
-        // @ts-ignore
-        return <QuestionPage key={featureProgress} wordId={(featureProgress-1).toString()} feature={currentFeature} onSubmit={() => onSubmit()}/>
+        if (featureProgress === 0) return {
+            content: <HintPage feature={currentFeature} onStart={() => onSubmit()}/>,
+            number: n,
+            data: {feature: currentFeature}
+        }
+
+        return {
+            //@ts-ignore
+            content: <QuestionPage key={featureProgress} wordId={(featureProgress - 1).toString()}
+                                   feature={currentFeature} onSubmit={() => onSubmit()}/>,
+            number: n,
+            data: {
+                feature: currentFeature,
+                rating: undefined,
+                // @ts-ignore
+                wordId: (featureProgress - 1).toString()
+            }
+        }
     }
 
     function onSubmit() {
@@ -100,17 +138,20 @@ const Main: React.FC = () => {
     const futureBufferLength = pageBuffer.length - bufferPointer - 1
     console.log ("PageBuffer health: " + pastBufferLength + " | " + futureBufferLength)
 
+    const pageData = pageBuffer[bufferPointer].data
+    const header = pageData.feature !== "End" ? as_human_readable(pageData.feature) : "Dankeschön❤️"
+
     return <div style={{width: "100vw", height: "100vh", maxWidth: "1024px"}}>
         <div style={{position: "relative", width: "100%", top: "0", height: "50px", overflow: "hidden", display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderBottom: "4px solid #888"}}>
             { pastBufferLength <= 0 ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
                 <div onClick={() => prevPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", color: "green", fontWeight: "bolder", cursor: "pointer"}}>back</div>
             }
-            <div style={{height: "min-content", maxWidth: NAVIGATION_BUTTON_RELATIVE_WIDTH*2 + "%"}}>Question</div>
+            <div style={{height: "min-content", maxWidth: NAVIGATION_BUTTON_RELATIVE_WIDTH*2 + "%"}}>{header}</div>
             { futureBufferLength < 1 || futureBufferLength <= 3 ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
                 <div onClick={() => nextPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", color: "green", fontWeight: "bolder", cursor: "pointer"}}>forward</div>
             }
         </div>
-        {pageBuffer[bufferPointer]}
+        {pageBuffer[bufferPointer].content}
     </div>
 }
 

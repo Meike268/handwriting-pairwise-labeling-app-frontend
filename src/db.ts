@@ -76,6 +76,14 @@ class LocalDatabase {
         const currentPointer: number | null = await this.store.getItem("progressPointer", storeDefaultCallback)
         return currentPointer ?? 0
     }
+
+    public async getExport() {
+        let ratings: any = {}
+        for (const id of wordIds) {
+            ratings[id] = (await this.getWordRating(id)).rating
+        }
+        return ratings
+    }
 }
 
 const db = new LocalDatabase("ratings")
