@@ -1,4 +1,4 @@
-import React, {ReactNode, useEffect, useRef, useState} from "react";
+import React, {ReactNode, useContext, useEffect, useRef, useState} from "react";
 import QuestionPage from "./QuestionPage";
 import Feature, {as_human_readable} from "./Feature";
 import db, {FeatureRating, WordIdType} from "./db";
@@ -7,6 +7,7 @@ import HintPage from "./HintPage";
 import EndPage from "./EndPage";
 import wordIds from "./wordIds";
 import ProgressBar from "./ProgressBar";
+import {DisplayContext} from "./DisplayContext";
 
 const FUTURE_BUFFER_MIN_LENGTH = 3
 const PAST_BUFFER_MAX_LENGTH = 10
@@ -30,6 +31,7 @@ type QuestionPageData = {
 }
 
 const Main: React.FC = () => {
+    const display = useContext(DisplayContext)!
     const [pageBuffer, setPageBuffer] = useState<PageData[]>([])
     const bufferRef = useRef<PageData[]>();
     bufferRef.current = pageBuffer
@@ -143,18 +145,18 @@ const Main: React.FC = () => {
     const page = pageBuffer[bufferPointer]
     const header = page.data.feature !== "End" ? as_human_readable(page.data.feature) : "Dankeschön❤️"
 
-    return <div style={{width: "100vw", height: "100vh", maxWidth: "1024px"}}>
-        <div style={{position: "relative", width: "100%", top: "0", height: "50px", overflow: "hidden", display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+    return <div style={{width: display.width, height: display.height, maxWidth: "1024px"}}>
+        <div style={{position: "relative", width: "100%", top: "0", height: "6%", overflow: "hidden", display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
             { pastBufferLength <= 0 ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
-                <div onClick={() => prevPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", color: "green", fontWeight: "bolder", cursor: "pointer"}}>back</div>
+                <div onClick={() => prevPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", color: "green", fontWeight: "bolder", cursor: "pointer"}}>zurück</div>
             }
             <div style={{height: "min-content", maxWidth: NAVIGATION_BUTTON_RELATIVE_WIDTH*2 + "%"}}>{header}</div>
             { futureBufferLength < 1 || futureBufferLength <= 3 ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
-                <div onClick={() => nextPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", color: "green", fontWeight: "bolder", cursor: "pointer"}}>forward</div>
+                <div onClick={() => nextPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", color: "green", fontWeight: "bolder", cursor: "pointer"}}>weiter</div>
             }
         </div>
-        <ProgressBar current={page.number} end={8 * (1+wordIds.length)}/>
-        {pageBuffer[bufferPointer].content}
+        <ProgressBar style={{height: "1.5%"}} current={page.number} end={8 * (1+wordIds.length)}/>
+        <div style={{height: "92.5%"}}>{pageBuffer[bufferPointer].content}</div>
     </div>
 }
 

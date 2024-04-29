@@ -1,3 +1,4 @@
+import "./QuestionPage.css"
 import React, {useEffect, useState} from "react";
 import Feature from "./Feature";
 import db, {FeatureRating, WordIdType} from "./db";
@@ -21,13 +22,20 @@ const QuestionPage: React.FC<{wordId: WordIdType, feature: Feature, onSubmit: ()
     console.log(wordId + ": " + JSON.stringify(rating))
     if (rating === undefined)
         return <div></div>
-    return <div>
-        <img src={"/words/" + wordId + ".png"}/>
-        <div>{feature} for {wordId}</div>
-        <div style={{display: "flex", flexDirection: "row", height: "20%"}}>
-            <div onClick={() => submit(0)} style={{backgroundColor: rating[feature] === 0 ? "green" : "red"}}>0 - nicht vorhanden</div>
-            <div onClick={() => submit(1)} style={{backgroundColor: rating[feature] === 1 ? "green" : "red"}}>1 - vorhanden</div>
-            <div onClick={() => submit(2)} style={{backgroundColor: rating[feature] === 2 ? "green" : "red"}}>2 - stark vorhanden</div>
+    return <div style={{height: "100%"}}>
+        <img src={"/words/" + wordId + ".png"} style={{height: "10%"}}/>
+        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", height: "20%", position: "absolute", bottom: "0", width: "100%"}}>
+            {feature !== Feature.GENERAL_READABILITY ? <>
+                <div className={"choiceField"} onClick={() => submit(0)} style={{backgroundColor: rating[feature] === 0 ? "green" : undefined, width: "33%"}}>0 - nicht vorhanden</div>
+                <div className={"choiceField"} onClick={() => submit(1)} style={{backgroundColor: rating[feature] === 1 ? "green" : undefined, width: "33%"}}>1 - vorhanden</div>
+                <div className={"choiceField"} onClick={() => submit(2)} style={{backgroundColor: rating[feature] === 2 ? "green" : undefined, width: "33%"}}>2 - stark vorhanden</div>
+            </> : <>
+                <div className={"choiceField"} onClick={() => submit(0)} style={{backgroundColor: rating[feature] === 0 ? "green" : undefined, width: "19.5%"}}>0 - nicht vorhanden</div>
+                <div className={"choiceField"} onClick={() => submit(1)} style={{backgroundColor: rating[feature] === 1 ? "green" : undefined, width: "19.5%"}}>1 - vorhanden</div>
+                <div className={"choiceField"} onClick={() => submit(2)} style={{backgroundColor: rating[feature] === 2 ? "green" : undefined, width: "19.5%"}}>2 - stark vorhanden</div>
+                <div className={"choiceField"} onClick={() => submit(3)} style={{backgroundColor: rating[feature] === 3 ? "green" : undefined, width: "19.5%"}}>3 - stark vorhanden</div>
+                <div className={"choiceField"} onClick={() => submit(4)} style={{backgroundColor: rating[feature] === 4 ? "green" : undefined, width: "19.5%"}}>4 - stark vorhanden</div>
+            </>}
         </div>
     </div>
 }
