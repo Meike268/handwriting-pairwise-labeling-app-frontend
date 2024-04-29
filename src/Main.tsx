@@ -2,6 +2,8 @@ import React, {ReactNode, useEffect, useRef, useState} from "react";
 import QuestionPage from "./QuestionPage";
 import Feature from "./Feature";
 import db from "./db";
+import WordIds from "./wordIds";
+import HintPage from "./HintPage";
 
 const FUTURE_BUFFER_MIN_LENGTH = 3
 const PAST_BUFFER_MAX_LENGTH = 10
@@ -36,8 +38,23 @@ const Main: React.FC = () => {
     }, [])
 
     function generateNewPage(n: number): ReactNode | undefined {
+        const pagesPerFeature = 1 + WordIds.length
+
+        const currentFeatureIndicator = n / pagesPerFeature
+        let currentFeature = Feature.BASELINE
+        if (currentFeatureIndicator >= 1) currentFeature = Feature.HEIGHT
+        if (currentFeatureIndicator >= 2) currentFeature = Feature.INCLINATION
+        if (currentFeatureIndicator >= 3) currentFeature = Feature.NO_CORRECTIONS
+        if (currentFeatureIndicator >= 4) currentFeature = Feature.SPACING
+        if (currentFeatureIndicator >= 5) currentFeature = Feature.ROUNDNESS
+        if (currentFeatureIndicator >= 6) currentFeature = Feature.CLOSED_FORMS
+        if (currentFeatureIndicator >= 7) currentFeature = Feature.GENERAL_READABILITY
+
+        const featureProgress = n % (pagesPerFeature)
+        if (featureProgress === 0)
+            return <HintPage feature={currentFeature} onStart={() => onSubmit()}/>
         // @ts-ignore
-        return <QuestionPage key={n} wordId={n.toString()} feature={Feature.INCLINATION} onSubmit={() => onSubmit()}></QuestionPage>
+        return <QuestionPage key={featureProgress} wordId={(featureProgress-1).toString()} feature={currentFeature} onSubmit={() => onSubmit()}/>
     }
 
     function onSubmit() {
