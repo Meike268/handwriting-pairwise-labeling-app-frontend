@@ -100,5 +100,6 @@ const HintPageClosedForms: React.FC = () => {
 const HintPageGeneralReadability: React.FC = () => {
     return <div>
         <h3>Bitte bewerte nun die generelle Lesbarkeit des jeweiligen Wortes.</h3>
+        <div><b>Achtung:</b> es geht hier <b><em>nicht</em></b> um "Schönschrift", sondern darum wie schnell und intuitiv das geschriebene Wort wahrgenommen werden kann.</div>
     </div>
 }
