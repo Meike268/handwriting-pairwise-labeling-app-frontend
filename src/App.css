@@ -20,8 +20,25 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 16px;
   color: white;
+}
+
+button {
+  background-color: #454c5a;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+button:active {
+  background-color: #8992a4;
+}
+button:hover {
+  background-color: #8992a4;
 }
 
 .App-link {

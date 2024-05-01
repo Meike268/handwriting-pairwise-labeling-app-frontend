@@ -18,8 +18,9 @@ export const Login: React.FC<{ children: ReactNode }> = ({children}) => {
 
     if (user === undefined) {
         return <div>
+            Name:&nbsp;
             <input onChange={e => setName(e.target.value)}/>
-            <button onClick={() => onSubmit()} type="submit">Submit form</button>
+            <button onClick={() => onSubmit()} type="submit">Bestätigen</button>
         </div>
     } else {
         return <UserContext.Provider value={user}>

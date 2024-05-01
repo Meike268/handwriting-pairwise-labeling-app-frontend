@@ -150,13 +150,13 @@ const Main: React.FC = () => {
             { pastBufferLength <= 0 ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
                 <div onClick={() => prevPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", color: "green", fontWeight: "bolder", cursor: "pointer"}}>zurück</div>
             }
-            <div style={{height: "min-content", maxWidth: NAVIGATION_BUTTON_RELATIVE_WIDTH*2 + "%"}}>{header}</div>
+            <h1 style={{height: "min-content", maxWidth: (100-NAVIGATION_BUTTON_RELATIVE_WIDTH*2) + "%"}}>{header}</h1>
             { futureBufferLength < 1 || futureBufferLength <= 3 ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
                 <div onClick={() => nextPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", color: "green", fontWeight: "bolder", cursor: "pointer"}}>weiter</div>
             }
         </div>
         <ProgressBar style={{height: "1.5%"}} current={page.number} end={8 * (1+wordIds.length)}/>
-        <div style={{height: "92.5%"}}>{pageBuffer[bufferPointer].content}</div>
+        <div style={{height: "92.5%", width: "100%", display:"flex", justifyItems: "center", alignItems: "center"}}>{pageBuffer[bufferPointer].content}</div>
     </div>
 }
 
