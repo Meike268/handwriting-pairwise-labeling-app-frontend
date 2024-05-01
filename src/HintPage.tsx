@@ -24,7 +24,7 @@ const HintPage: React.FC<{feature: Feature, onStart: () => void}> = ({feature, o
     }
 
     let featurePage = getFeaturePage()
-    return <div style={{width: "100%", display: "flex", alignItems: "center", flexDirection: "column"}}>
+    return <div style={{width: "100%", display: "flex", alignItems: "center", flexDirection: "column", padding: "6%"}}>
         {featurePage}
         <button onClick={() => onStart()} style={{padding: "10px 30px", margin:"20px", width: "fit-content"}}>Start</button>
     </div>
