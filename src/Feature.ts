@@ -12,7 +12,7 @@ enum Feature {
 export function as_human_readable(feature: Feature) {
     switch (feature) {
         case Feature.SPACING:
-            return "Buchstaben Abstand"
+            return "Buchstabenabstand"
         case Feature.BASELINE:
             return "Einheitliche Grundlinie"
         case Feature.INCLINATION:
