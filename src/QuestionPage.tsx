@@ -12,8 +12,8 @@ const QuestionPage: React.FC<{wordId: WordIdType, feature: Feature, onSubmit: ()
 
     function submit(ratedValue: number) {
         const newRating = rating!
-        if (ratedValue === 0 || ratedValue === 1 || ratedValue === 2)
-            newRating[feature] = ratedValue
+        //@ts-ignore
+        newRating[feature] = ratedValue
         setRating(newRating)
         db.updateWordRating(wordId, newRating)
         onSubmit()
