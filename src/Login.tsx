@@ -20,7 +20,8 @@ export const Login: React.FC<{ children: ReactNode }> = ({children}) => {
         return <div>
             Name:&nbsp;
             <input onChange={e => setName(e.target.value)}/>
-            <button onClick={() => onSubmit()} type="submit">Bestätigen</button>
+            <br/>
+            <button onClick={() => onSubmit()} type="submit" style={{padding: "10px", marginTop: "10px", width: "100%"}}>Bestätigen</button>
         </div>
     } else {
         return <UserContext.Provider value={user}>
