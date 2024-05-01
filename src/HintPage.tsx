@@ -5,21 +5,21 @@ const HintPage: React.FC<{feature: Feature, onStart: () => void}> = ({feature, o
     function getFeaturePage(feat: Feature = feature) {
         switch (feat) {
             case Feature.CLOSED_FORMS:
-                return <HelpPageClosedForms/>
+                return <HintPageClosedForms/>
             case Feature.BASELINE:
-                return <HelpPageBaseline/>
+                return <HintPageBaseline/>
             case Feature.GENERAL_READABILITY:
-                return <HelpPageGeneralReadability/>
+                return <HintPageGeneralReadability/>
             case Feature.SPACING:
-                return <HelpPageSpacing/>
+                return <HintPageSpacing/>
             case Feature.NO_CORRECTIONS:
-                return <HelpPageNoCorrections/>
+                return <HintPageNoCorrections/>
             case Feature.ROUNDNESS:
-                return <HelpPageRoundness/>
+                return <HintPageRoundness/>
             case Feature.HEIGHT:
-                return <HelpPageHeigth/>
+                return <HintPageHeigth/>
             case Feature.INCLINATION:
-                return <HelpPageInclination/>
+                return <HintPageInclination/>
         }
     }
 
@@ -32,44 +32,73 @@ const HintPage: React.FC<{feature: Feature, onStart: () => void}> = ({feature, o
 
 export default HintPage
 
-const HelpPageBaseline: React.FC = () => {
+const HintPageBaseline: React.FC = () => {
     return <div>
-        Bitte bewerte bei den nun folgenden Wörtern, wie gut sich beim jeweiligen Wort daran gehalten wurde, eine einheitliche Grundlinie einzuhalten.
+        <h3>Bitte bewerte bei den nun folgenden Wörtern, wie gut beim jeweiligen Wort eine einheitliche Grundlinie eingehalten wurde.</h3>
+        <div>Ein Beispiel für eine schlechte Einhaltung der Grundlinie:</div>
+        <img src={"/hint_examples/baseline_negative.png"} alt={"Example for bad baseline"} style={{width: "50%", marginTop: "7px"}}/>
     </div>
 }
 
-const HelpPageClosedForms: React.FC = () => {
+const HintPageHeigth: React.FC = () => {
     return <div>
-        Bitte bewerte nun beim jeweiligen Wort, wie gut Buchstaben die geschlossen sein sollten geschlossen wurden.
+        <h3>Bitte bewerte nun wie gut beim jeweiligen Wort höhere / tiefere Buchstaben gleich weit von der Grundhöhe abweichen.</h3>
+        <div>Zwei Beispiele für eine schlechte Umsetzung einer einheitlichen Höhe:</div>
+        <img src={"/hint_examples/height_negative.png"} alt={"Example for bad height"} style={{width: "50%", margin: "7px"}}/>
+        <img src={"/hint_examples/height_negative2.jpg"} alt={"Example for bad height"} style={{width: "50%", margin: "7px"}}/>
     </div>
 }
-const HelpPageGeneralReadability: React.FC = () => {
+
+const HintPageInclination: React.FC = () => {
     return <div>
-        Bitte bewerte nun die generelle Lesbarkeit des Wortes.
+        <h3>Bitte bewerte nun wie gut sich beim jeweiligen Wort daran gehalten wurde eine gleich bleibende Neigung
+            einzuhalten.</h3>
+        <div>Ein Beispiel für eine schlechte Einhaltung der Neigung:</div>
+        <img src={"/hint_examples/inclination_negative.png"} alt={"Example for bad inclination"}
+             style={{width: "50%", marginTop: "7px"}}/>
     </div>
 }
-const HelpPageSpacing: React.FC = () => {
+
+const HintPageNoCorrections: React.FC = () => {
     return <div>
-        Bitte bewerte nun die Gleichmässigkeit der Abstände zwischen den Buchstaben .
+        <h3>Bitte bewerte nun ob beim jeweiligen Wort störende Korrekturen vorgenommen wurden.</h3>
+        <div>Ein Beispiel für <em><b>leichte</b></em> Korrekturen:</div>
+        <img src={"/hint_examples/corrections_negative1.jpg"} alt={"Example for light corrections"}
+             style={{width: "50%", margin: "7px"}}/>
+        <div>Ein Beispiel für <em><b>störende</b></em> Korrekturen:</div>
+        <img src={"/hint_examples/corrections_negative2.png"} alt={"Example for light corrections"}
+             style={{width: "50%", margin: "7px"}}/>
     </div>
 }
-const HelpPageNoCorrections: React.FC = () => {
+
+const HintPageSpacing: React.FC = () => {
     return <div>
-        Bitte bewerte nun ob beim jeweiligen Wort störende Korrekturen vorgenommen wurden.
+        <h3>Bitte bewerte nun die Gleichmässigkeit der Abstände zwischen den Buchstaben.</h3>
+        <div>Ein Beispiel für ungleichmässige Abstände:</div>
+        <img src={"/hint_examples/spacing_negative.png"} alt={"Example for bad spacing"} style={{width: "50%", marginTop: "7px"}}/>
     </div>
 }
-const HelpPageRoundness: React.FC = () => {
+
+const HintPageRoundness: React.FC = () => {
     return <div>
-        Bitte bewerte nun ob die Buchstaben die rund sein sollten, auch rund sind.
+        <h3>Bitte bewerte nun ob die Buchstaben die rund sein sollten, auch rund sind.</h3>
+        <div>Ein Beispiel für eine schlechte Einhaltung von Rundungen:</div>
+        <img src={"/hint_examples/roundness_negative.png"} alt={"Example for bad baseline"} style={{width: "50%", marginTop: "7px"}}/>
     </div>
 }
-const HelpPageHeigth: React.FC = () => {
+
+const HintPageClosedForms: React.FC = () => {
     return <div>
-        Bitte bewerte nun wie gut beim jeweiligen Wort höhere / tiefere Buchstaben gleich weit von der Grundhöhe abweichen.
+        <h3>Bitte bewerte nun beim jeweiligen Wort, wie gut Buchstaben die geschlossen sein sollten geschlossen wurden.</h3>
+        <div>Ein Beispiel für eine <em><b>leichte</b></em> Abweichung einer geschlossenen Form:</div>
+        <img src={"/hint_examples/closed_negative2.png"} alt={"Example for light unclosed form"} style={{width: "50%", margin: "7px"}}/>
+        <div>Ein Beispiel für eine <em><b>schwere</b></em> Abweichung einer geschlossenen Form:</div>
+        <img src={"/hint_examples/closed_negative.png"} alt={"Example for bad unclosed form"} style={{width: "50%", margin: "7px"}}/>
     </div>
 }
-const HelpPageInclination: React.FC = () => {
+
+const HintPageGeneralReadability: React.FC = () => {
     return <div>
-        Bitte bewerte nun wie gut sich beim jeweiligen Wort daran gehalten wurde eine gleich bleibende Neigung einzuhalten.
+        <h3>Bitte bewerte nun die generelle Lesbarkeit des jeweiligen Wortes.</h3>
     </div>
 }
