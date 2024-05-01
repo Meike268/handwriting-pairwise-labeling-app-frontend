@@ -24,7 +24,7 @@ const QuestionPage: React.FC<{wordId: WordIdType, feature: Feature, onSubmit: ()
         return <div></div>
     return <div style={{height: "100%", width: "100%"}}>
         <div style={{height: "80%", width: "100%", display: "flex", justifyContent: "center", alignItems: "center", alignContent: "center"}}>
-            <img src={"/words/" + wordId + ".png"} alt={"The word you need to label"} style={{height: "20%"}}/>
+            <img src={"/words/" + wordId + ".png"} alt={"The word you need to label"} style={{height: "20%", maxWidth: "80%"}}/>
         </div>
         <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", height: "20%", position: "absolute", bottom: "0", width: "100%"}}>
             {
