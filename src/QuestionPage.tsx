@@ -1,6 +1,6 @@
 import "./QuestionPage.css"
 import React, {useEffect, useState} from "react";
-import Feature from "./Feature";
+import Feature, {getORatingOptions} from "./Feature";
 import db, {FeatureRating, WordIdType} from "./db";
 
 const QuestionPage: React.FC<{wordId: WordIdType, feature: Feature, onSubmit: ()=>void}> = ({wordId, feature, onSubmit}) => {
@@ -19,7 +19,7 @@ const QuestionPage: React.FC<{wordId: WordIdType, feature: Feature, onSubmit: ()
         onSubmit()
     }
 
-    console.log(wordId + ": " + JSON.stringify(rating))
+    const ratingOptions = getORatingOptions(feature)
     if (rating === undefined)
         return <div></div>
     return <div style={{height: "100%", width: "100%"}}>
@@ -27,17 +27,15 @@ const QuestionPage: React.FC<{wordId: WordIdType, feature: Feature, onSubmit: ()
             <img src={"/words/" + wordId + ".png"} alt={"The word you need to label"} style={{height: "20%"}}/>
         </div>
         <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", height: "20%", position: "absolute", bottom: "0", width: "100%"}}>
-            {feature !== Feature.GENERAL_READABILITY ? <>
-                <button onClick={() => submit(0)} style={{backgroundColor: rating[feature] === 0 ? "green" : undefined, width: "33%"}}>0 - nicht vorhanden</button>
-                <button onClick={() => submit(1)} style={{backgroundColor: rating[feature] === 1 ? "green" : undefined, width: "33%"}}>1 - vorhanden</button>
-                <button onClick={() => submit(2)} style={{backgroundColor: rating[feature] === 2 ? "green" : undefined, width: "33%"}}>2 - stark vorhanden</button>
-            </> : <>
-                <button onClick={() => submit(0)} style={{backgroundColor: rating[feature] === 0 ? "green" : undefined, width: "19.5%"}}>0 - nicht vorhanden</button>
-                <button onClick={() => submit(1)} style={{backgroundColor: rating[feature] === 1 ? "green" : undefined, width: "19.5%"}}>1 - vorhanden</button>
-                <button onClick={() => submit(2)} style={{backgroundColor: rating[feature] === 2 ? "green" : undefined, width: "19.5%"}}>2 - stark vorhanden</button>
-                <button onClick={() => submit(3)} style={{backgroundColor: rating[feature] === 3 ? "green" : undefined, width: "19.5%"}}>3 - stark vorhanden</button>
-                <button onClick={() => submit(4)} style={{backgroundColor: rating[feature] === 4 ? "green" : undefined, width: "19.5%"}}>4 - stark vorhanden</button>
-            </>}
+            {
+                ratingOptions.map(ratingOption =>
+                    <button onClick={() => submit(ratingOption.value)} style={{backgroundColor: rating[feature] === ratingOption.value ? "green" : undefined, width: (99/ratingOptions.length) + "%"}}>
+                        <div style={{height: "100%"}}>
+                            <div style={{margin: "3px", fontSize: "20px", fontWeight: "bold", color: "lightgreen"}}>{ratingOption.value}</div>
+                            <div>{ratingOption.description}</div>
+                        </div>
+                        </button>
+                )}
         </div>
     </div>
 }

@@ -27,7 +27,9 @@ const EndPage: React.FC = () => {
         link.parentNode!.removeChild(link);
     }
 
-    return <button onClick={() => downloadData()}>Download</button>
+    return <div style={{width: "100%"}}>
+        <button onClick={() => downloadData()} style={{padding: "10px 30px"}}>Ergebnisse herunterladen</button>
+    </div>
 }
 
 export default EndPage
