@@ -30,6 +30,10 @@ export function as_human_readable(feature: Feature) {
     }
 }
 
+export type FeatureRating = {
+    [K in Feature]: number | undefined
+}
+
 export type RatingOption = {
     value: number,
     description: string

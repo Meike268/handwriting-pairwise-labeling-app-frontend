@@ -1,5 +1,5 @@
 import * as localforage from "localforage";
-import Feature from "./Feature";
+import Feature, {FeatureRating} from "./Feature";
 import wordIds from "./wordIds";
 
 export type WordIdType = typeof wordIds[number]
@@ -12,27 +12,12 @@ export class WordRating {
         this.rating = blankFeatureRating()
     }
 }
-export type FeatureRating = {
-    [Feature.BASELINE]: 0 | 1 | 2 | undefined,
-    [Feature.CLOSED_FORMS]: 0 | 1 | 2 | undefined,
-    [Feature.HEIGHT]: 0 | 1 | 2 | undefined,
-    [Feature.INCLINATION]: 0 | 1 | 2 | undefined,
-    [Feature.NO_CORRECTIONS]: 0 | 1 | 2 | undefined,
-    [Feature.SPACING]: 0 | 1 | 2 | undefined,
-    [Feature.ROUNDNESS]: 0 | 1 | 2 | undefined,
-    [Feature.GENERAL_READABILITY]: 0 | 1 | 2 | 3 | 4 | 5 | undefined,
-}
-function blankFeatureRating() {
-    return {
-        [Feature.BASELINE]: undefined,
-        [Feature.CLOSED_FORMS]: undefined,
-        [Feature.HEIGHT]: undefined,
-        [Feature.INCLINATION]: undefined,
-        [Feature.NO_CORRECTIONS]: undefined,
-        [Feature.SPACING]: undefined,
-        [Feature.ROUNDNESS]: undefined,
-        [Feature.GENERAL_READABILITY]: undefined,
-    }
+
+function blankFeatureRating(): FeatureRating {
+    let ret: Partial<FeatureRating> = {}
+    for (let feature in Object.values(Feature))
+        ret[feature as Feature] = undefined
+    return ret as FeatureRating
 }
 
 function storeDefaultCallback<T>(err: any, value: T): T {

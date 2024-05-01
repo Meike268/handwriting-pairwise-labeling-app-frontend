@@ -1,7 +1,7 @@
 import React, {ReactNode, useContext, useEffect, useRef, useState} from "react";
 import QuestionPage from "./QuestionPage";
-import Feature, {as_human_readable} from "./Feature";
-import db, {FeatureRating, WordIdType} from "./db";
+import Feature, {as_human_readable, FeatureRating} from "./Feature";
+import db, {WordIdType} from "./db";
 import WordIds from "./wordIds";
 import HintPage from "./HintPage";
 import EndPage from "./EndPage";
