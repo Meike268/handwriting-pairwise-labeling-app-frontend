@@ -41,39 +41,53 @@ export type RatingOption = {
 
 const spacingRatingOptions: RatingOption[] = [
     {value: 0, description: 'Abstand sehr ungleichmässig'},
-    {value: 1, description: 'Abstand leicht ungleichmässig'},
-    {value: 2, description: 'Abstand sehr gleichmässig'},
+    {value: 1, description: 'Abstand eher ungleichmässig'},
+    {value: 2, description: 'Abstand leicht ungleichmässig'},
+    {value: 3, description: 'Abstand eher gleichmässig'},
+    {value: 4, description: 'Abstand sehr gleichmässig'},
 ]
 
 const baselineRatingOptions: RatingOption[] = [
     {value: 0, description: 'Grundline nicht eingehalten'},
-    {value: 1, description: 'Grundlinie teilweise eingehalten'},
-    {value: 2, description: 'Grundlinie sehr gut eingehalten'},
+    {value: 1, description: 'Grundline eher nicht eingehalten'},
+    {value: 2, description: 'Grundlinie teilweise nicht eingehalten'},
+    {value: 3, description: 'Grundlinie grösstenteils eingehalten'},
+    {value: 4, description: 'Grundlinie sehr gut eingehalten'},
 ]
 const inclinationRatingOptions: RatingOption[] = [
     {value: 0, description: 'Neigung sehr ungleichmässig'},
-    {value: 1, description: 'Neigung teilweise ungleichmässig'},
-    {value: 2, description: 'Neigung sehr gleichmässig'},
+    {value: 1, description: 'Neigung eher ungleichmässig'},
+    {value: 2, description: 'Neigung teilweise ungleichmässig'},
+    {value: 3, description: 'Neigung eher gleichmässig'},
+    {value: 4, description: 'Neigung sehr gleichmässig'},
 ]
 const roundnessRatingOptions: RatingOption[] = [
     {value: 0, description: 'Rundungen sehr ungleichmässig'},
-    {value: 1, description: 'Rundungen leicht ungleichmässig'},
-    {value: 2, description: 'Rundungen sehr gleichmässig'},
+    {value: 1, description: 'Rundungen eher ungleichmässig'},
+    {value: 2, description: 'Rundungen leicht ungleichmässig'},
+    {value: 3, description: 'Rundungen eher gleichmässig'},
+    {value: 4, description: 'Rundungen sehr gleichmässig'},
 ]
 const heightRatingOptions: RatingOption[] = [
     {value: 0, description: 'Höhe sehr ungleichmässig'},
-    {value: 1, description: 'Höhe leicht ungleichmässig'},
-    {value: 2, description: 'Höhe sehr gleichmässig'},
+    {value: 1, description: 'Höhe eher ungleichmässig'},
+    {value: 2, description: 'Höhe leicht ungleichmässig'},
+    {value: 3, description: 'Höhe eher gleichmässig'},
+    {value: 4, description: 'Höhe sehr gleichmässig'},
 ]
 const closedFormsRatingOptions: RatingOption[] = [
     {value: 0, description: 'Formenschluss sehr unsauber'},
-    {value: 1, description: 'Formenschluss teilweise unsauber'},
-    {value: 2, description: 'Formenschluss eindeutig'},
+    {value: 1, description: 'Formenschluss eher unsauber'},
+    {value: 2, description: 'Formenschluss teilweise unsauber'},
+    {value: 3, description: 'Formenschluss eher eindeutig'},
+    {value: 4, description: 'Formenschluss sehr eindeutig'},
 ]
 const noCorrectionsRatingOptions: RatingOption[] = [
-    {value: 0, description: 'Störende Korrekturen'},
-    {value: 1, description: 'Leichte Korrekturen'},
-    {value: 2, description: 'Keine Korrekturen'},
+    {value: 0, description: 'Sehr störende Korrekturen'},
+    {value: 1, description: 'Störende Korrekturen'},
+    {value: 2, description: 'Leicht störende Korrekturen'},
+    {value: 3, description: 'Nicht störende Korrekturen'},
+    {value: 4, description: 'Keine Korrekturen'},
 ]
 const generalReadabilityRatingOptions: RatingOption[] = [
     {value: 0, description: 'Sehr schlecht lesbar / unleserlich'},
