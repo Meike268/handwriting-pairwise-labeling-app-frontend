@@ -1,5 +1,6 @@
 import React from "react";
 import Feature from "./Feature";
+import {CheckRounded, CloseRounded} from "@mui/icons-material";
 
 const HintPage: React.FC<{feature: Feature, onStart: () => void}> = ({feature, onStart}) => {
     function getFeaturePage(feat: Feature = feature) {
@@ -34,18 +35,66 @@ export default HintPage
 
 const HintPageBaseline: React.FC = () => {
     return <div>
-        <h3>Bitte bewerte bei den nun folgenden Wörtern, wie gut beim jeweiligen Wort eine einheitliche Grundlinie eingehalten wurde.</h3>
-        <div>Ein Beispiel für eine schlechte Einhaltung der Grundlinie:</div>
-        <img src={"/hint_examples/baseline_negative.png"} alt={"Example for bad baseline"} style={{width: "50%", marginTop: "7px"}}/>
+        <h3>Bitte bewerte bei den nun folgenden Wörtern, wie gut beim jeweiligen Wort eine einheitliche Grundlinie
+            eingehalten wurde.</h3>
+        <div style={{margin: "8px"}}>Beispiele für eine gute/schlechte Umsetzung:</div>
+        <div style={{
+            width: "85%",
+            display: "flex",
+            flexDirection: "row",
+            margin: "5px auto",
+            backgroundColor: "#1a1d22",
+            padding: "5px"
+        }}>
+            <CloseRounded style={{fontSize: "100px", scale: "1", color: "darkred", margin: "0 -10px"}}/>
+            <img src={"/hint_examples/baseline_negative.png"} alt={"Example for bad baseline"}
+                 style={{width: "75%", alignSelf: "center"}}/>
+        </div>
+        <div style={{
+            width: "85%",
+            display: "flex",
+            flexDirection: "row",
+            margin: "5px auto",
+            backgroundColor: "#1a1d22",
+            padding: "5px"
+        }}>
+            <CheckRounded style={{fontSize: "100px", scale: ".95", color: "darkgreen", margin: "0 -10px"}}/>
+            <img src={"/hint_examples/baseline_positive.png"} alt={"Example for good baseline"}
+                 style={{width: "75%", alignSelf: "center"}}/>
+        </div>
+
     </div>
 }
 
 const HintPageHeigth: React.FC = () => {
     return <div>
-        <h3>Bitte bewerte nun wie gut beim jeweiligen Wort höhere / tiefere Buchstaben gleich weit von der Grundhöhe abweichen.</h3>
-        <div>Zwei Beispiele für eine schlechte Umsetzung einer einheitlichen Höhe:</div>
-        <img src={"/hint_examples/height_negative.png"} alt={"Example for bad height"} style={{width: "50%", margin: "7px"}}/>
-        <img src={"/hint_examples/height_negative2.jpg"} alt={"Example for bad height"} style={{width: "50%", margin: "7px"}}/>
+        <h3>Bitte bewerte nun wie gut beim jeweiligen Wort höhere / tiefere Buchstaben gleich weit von der Grundhöhe
+            abweichen.</h3>
+        <div style={{margin: "8px"}}>Beispiele für eine gute/schlechte Umsetzung:</div>
+        <div style={{
+            width: "85%",
+            display: "flex",
+            flexDirection: "row",
+            margin: "5px auto",
+            backgroundColor: "#1a1d22",
+            padding: "5px"
+        }}>
+            <CloseRounded style={{fontSize: "100px", scale: "1", color: "darkred", margin: "0 -10px"}}/>
+            <img src={"/hint_examples/height_negative.png"} alt={"Example for bad baseline"}
+                 style={{width: "75%", alignSelf: "center"}}/>
+        </div>
+        <div style={{
+            width: "85%",
+            display: "flex",
+            flexDirection: "row",
+            margin: "5px auto",
+            backgroundColor: "#1a1d22",
+            padding: "5px"
+        }}>
+            <CheckRounded style={{fontSize: "100px", scale: ".95", color: "darkgreen", margin: "0 -10px"}}/>
+            <img src={"/hint_examples/height_positive.png"} alt={"Example for good baseline"}
+                 style={{width: "75%", alignSelf: "center"}}/>
+        </div>
     </div>
 }
 
@@ -53,53 +102,164 @@ const HintPageInclination: React.FC = () => {
     return <div>
         <h3>Bitte bewerte nun wie gut sich beim jeweiligen Wort daran gehalten wurde eine gleich bleibende Neigung
             einzuhalten.</h3>
-        <div>Ein Beispiel für eine schlechte Einhaltung der Neigung:</div>
-        <img src={"/hint_examples/inclination_negative.png"} alt={"Example for bad inclination"}
-             style={{width: "50%", marginTop: "7px"}}/>
+        <div style={{margin: "8px"}}>Beispiele für eine gute/schlechte Umsetzung:</div>
+        <div style={{
+            width: "85%",
+            display: "flex",
+            flexDirection: "row",
+            margin: "5px auto",
+            backgroundColor: "#1a1d22",
+            padding: "5px"
+        }}>
+            <CloseRounded style={{fontSize: "100px", scale: "1", color: "darkred", margin: "0 -10px"}}/>
+            <img src={"/hint_examples/inclination_negative.png"} alt={"Example for bad baseline"}
+                 style={{width: "75%", alignSelf: "center"}}/>
+        </div>
+        <div style={{
+            width: "85%",
+            display: "flex",
+            flexDirection: "row",
+            margin: "5px auto",
+            backgroundColor: "#1a1d22",
+            padding: "5px"
+        }}>
+            <CheckRounded style={{fontSize: "100px", scale: ".95", color: "darkgreen", margin: "0 -10px"}}/>
+            <img src={"/hint_examples/inclination_positive.png"} alt={"Example for good baseline"}
+                 style={{width: "75%", alignSelf: "center"}}/>
+        </div>
     </div>
 }
 
 const HintPageNoCorrections: React.FC = () => {
     return <div>
         <h3>Bitte bewerte nun ob beim jeweiligen Wort störende Korrekturen vorgenommen wurden.</h3>
-        <div>Ein Beispiel für <em><b>leichte</b></em> Korrekturen:</div>
-        <img src={"/hint_examples/corrections_negative1.jpg"} alt={"Example for light corrections"}
-             style={{width: "50%", margin: "7px"}}/>
-        <div>Ein Beispiel für <em><b>störende</b></em> Korrekturen:</div>
-        <img src={"/hint_examples/corrections_negative2.png"} alt={"Example for light corrections"}
-             style={{width: "50%", margin: "7px"}}/>
+        <div style={{margin: "8px"}}>Beispiele für eine gute/schlechte Umsetzung:</div>
+        <div style={{
+            width: "85%",
+            display: "flex",
+            flexDirection: "row",
+            margin: "5px auto",
+            backgroundColor: "#1a1d22",
+            padding: "5px"
+        }}>
+            <CloseRounded style={{fontSize: "100px", scale: "1", color: "darkred", margin: "0 -10px"}}/>
+            <img src={"/hint_examples/corrections_negative.png"} alt={"Example for bad baseline"}
+                 style={{width: "75%", alignSelf: "center"}}/>
+        </div>
+        <div style={{
+            width: "85%",
+            display: "flex",
+            flexDirection: "row",
+            margin: "5px auto",
+            backgroundColor: "#1a1d22",
+            padding: "5px"
+        }}>
+            <CheckRounded style={{fontSize: "100px", scale: ".95", color: "darkgreen", margin: "0 -10px"}}/>
+            <img src={"/hint_examples/corrections_positive.png"} alt={"Example for good baseline"}
+                 style={{width: "75%", alignSelf: "center"}}/>
+        </div>
     </div>
 }
 
 const HintPageSpacing: React.FC = () => {
     return <div>
         <h3>Bitte bewerte nun die Gleichmässigkeit der Abstände zwischen den Buchstaben.</h3>
-        <div>Ein Beispiel für ungleichmässige Abstände:</div>
-        <img src={"/hint_examples/spacing_negative.png"} alt={"Example for bad spacing"} style={{width: "50%", marginTop: "7px"}}/>
+        <div style={{margin: "8px"}}>Beispiele für eine gute/schlechte Umsetzung:</div>
+        <div style={{
+            width: "85%",
+            display: "flex",
+            flexDirection: "row",
+            margin: "5px auto",
+            backgroundColor: "#1a1d22",
+            padding: "5px"
+        }}>
+            <CloseRounded style={{fontSize: "100px", scale: "1", color: "darkred", margin: "0 -10px"}}/>
+            <img src={"/hint_examples/spacing_negative.png"} alt={"Example for bad baseline"}
+                 style={{width: "75%", alignSelf: "center"}}/>
+        </div>
+        <div style={{
+            width: "85%",
+            display: "flex",
+            flexDirection: "row",
+            margin: "5px auto",
+            backgroundColor: "#1a1d22",
+            padding: "5px"
+        }}>
+            <CheckRounded style={{fontSize: "100px", scale: ".95", color: "darkgreen", margin: "0 -10px"}}/>
+            <img src={"/hint_examples/spacing_positive.png"} alt={"Example for good baseline"}
+                 style={{width: "75%", alignSelf: "center"}}/>
+        </div>
     </div>
 }
 
 const HintPageRoundness: React.FC = () => {
     return <div>
         <h3>Bitte bewerte nun ob die Buchstaben die rund sein sollten, auch rund sind.</h3>
-        <div>Ein Beispiel für eine schlechte Einhaltung von Rundungen:</div>
-        <img src={"/hint_examples/roundness_negative.png"} alt={"Example for bad baseline"} style={{width: "50%", marginTop: "7px"}}/>
+        <div style={{margin: "8px"}}>Beispiele für eine gute/schlechte Umsetzung:</div>
+        <div style={{
+            width: "85%",
+            display: "flex",
+            flexDirection: "row",
+            margin: "5px auto",
+            backgroundColor: "#1a1d22",
+            padding: "5px"
+        }}>
+            <CloseRounded style={{fontSize: "100px", scale: "1", color: "darkred", margin: "0 -10px"}}/>
+            <img src={"/hint_examples/roundness_negative.png"} alt={"Example for bad baseline"}
+                 style={{width: "75%", alignSelf: "center"}}/>
+        </div>
+        <div style={{
+            width: "85%",
+            display: "flex",
+            flexDirection: "row",
+            margin: "5px auto",
+            backgroundColor: "#1a1d22",
+            padding: "5px"
+        }}>
+            <CheckRounded style={{fontSize: "100px", scale: ".95", color: "darkgreen", margin: "0 -10px"}}/>
+            <img src={"/hint_examples/roundness_positive.png"} alt={"Example for good baseline"}
+                 style={{width: "75%", alignSelf: "center"}}/>
+        </div>
     </div>
 }
 
 const HintPageClosedForms: React.FC = () => {
     return <div>
-        <h3>Bitte bewerte nun beim jeweiligen Wort, wie gut Buchstaben die geschlossen sein sollten geschlossen wurden.</h3>
-        <div>Ein Beispiel für eine <em><b>leichte</b></em> Abweichung einer geschlossenen Form:</div>
-        <img src={"/hint_examples/closed_negative2.png"} alt={"Example for light unclosed form"} style={{width: "50%", margin: "7px"}}/>
-        <div>Ein Beispiel für eine <em><b>schwere</b></em> Abweichung einer geschlossenen Form:</div>
-        <img src={"/hint_examples/closed_negative.png"} alt={"Example for bad unclosed form"} style={{width: "50%", margin: "7px"}}/>
+        <h3>Bitte bewerte nun beim jeweiligen Wort, wie gut Buchstaben die geschlossen sein sollten geschlossen
+            wurden.</h3>
+        <div style={{margin: "8px"}}>Beispiele für eine gute/schlechte Umsetzung:</div>
+        <div style={{
+            width: "85%",
+            display: "flex",
+            flexDirection: "row",
+            margin: "5px auto",
+            backgroundColor: "#1a1d22",
+            padding: "5px"
+        }}>
+            <CloseRounded style={{fontSize: "100px", scale: "1", color: "darkred", margin: "0 -10px"}}/>
+            <img src={"/hint_examples/closed_negative.png"} alt={"Example for bad baseline"}
+                 style={{width: "75%", alignSelf: "center"}}/>
+        </div>
+        <div style={{
+            width: "85%",
+            display: "flex",
+            flexDirection: "row",
+            margin: "5px auto",
+            backgroundColor: "#1a1d22",
+            padding: "5px"
+        }}>
+            <CheckRounded style={{fontSize: "100px", scale: ".95", color: "darkgreen", margin: "0 -10px"}}/>
+            <img src={"/hint_examples/closed_positive.png"} alt={"Example for good baseline"}
+                 style={{width: "75%", alignSelf: "center"}}/>
+        </div>
     </div>
 }
 
 const HintPageGeneralReadability: React.FC = () => {
     return <div>
-        <h3>Bitte bewerte nun die generelle Lesbarkeit des jeweiligen Wortes.</h3>
-        <div><b>Achtung:</b> es geht hier <b><em>nicht</em></b> um "Schönschrift", sondern darum wie schnell und intuitiv das geschriebene Wort wahrgenommen werden kann.</div>
+    <h3>Bitte bewerte nun die generelle Lesbarkeit des jeweiligen Wortes.</h3>
+        <div><b>Achtung:</b> es geht hier <b><em>nicht</em></b> um "Schönschrift", sondern darum wie schnell und
+            intuitiv das geschriebene Wort wahrgenommen werden kann.
+        </div>
     </div>
 }
