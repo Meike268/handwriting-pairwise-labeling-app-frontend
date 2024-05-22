@@ -51,7 +51,7 @@ const baselineRatingOptions: RatingOption[] = [
     {value: 0, description: 'Grundline nicht eingehalten'},
     {value: 1, description: 'Grundline eher nicht eingehalten'},
     {value: 2, description: 'Grundlinie teilweise nicht eingehalten'},
-    {value: 3, description: 'Grundlinie grösstenteils eingehalten'},
+    {value: 3, description: 'Grundlinie meist eingehalten'},
     {value: 4, description: 'Grundlinie sehr gut eingehalten'},
 ]
 const inclinationRatingOptions: RatingOption[] = [

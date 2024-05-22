@@ -31,8 +31,8 @@ const QuestionPage: React.FC<{wordId: WordIdType, feature: Feature, onSubmit: ()
                 ratingOptions.map(ratingOption =>
                     <button onClick={() => submit(ratingOption.value)} style={{backgroundColor: rating[feature] === ratingOption.value ? "green" : undefined, width: (99/ratingOptions.length) + "%"}}>
                         <div style={{height: "100%"}}>
-                            {/*<div style={{margin: "3px", fontSize: "20px", fontWeight: "bold", color: "lightgreen"}}>{ratingOption.value}</div>*/}
-                            <div style={{margin: "8px 5px"}}>{ratingOption.description}</div>
+                            {/*<div style={{margin: "3px", fontSize: "20px", fontWeight: "bold", color: "lightgreen"}}>{ratingOption.value + 1}</div>*/}
+                            <div lang={"de"} style={{margin: "8px 5px", fontSize: "11px", hyphens: "auto"}}>{ratingOption.description}</div>
                         </div>
                         </button>
                 )}
