@@ -3,7 +3,6 @@ import {CSSProperties} from "react";
 const ProgressBar: React.FC<{ current: number, end: number, style: CSSProperties }> = ({current, end, style}) => {
     const progress = current / end
 
-    console.log("progress: " + progress)
     return <div style={{width: "100%", height: "10px", ...style}}>
         <div style={{width: "100%", height: "40%", display: "flex"}}>
             <div style={{backgroundColor: "green", height: "100%", width: (progress * 100) + "%"}}/>

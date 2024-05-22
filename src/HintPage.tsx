@@ -25,7 +25,7 @@ const HintPage: React.FC<{feature: Feature, onStart: () => void}> = ({feature, o
     }
 
     let featurePage = getFeaturePage()
-    return <div style={{width: "100%", display: "flex", alignItems: "center", flexDirection: "column", padding: "6%"}}>
+    return <div style={{display: "flex", alignItems: "center", flexDirection: "column", padding: "6%", width: "100%", boxSizing: "border-box" }}>
         {featurePage}
         <button onClick={() => onStart()} style={{padding: "10px 30px", margin:"20px", width: "fit-content"}}>Start</button>
     </div>
@@ -33,226 +33,108 @@ const HintPage: React.FC<{feature: Feature, onStart: () => void}> = ({feature, o
 
 export default HintPage
 
-const HintPageBaseline: React.FC = () => {
-    return <div>
-        <h3>Bitte bewerte bei den nun folgenden Wörtern, wie gut beim jeweiligen Wort eine einheitliche Grundlinie
-            eingehalten wurde.</h3>
+const GenericHintPage: React.FC<{headline: string, exampleNegativePath: string, examplePositivePath: string}> = ({headline, exampleNegativePath, examplePositivePath}) => {
+    return <div style={{width: "100%", boxSizing: "border-box"}}>
+        <h3>{headline}</h3>
         <div style={{margin: "8px"}}>Beispiele für eine gute/schlechte Umsetzung:</div>
         <div style={{
             width: "85%",
             display: "flex",
             flexDirection: "row",
+            alignItems: "center",
             margin: "5px auto",
             backgroundColor: "#1a1d22",
             padding: "5px"
         }}>
-            <CloseRounded style={{fontSize: "100px", scale: "1", color: "darkred", margin: "0 -10px"}}/>
-            <img src={"/hint_examples/baseline_negative.png"} alt={"Example for bad baseline"}
-                 style={{width: "75%", alignSelf: "center"}}/>
+            <CheckRounded style={{
+                fontSize: "8em",
+                scale: ".92",
+                color: "darkgreen",
+                marginLeft: "-6px",
+                flexShrink: "0",
+                flexGrow: "0",
+                flexBasis: "20%"
+            }}/>
+            <img src={examplePositivePath} alt={"Positive example"}
+                 style={{width: "81%"}}/>
         </div>
         <div style={{
             width: "85%",
             display: "flex",
             flexDirection: "row",
+            alignItems: "center",
             margin: "5px auto",
             backgroundColor: "#1a1d22",
             padding: "5px"
         }}>
-            <CheckRounded style={{fontSize: "100px", scale: ".95", color: "darkgreen", margin: "0 -10px"}}/>
-            <img src={"/hint_examples/baseline_positive.png"} alt={"Example for good baseline"}
-                 style={{width: "75%", alignSelf: "center"}}/>
+            <CloseRounded style={{
+                fontSize: "8em",
+                color: "darkred",
+                marginLeft: "-6px",
+                flexShrink: "0",
+                flexGrow: "0",
+                flexBasis: "20%"
+            }}/>
+            <img src={exampleNegativePath} alt={"Negative example"}
+                 style={{width: "81%"}}/>
         </div>
-
     </div>
+}
+
+const HintPageBaseline: React.FC = () => {
+    return <GenericHintPage
+        headline={"Bitte bewerte bei den nun folgenden Wörtern, wie gut beim jeweiligen Wort eine einheitliche Grundlinie eingehalten wurde."}
+        exampleNegativePath={"/hint_examples/baseline_negative.png"}
+        examplePositivePath={"/hint_examples/baseline_positive.png"}
+    />
 }
 
 const HintPageHeigth: React.FC = () => {
-    return <div>
-        <h3>Bitte bewerte nun wie gut beim jeweiligen Wort höhere / tiefere Buchstaben gleich weit von der Grundhöhe
-            abweichen.</h3>
-        <div style={{margin: "8px"}}>Beispiele für eine gute/schlechte Umsetzung:</div>
-        <div style={{
-            width: "85%",
-            display: "flex",
-            flexDirection: "row",
-            margin: "5px auto",
-            backgroundColor: "#1a1d22",
-            padding: "5px"
-        }}>
-            <CloseRounded style={{fontSize: "100px", scale: "1", color: "darkred", margin: "0 -10px"}}/>
-            <img src={"/hint_examples/height_negative.png"} alt={"Example for bad baseline"}
-                 style={{width: "75%", alignSelf: "center"}}/>
-        </div>
-        <div style={{
-            width: "85%",
-            display: "flex",
-            flexDirection: "row",
-            margin: "5px auto",
-            backgroundColor: "#1a1d22",
-            padding: "5px"
-        }}>
-            <CheckRounded style={{fontSize: "100px", scale: ".95", color: "darkgreen", margin: "0 -10px"}}/>
-            <img src={"/hint_examples/height_positive.png"} alt={"Example for good baseline"}
-                 style={{width: "75%", alignSelf: "center"}}/>
-        </div>
-    </div>
+    return <GenericHintPage
+        headline={"Bitte bewerte nun wie gut beim jeweiligen Wort höhere / tiefere Buchstaben gleich weit von der Grundhöhe abweichen."}
+        exampleNegativePath={"/hint_examples/height_negative.png"}
+        examplePositivePath={"/hint_examples/height_positive.png"}
+    />
 }
 
 const HintPageInclination: React.FC = () => {
-    return <div>
-        <h3>Bitte bewerte nun wie gut sich beim jeweiligen Wort daran gehalten wurde eine gleich bleibende Neigung
-            einzuhalten.</h3>
-        <div style={{margin: "8px"}}>Beispiele für eine gute/schlechte Umsetzung:</div>
-        <div style={{
-            width: "85%",
-            display: "flex",
-            flexDirection: "row",
-            margin: "5px auto",
-            backgroundColor: "#1a1d22",
-            padding: "5px"
-        }}>
-            <CloseRounded style={{fontSize: "100px", scale: "1", color: "darkred", margin: "0 -10px"}}/>
-            <img src={"/hint_examples/inclination_negative.png"} alt={"Example for bad baseline"}
-                 style={{width: "75%", alignSelf: "center"}}/>
-        </div>
-        <div style={{
-            width: "85%",
-            display: "flex",
-            flexDirection: "row",
-            margin: "5px auto",
-            backgroundColor: "#1a1d22",
-            padding: "5px"
-        }}>
-            <CheckRounded style={{fontSize: "100px", scale: ".95", color: "darkgreen", margin: "0 -10px"}}/>
-            <img src={"/hint_examples/inclination_positive.png"} alt={"Example for good baseline"}
-                 style={{width: "75%", alignSelf: "center"}}/>
-        </div>
-    </div>
+    return <GenericHintPage
+        headline={"Bitte bewerte nun wie gut sich beim jeweiligen Wort daran gehalten wurde eine gleich bleibende Neigung einzuhalten."}
+        exampleNegativePath={"/hint_examples/inclination_negative.png"}
+        examplePositivePath={"/hint_examples/inclination_positive.png"}
+    />
 }
 
 const HintPageNoCorrections: React.FC = () => {
-    return <div>
-        <h3>Bitte bewerte nun ob beim jeweiligen Wort störende Korrekturen vorgenommen wurden.</h3>
-        <div style={{margin: "8px"}}>Beispiele für eine gute/schlechte Umsetzung:</div>
-        <div style={{
-            width: "85%",
-            display: "flex",
-            flexDirection: "row",
-            margin: "5px auto",
-            backgroundColor: "#1a1d22",
-            padding: "5px"
-        }}>
-            <CloseRounded style={{fontSize: "100px", scale: "1", color: "darkred", margin: "0 -10px"}}/>
-            <img src={"/hint_examples/corrections_negative.png"} alt={"Example for bad baseline"}
-                 style={{width: "75%", alignSelf: "center"}}/>
-        </div>
-        <div style={{
-            width: "85%",
-            display: "flex",
-            flexDirection: "row",
-            margin: "5px auto",
-            backgroundColor: "#1a1d22",
-            padding: "5px"
-        }}>
-            <CheckRounded style={{fontSize: "100px", scale: ".95", color: "darkgreen", margin: "0 -10px"}}/>
-            <img src={"/hint_examples/corrections_positive.png"} alt={"Example for good baseline"}
-                 style={{width: "75%", alignSelf: "center"}}/>
-        </div>
-    </div>
+    return <GenericHintPage
+        headline={"Bitte bewerte nun ob beim jeweiligen Wort störende Korrekturen vorgenommen wurden."}
+        exampleNegativePath={"/hint_examples/corrections_negative.png"}
+        examplePositivePath={"/hint_examples/corrections_positive.png"}
+    />
 }
 
 const HintPageSpacing: React.FC = () => {
-    return <div>
-        <h3>Bitte bewerte nun die Gleichmässigkeit der Abstände zwischen den Buchstaben.</h3>
-        <div style={{margin: "8px"}}>Beispiele für eine gute/schlechte Umsetzung:</div>
-        <div style={{
-            width: "85%",
-            display: "flex",
-            flexDirection: "row",
-            margin: "5px auto",
-            backgroundColor: "#1a1d22",
-            padding: "5px"
-        }}>
-            <CloseRounded style={{fontSize: "100px", scale: "1", color: "darkred", margin: "0 -10px"}}/>
-            <img src={"/hint_examples/spacing_negative.png"} alt={"Example for bad baseline"}
-                 style={{width: "75%", alignSelf: "center"}}/>
-        </div>
-        <div style={{
-            width: "85%",
-            display: "flex",
-            flexDirection: "row",
-            margin: "5px auto",
-            backgroundColor: "#1a1d22",
-            padding: "5px"
-        }}>
-            <CheckRounded style={{fontSize: "100px", scale: ".95", color: "darkgreen", margin: "0 -10px"}}/>
-            <img src={"/hint_examples/spacing_positive.png"} alt={"Example for good baseline"}
-                 style={{width: "75%", alignSelf: "center"}}/>
-        </div>
-    </div>
+    return <GenericHintPage
+        headline={"Bitte bewerte nun die Gleichmässigkeit der Abstände zwischen den Buchstaben."}
+        exampleNegativePath={"/hint_examples/spacing_negative.png"}
+        examplePositivePath={"/hint_examples/spacing_positive.png"}
+    />
 }
 
 const HintPageRoundness: React.FC = () => {
-    return <div>
-        <h3>Bitte bewerte nun ob die Buchstaben die rund sein sollten, auch rund sind.</h3>
-        <div style={{margin: "8px"}}>Beispiele für eine gute/schlechte Umsetzung:</div>
-        <div style={{
-            width: "85%",
-            display: "flex",
-            flexDirection: "row",
-            margin: "5px auto",
-            backgroundColor: "#1a1d22",
-            padding: "5px"
-        }}>
-            <CloseRounded style={{fontSize: "100px", scale: "1", color: "darkred", margin: "0 -10px"}}/>
-            <img src={"/hint_examples/roundness_negative.png"} alt={"Example for bad baseline"}
-                 style={{width: "75%", alignSelf: "center"}}/>
-        </div>
-        <div style={{
-            width: "85%",
-            display: "flex",
-            flexDirection: "row",
-            margin: "5px auto",
-            backgroundColor: "#1a1d22",
-            padding: "5px"
-        }}>
-            <CheckRounded style={{fontSize: "100px", scale: ".95", color: "darkgreen", margin: "0 -10px"}}/>
-            <img src={"/hint_examples/roundness_positive.png"} alt={"Example for good baseline"}
-                 style={{width: "75%", alignSelf: "center"}}/>
-        </div>
-    </div>
+    return <GenericHintPage
+        headline={"Bitte bewerte nun ob die Buchstaben die rund sein sollten, auch rund sind."}
+        exampleNegativePath={"/hint_examples/roundness_negative.png"}
+        examplePositivePath={"/hint_examples/roundness_positive.png"}
+    />
 }
 
 const HintPageClosedForms: React.FC = () => {
-    return <div>
-        <h3>Bitte bewerte nun beim jeweiligen Wort, wie gut Buchstaben die geschlossen sein sollten geschlossen
-            wurden.</h3>
-        <div style={{margin: "8px"}}>Beispiele für eine gute/schlechte Umsetzung:</div>
-        <div style={{
-            width: "85%",
-            display: "flex",
-            flexDirection: "row",
-            margin: "5px auto",
-            backgroundColor: "#1a1d22",
-            padding: "5px"
-        }}>
-            <CloseRounded style={{fontSize: "100px", scale: "1", color: "darkred", margin: "0 -10px"}}/>
-            <img src={"/hint_examples/closed_negative.png"} alt={"Example for bad baseline"}
-                 style={{width: "75%", alignSelf: "center"}}/>
-        </div>
-        <div style={{
-            width: "85%",
-            display: "flex",
-            flexDirection: "row",
-            margin: "5px auto",
-            backgroundColor: "#1a1d22",
-            padding: "5px"
-        }}>
-            <CheckRounded style={{fontSize: "100px", scale: ".95", color: "darkgreen", margin: "0 -10px"}}/>
-            <img src={"/hint_examples/closed_positive.png"} alt={"Example for good baseline"}
-                 style={{width: "75%", alignSelf: "center"}}/>
-        </div>
-    </div>
+    return <GenericHintPage
+        headline={"Bitte bewerte nun beim jeweiligen Wort, wie gut Buchstaben die geschlossen sein sollten geschlossen wurden."}
+        exampleNegativePath={"/hint_examples/closed_negative.png"}
+        examplePositivePath={"/hint_examples/closed_positive.png"}
+    />
 }
 
 const HintPageGeneralReadability: React.FC = () => {
