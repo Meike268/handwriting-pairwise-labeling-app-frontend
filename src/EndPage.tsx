@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import db from "./db";
-import {UserContext} from "./Login";
+import {UserContext} from "./AuthenticationProvider";
 
 const EndPage: React.FC = () => {
     const user = useContext(UserContext)

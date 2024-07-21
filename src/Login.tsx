@@ -1,31 +1,38 @@
-import React, {createContext, ReactNode, useState} from "react";
+import React, {useState} from "react";
 import {useCookies} from "react-cookie";
+import {useNavigate} from "react-router-dom";
 
-type User = {name: string}
-export const UserContext = createContext<User | undefined>(undefined);
 
-export const Login: React.FC<{ children: ReactNode }> = ({children}) => {
-    const [cookies, setCookie] = useCookies(['user'])
-    const [user, setUser] = useState<User | undefined>(cookies.user)
-
+export const Login: React.FC = () => {
     const [name, setName] = useState<string>("")
+    const [password, setPassword] = useState<string>("")
+    const  navigate = useNavigate();
+
+    const [, setCookie] = useCookies(['user'])
 
     function onSubmit() {
         const newUser = {name: name}
-        setUser(newUser)
         setCookie("user", newUser)
+        navigate("/")
     }
 
-    if (user === undefined) {
-        return <div>
-            Name:&nbsp;
-            <input onChange={e => setName(e.target.value)}/>
+    return <div>
+        <div style={{display: "grid"}}>
+            <div style={{gridRowStart: "row-start 1", justifySelf: "start", margin: "10px"}}>
+                Name:
+            </div>
+            <input value={name} onChange={e => setName(e.target.value)}
+                   style={{gridRowStart: "row-start 1"}}/>
+            <div style={{height: "5px", gridRowStart: "row-start 2"}}/>
+            <div style={{gridRowStart: "row-start 3", justifySelf: "start", margin: "10px"}}>
+                Passwort:
+            </div>
+            <input type={"password"} value={password} onChange={e => setPassword(e.target.value)}
+                   style={{gridRowStart: "row-start 3"}}/>
             <br/>
-            <button onClick={() => onSubmit()} type="submit" style={{padding: "10px", marginTop: "10px", width: "100%"}}>Bestätigen</button>
         </div>
-    } else {
-        return <UserContext.Provider value={user}>
-            {children}
-        </UserContext.Provider>
-    }
+        <button onClick={() => onSubmit()} type="submit"
+                style={{padding: "10px", marginTop: "10px", width: "100%"}}>Bestätigen
+        </button>
+    </div>
 }
