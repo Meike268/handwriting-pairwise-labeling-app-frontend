@@ -5,9 +5,9 @@ import Main from "./Main";
 import {DisplayProvider} from "./DisplayContext";
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import {Login} from "./Login";
+import {Logout} from "./Logout";
 
 const App: React.FC = () => {
-
     return (
         <div className="App">
             <header className="App-header">
@@ -15,6 +15,7 @@ const App: React.FC = () => {
                     <BrowserRouter basename={"/"}>
                         <Routes>
                             <Route path="/login" element={<Login/>}/>
+                            <Route path="/logout" element={<Logout/>}/>
                             <Route path={"/"} element={
                                 <AuthenticationProvider>
                                     <Main/>
