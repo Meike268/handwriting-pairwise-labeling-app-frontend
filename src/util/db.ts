@@ -1,6 +1,6 @@
 import * as localforage from "localforage";
 import Feature, {FeatureRating} from "./Feature";
-import wordIds from "./wordIds";
+import wordIds from "../constants/wordIds";
 
 export type WordIdType = typeof wordIds[number]
 export class WordRating {

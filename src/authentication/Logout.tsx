@@ -4,9 +4,9 @@ import {Navigate} from "react-router-dom";
 
 
 export const Logout: React.FC = () => {
-    const [, , removeCookie] = useCookies(['user'])
+    const [, , removeCookie] = useCookies(['me'])
 
-    removeCookie("user")
+    removeCookie("me")
 
     return <Navigate to={"/"}/>
 }

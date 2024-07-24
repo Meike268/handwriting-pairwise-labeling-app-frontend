@@ -1,8 +1,12 @@
 import React, {useState} from "react";
 import {useCookies} from "react-cookie";
 import {Navigate, useNavigate} from "react-router-dom";
-import {BACKEND_LOGIN} from "./constants/Urls";
+import {BACKEND_LOGIN} from "../constants/Urls";
 
+export type Me = {
+    username: string,
+    auth_token: string,
+}
 
 export const Login: React.FC = () => {
     const [user, setUser] = useState<string>("")
@@ -10,13 +14,13 @@ export const Login: React.FC = () => {
     const [error, setError] = useState<string | undefined>(undefined)
     const  navigate = useNavigate();
 
-    const [cookie, setCookie] = useCookies(['user'])
+    const [cookie, setCookie] = useCookies(['me'])
 
     async function onSubmit() {
-        const basic_auth_encoded = window.btoa(user + ":" + password)
+        const basic_auth_token = window.btoa(user + ":" + password)
         const requestHeaders: HeadersInit = new Headers();
         requestHeaders.set('Content-Type', 'application/json');
-        requestHeaders.set('Authorization', `Basic ${basic_auth_encoded}`)
+        requestHeaders.set('Authorization', `Basic ${basic_auth_token}`)
 
         const requestOptions: RequestInit = {
             method: 'POST',
@@ -24,16 +28,21 @@ export const Login: React.FC = () => {
         };
         const res = await fetch(BACKEND_LOGIN, requestOptions)
         if (res.status === 200) {
-            setCookie("user", res.ok)
+            const user = await res.json()
+            const me: Me = {auth_token: basic_auth_token, username: user.username}
+
+            setCookie("me", me)
             navigate("/")
         }
         else if (res.status === 401)
             setError("Incorrect credentials")
+        else if (res.status === 404)
+            setError(`Could not log in at ${BACKEND_LOGIN}. Is login-endpoint running at that address?`)
         else
             setError(`Unknown errorcode: ${res.status}`)
     }
 
-    if (cookie.user !== undefined)
+    if (cookie.me !== undefined)
         return <Navigate to={"/"}/>
     return <div>
         <div style={{display: "grid"}}>

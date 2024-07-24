@@ -1,9 +1,9 @@
 import React, {useContext} from "react";
-import db from "./db";
-import {UserContext} from "./AuthenticationProvider";
+import db from "../util/db";
+import {UserContext} from "../authentication/AuthenticationProvider";
 
 const EndPage: React.FC = () => {
-    const user = useContext(UserContext)
+    const me = useContext(UserContext)
 
     async function downloadData() {
         const json = JSON.stringify(await db.getExport())
@@ -14,7 +14,7 @@ const EndPage: React.FC = () => {
         link.href = url;
         link.setAttribute(
             'download',
-            `ergebnisse_${user?.name}.json`,
+            `ergebnisse_${me?.username}.json`,
         );
 
         // Append to html link element page

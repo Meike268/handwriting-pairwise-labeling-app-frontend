@@ -1,13 +1,15 @@
 import React, {ReactNode, useContext, useEffect, useRef, useState} from "react";
-import QuestionPage from "./QuestionPage";
-import Feature, {as_human_readable, FeatureRating} from "./Feature";
-import db, {WordIdType} from "./db";
-import WordIds from "./wordIds";
-import HintPage from "./HintPage";
-import EndPage from "./EndPage";
-import wordIds from "./wordIds";
-import ProgressBar from "./ProgressBar";
-import {DisplayContext} from "./DisplayContext";
+import QuestionPage from "./pages/QuestionPage";
+import Feature, {as_human_readable, FeatureRating} from "./util/Feature";
+import db, {WordIdType} from "./util/db";
+import WordIds from "./constants/wordIds";
+import HintPage from "./pages/HintPage";
+import EndPage from "./pages/EndPage";
+import wordIds from "./constants/wordIds";
+import ProgressBar from "./components/ProgressBar";
+import {DisplayContext} from "./util/DisplayContext";
+import {put} from "./authentication/io";
+import {BACKEND_ROOT} from "./constants/Urls";
 
 const FUTURE_BUFFER_MIN_LENGTH = 3
 const PAST_BUFFER_MAX_LENGTH = 10
@@ -146,6 +148,7 @@ const Main: React.FC = () => {
     const header = page.data.feature !== "End" ? as_human_readable(page.data.feature) : "Dankeschön❤️"
 
     return <div style={{width: display.width, height: display.height, maxWidth: "1024px"}}>
+        <button onClick={() => put(BACKEND_ROOT + "/greeting",{"clause": "oh hi", "name": "mark"}).then(async res => console.log(await res!.text()))}>AAAAAAAAAAAAAAAAAAAAAAAAAAAAA</button>
         <div style={{position: "relative", width: "100%", top: "0", height: "6%", overflow: "hidden", display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
             { pastBufferLength <= 0 ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
                 <button onClick={() => prevPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: "lightgreen", fontWeight: "bolder", cursor: "pointer"}}>zurück</button>
