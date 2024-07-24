@@ -1,5 +1,5 @@
 import React from "react";
-import Feature from "./Feature";
+import Feature from "../util/Feature";
 import {CheckRounded, CloseRounded} from "@mui/icons-material";
 
 const HintPage: React.FC<{feature: Feature, onStart: () => void}> = ({feature, onStart}) => {

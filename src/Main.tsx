@@ -1,13 +1,13 @@
 import React, {ReactNode, useContext, useEffect, useRef, useState} from "react";
-import QuestionPage from "./QuestionPage";
-import Feature, {as_human_readable, FeatureRating} from "./Feature";
-import db, {WordIdType} from "./db";
-import WordIds from "./wordIds";
-import HintPage from "./HintPage";
-import EndPage from "./EndPage";
-import wordIds from "./wordIds";
-import ProgressBar from "./ProgressBar";
-import {DisplayContext} from "./DisplayContext";
+import QuestionPage from "./pages/QuestionPage";
+import Feature, {as_human_readable, FeatureRating} from "./util/Feature";
+import db, {WordIdType} from "./util/db";
+import WordIds from "./constants/wordIds";
+import HintPage from "./pages/HintPage";
+import EndPage from "./pages/EndPage";
+import wordIds from "./constants/wordIds";
+import ProgressBar from "./components/ProgressBar";
+import {DisplayContext} from "./util/DisplayContext";
 import {put} from "./authentication/io";
 import {BACKEND_ROOT} from "./constants/Urls";
 

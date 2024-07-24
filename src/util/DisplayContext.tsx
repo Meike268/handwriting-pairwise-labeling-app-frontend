@@ -28,6 +28,6 @@ export const DisplayProvider: React.FC<{ children: ReactNode }> = ({children}) =
 }
 
 function getWindowDimensions(): {width: number, height: number} {
-    const {innerWidth: innerWidth, innerHeight: innerHeight} = window;
+    const {innerWidth, innerHeight} = window;
     return {width: innerWidth, height: innerHeight};
 }

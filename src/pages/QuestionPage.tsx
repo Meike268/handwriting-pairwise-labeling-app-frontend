@@ -1,7 +1,7 @@
 import "./QuestionPage.css"
 import React, {useEffect, useState} from "react";
-import Feature, {FeatureRating, getORatingOptions} from "./Feature";
-import db, {WordIdType} from "./db";
+import Feature, {FeatureRating, getORatingOptions} from "../util/Feature";
+import db, {WordIdType} from "../util/db";
 
 const QuestionPage: React.FC<{wordId: WordIdType, feature: Feature, onSubmit: ()=>void}> = ({wordId, feature, onSubmit}) => {
     const [rating, setRating] = useState<FeatureRating | undefined>(undefined)

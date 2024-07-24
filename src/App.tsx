@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import {AuthenticationProvider} from "./authentication/AuthenticationProvider";
 import Main from "./Main";
-import {DisplayProvider} from "./DisplayContext";
+import {DisplayProvider} from "./util/DisplayContext";
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import {Login} from "./authentication/Login";
 import {Logout} from "./authentication/Logout";
