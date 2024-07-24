@@ -6,7 +6,7 @@ cd "$SCRIPT_DIR" || exit 1
 ENV_FILE=.env
 if [ ! -f "$ENV_FILE" ]; then
   echo \
-"BACKEND_URL_ROOT=http://localhost:8080
+"REACT_APP_BACKEND_URL_ROOT=http://localhost:8080
 " \
 > "$ENV_FILE"
 fi
