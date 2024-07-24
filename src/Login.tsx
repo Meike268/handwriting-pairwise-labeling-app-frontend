@@ -29,6 +29,8 @@ export const Login: React.FC = () => {
         }
         else if (res.status === 401)
             setError("Incorrect credentials")
+        else if (res.status === 404)
+            setError(`Could not log in at ${BACKEND_LOGIN}. Is login-endpoint running at that address?`)
         else
             setError(`Unknown errorcode: ${res.status}`)
     }
