@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useCookies} from "react-cookie";
 import {Navigate, useNavigate} from "react-router-dom";
-import {BACKEND_LOGIN} from "../constants/Urls";
+import {APP_INDEX, BACKEND_LOGIN} from "../constants/Urls";
 
 export type Me = {
     username: string,
@@ -32,7 +32,7 @@ export const Login: React.FC = () => {
             const me: Me = {auth_token: basic_auth_token, username: user.username}
 
             setCookie("me", me)
-            navigate("/")
+            navigate(APP_INDEX)
         }
         else if (res.status === 401)
             setError("Incorrect credentials")
@@ -43,7 +43,7 @@ export const Login: React.FC = () => {
     }
 
     if (cookie.me !== undefined)
-        return <Navigate to={"/"}/>
+        return <Navigate to={APP_INDEX}/>
     return <div>
         <div style={{display: "grid"}}>
             <div style={{gridRowStart: "row-start 1", justifySelf: "start", margin: "10px"}}>
