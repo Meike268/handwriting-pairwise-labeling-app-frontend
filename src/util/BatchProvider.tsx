@@ -1,7 +1,9 @@
-import React, {createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState} from "react";
-import {Outlet} from 'react-router-dom';
+import React, {createContext, Dispatch, ReactNode, SetStateAction, useContext, useState} from "react";
+import {Outlet, useLocation, useNavigate} from 'react-router-dom';
 import {UserContext} from "../authentication/AuthenticationProvider";
 import {Me} from "../authentication/Login";
+import {APP_BATCH_LABELING_PATH, APP_BATCH_LABELING_SAMPLE} from "../constants/Urls";
+import {sleep} from "./helpers";
 
 export type Question = {
     id: string
@@ -27,14 +29,23 @@ export const BatchContext = createContext<[TaskBatch | undefined, Dispatch<SetSt
 
 export const BatchProvider: React.FC<{ children?: ReactNode }> = ({children}) => {
     const user = useContext(UserContext)!;
+    const location = useLocation()
+    const navigate = useNavigate()
     const [batch, setBatch] = useState<TaskBatch | undefined>(undefined)
 
-    useEffect(() => {
-        fetchBatch(user).then(res => setBatch(res))
-    }, []);
+    if (location.pathname === APP_BATCH_LABELING_PATH + "/" && batch !== undefined) {
+        setBatch(undefined)
+    }
 
-    const fetchBatch = async (user: Me) =>  {
-        console.log(`Creatign batch for ${user}`)
+    if (batch === undefined) {
+        fetchBatch(user).then(res => {
+            setBatch(res)
+            navigate(APP_BATCH_LABELING_SAMPLE(0))
+        })
+    }
+
+    async function fetchBatch(user: Me) {  // TODO make this fetch from backend
+        console.info(`Fetching batch for ${JSON.stringify(user)}`)
         const theBatch: TaskBatch = {
             question: {
                 id: "question1",
@@ -57,6 +68,7 @@ export const BatchProvider: React.FC<{ children?: ReactNode }> = ({children}) =>
                 {id: "sample10", image: "sample", score: undefined}
             ]
         }
+        await sleep(1000)  // Simulate response time
         return theBatch
     }
 

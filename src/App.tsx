@@ -8,7 +8,7 @@ import {Logout} from "./authentication/Logout";
 import Introduction from "./pages/Introduction";
 import {BatchProvider} from "./util/BatchProvider";
 import {
-    APP_BATCH_LABELING,
+    APP_BATCH_LABELING_SAMPLE,
     APP_BATCH_LABELING_PATH,
     APP_INDEX,
     APP_LOGIN,
@@ -28,7 +28,7 @@ const App: React.FC = () => {
                             <Route path={APP_INDEX} element={<AuthenticationProvider/>}>
                                 <Route path={APP_INDEX} element={<Introduction/>}/>
                                 <Route path={APP_BATCH_LABELING_PATH} element={<BatchProvider/>}>
-                                    <Route path={APP_BATCH_LABELING()} element={<Main/>}/>
+                                    <Route path={APP_BATCH_LABELING_SAMPLE(":sampleIndex")} element={<Main/>}/>
                                 </Route>
                             </Route>
                             <Route path="*" element={<p>There's nothing here: 404!</p>} />
