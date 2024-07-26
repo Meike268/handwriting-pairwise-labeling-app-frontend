@@ -25,17 +25,17 @@ export async function fetchAuthenticated(input: RequestInfo | URL, init: Request
 export async function get(url: RequestInfo | URL, init: RequestInit = {}) {
     init.method = "GET"
     init.body = undefined
-    return await fetchAuthenticated(url, init)
+    return await (await fetchAuthenticated(url, init)).json()
 }
 
 export async function post(url: RequestInfo | URL, body: any={}, init: RequestInit = {}) {
     init.method = "POST"
     init.body = JSON.stringify(body)
-    return await fetchAuthenticated(url, init)
+    return await (await fetchAuthenticated(url, init)).json()
 }
 
 export async function put(url: RequestInfo | URL, body: any={}, init: RequestInit = {}) {
     init.method = "PUT"
     init.body = JSON.stringify(body)
-    return await fetchAuthenticated(url, init)
+    return await (await fetchAuthenticated(url, init)).json()
 }
