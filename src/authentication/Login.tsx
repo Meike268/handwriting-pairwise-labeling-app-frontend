@@ -8,11 +8,13 @@ export type Me = {
     auth_token: string,
 }
 
+
 export const Login: React.FC = () => {
+
     const [user, setUser] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [error, setError] = useState<string | undefined>(undefined)
-    const  navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [cookie, setCookie] = useCookies(['me'])
 
@@ -45,23 +47,58 @@ export const Login: React.FC = () => {
     if (cookie.me !== undefined)
         return <Navigate to={APP_INDEX}/>
     return <div>
-        <div style={{display: "grid"}}>
+        <div>
+            <h1 style={{
+                height: "min-content",
+                marginLeft: "auto",
+                marginRight: "auto",
+                maxWidth: "60%"
+            }}>Willkommen</h1>
+            <p style={{
+                textAlign: "center",
+                marginLeft: "auto",
+                marginRight: "auto",
+                maxWidth: "80%"
+            }}>
+                Diese Website ist Teil der Abschlussarbeiten von Lukas Pieger und Erik Schmidt.
+                In Zusammenarbeit mit Stabilo und dem xAI Lehrstuhl wollen wir die Handschrift von Schülern
+                automatisiert bezüglich ihrer Leserlichkeit Bewerten. Dazu haben wir von etwa 200 Schülern die selben 10
+                Sätze aufgezeichnet. Zweck dieser Website ist es deine Einschätzung zur Leserlichkeit einzelner Sätze zu
+                sammeln. Diese Bewertungen dienen später als Grundlage (Trainings-Besipiele) für KI-Modelle, die
+                Handschrift möglichst so bewerten sollen, wie das Menschen tun.
+                <br/>
+                <br/>
+                Bitte melde dich mit den Daten an, die wir dir geschickt haben. Danach geht es direkt los.
+                Falls du keine Login-Daten hast und gerne helfen willst, melde dich
+                bei hw-labeling-app@beispiel.de.
+            </p>
+        </div>
+        <div className={"grid-container"} style={{
+            maxWidth: "30%",
+            minWidth: "300px",
+            marginLeft: "auto",
+            marginRight: "auto"
+        }}>
             <div style={{gridRowStart: "row-start 1", justifySelf: "start", margin: "10px"}}>
                 Name:
             </div>
             <input value={user} onChange={e => setUser(e.target.value)}
                    style={{gridRowStart: "row-start 1"}}/>
-            <div style={{height: "5px", gridRowStart: "row-start 2"}}/>
-            <div style={{gridRowStart: "row-start 3", justifySelf: "start", margin: "10px"}}>
+            <div style={{gridRowStart: "row-start 2", justifySelf: "start", margin: "10px"}}>
                 Passwort:
             </div>
             <input type={"password"} value={password} onChange={e => setPassword(e.target.value)}
-                   style={{gridRowStart: "row-start 3"}}/>
+                   style={{gridRowStart: "row-start 2"}}/>
             <br/>
         </div>
         <div style={{color: "red"}}>{error}</div>
         <button onClick={() => onSubmit()} type="submit"
-                style={{padding: "10px", marginTop: "10px", width: "100%"}}>Bestätigen
+                style={{
+                    padding: "10px",
+                    marginTop: "10px",
+                    maxWidth: "30%",
+                    minWidth: "300px"
+                }}>Bestätigen
         </button>
     </div>
 }
