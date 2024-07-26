@@ -3,6 +3,7 @@ import React from "react";
 import {ExamplePair, Question, ReferenceSentence, Sample, Score} from "../entities/Batch";
 
 const TaskPage: React.FC<{question: Question, referenceSentence: ReferenceSentence, examplePair: ExamplePair, sample: Sample, onSubmit: (score: Score)=>void}> = ({question, referenceSentence, examplePair, sample,  onSubmit=()=>{}}) => {
+    console.log(sample.id)
     return <div style={{height: "100%", width: "100%"}}>
         Question: {JSON.stringify(question)}<br/>
         Sentence: {JSON.stringify(referenceSentence)}<br/>

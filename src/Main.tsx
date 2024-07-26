@@ -56,7 +56,7 @@ const Main: React.FC = () => {
     }
 
     function nextPage() {
-        if (sampleInd+1 < batch.samples.length)
+        if (sampleInd < batch.samples.length)
             navigate(APP_BATCH_LABELING_SAMPLE(sampleInd+1))
         else {
             setBatch(undefined)
