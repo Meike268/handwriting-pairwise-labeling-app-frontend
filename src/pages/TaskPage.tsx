@@ -1,6 +1,6 @@
 import "./QuestionPage.css"
 import React from "react";
-import {Question, Sample, Score} from "../util/BatchProvider";
+import {Question, Sample, Score} from "../entities/Batch";
 
 const TaskPage: React.FC<{sample: Sample, question: Question, onSubmit: (score: Score)=>void}> = ({sample, question, onSubmit=()=>{}}) => {
     return <div style={{height: "100%", width: "100%"}}>

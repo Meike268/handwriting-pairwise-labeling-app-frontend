@@ -6,7 +6,8 @@ import {post, put} from "./authentication/io";
 import {APP_BATCH_LABELING_SAMPLE, APP_BATCH_LABELING_PATH, BACKEND_ANSWER} from "./constants/Urls";
 import TaskPage from "./pages/TaskPage";
 import { useNavigate, useParams} from "react-router-dom";
-import {BatchContext, Score, TaskBatch} from "./util/BatchProvider";
+import {BatchContext} from "./util/BatchProvider";
+import {Score, TaskBatch} from "./entities/Batch";
 
 const NAVIGATION_BUTTON_RELATIVE_WIDTH = 15
 
@@ -73,7 +74,7 @@ const Main: React.FC = () => {
             { sampleInd <= 0 ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
                 <button onClick={() => prevPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: "lightgreen", fontWeight: "bolder", cursor: "pointer"}}>zurück</button>
             }
-            <h1 style={{height: "min-content", maxWidth: (100-NAVIGATION_BUTTON_RELATIVE_WIDTH*2) + "%"}}>{batch.question.instruction}</h1>
+            <h1 style={{height: "min-content", maxWidth: (100-NAVIGATION_BUTTON_RELATIVE_WIDTH*2) + "%"}}>{batch.question.description}</h1>
             <img src={currentSample.image.src} alt={"asdf"}/>
             { currentSample.score === undefined ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
                 <button onClick={() => nextPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: "lightgreen", fontWeight: "bolder", cursor: "pointer"}}>weiter</button>

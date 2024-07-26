@@ -58,7 +58,7 @@ const GenericHintPage: React.FC<{headline: string, exampleNegativePath: string, 
                 flexGrow: "0",
                 flexBasis: "20%"
             }}/>
-            <img src={batch!.question.examples?.positive.src} alt={"Positive example"}
+            <img src={batch!.examplePair.positive.src} alt={"Positive example"}
                  style={{width: "81%"}}/>
         </div>
         <div style={{
@@ -78,7 +78,7 @@ const GenericHintPage: React.FC<{headline: string, exampleNegativePath: string, 
                 flexGrow: "0",
                 flexBasis: "20%"
             }}/>
-            <img src={batch!.question.examples?.negative.src} alt={"Negative example"}
+            <img src={batch!.examplePair.negative.src} alt={"Negative example"}
                  style={{width: "81%"}}/>
         </div>
     </div>

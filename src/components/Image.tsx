@@ -18,12 +18,10 @@ export const preloadImage = async (src: string): Promise<string> => {
 
 export class PreloadableImageSrc {
     src: string
-    alt: string
     private _loaded: boolean
 
-    constructor(src: string, alt: string) {
+    constructor(src: string) {
         this.src = src
-        this.alt = alt
         this._loaded = false
     }
 
