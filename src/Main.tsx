@@ -42,7 +42,7 @@ const Main: React.FC = () => {
                 res = await put(BACKEND_ANSWER, answer)
             else
                 res = await post(BACKEND_ANSWER, answer)
-            console.info(`Successfully sent answer ${res}`)
+            console.info(`Successfully sent answer ${JSON.stringify(res)}`)
             return res
         } catch (error) {
             console.warn("Something went wrong while sending new score to backend.")
