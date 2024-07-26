@@ -8,10 +8,6 @@ export type Me = {
     auth_token: string,
 }
 
-const WELCOME_HEADER_RELATIVE_WIDTH = 60
-const WELCOME_TEXT_RELATIVE_WIDTH = 80
-const LOGIN_INPUT_RELATIVE_WIDTH = 30
-const SUBMIT_BUTTON_RELATIVE_WIDTH = 30
 
 export const Login: React.FC = () => {
 
@@ -39,7 +35,8 @@ export const Login: React.FC = () => {
 
             setCookie("me", me)
             navigate("/")
-        } else if (res.status === 401)
+        }
+        else if (res.status === 401)
             setError("Incorrect credentials")
         else if (res.status === 404)
             setError(`Could not log in at ${BACKEND_LOGIN}. Is login-endpoint running at that address?`)
@@ -55,13 +52,13 @@ export const Login: React.FC = () => {
                 height: "min-content",
                 marginLeft: "auto",
                 marginRight: "auto",
-                maxWidth: (WELCOME_HEADER_RELATIVE_WIDTH) + "%"
+                maxWidth: "60%"
             }}>Willkommen</h1>
             <p style={{
                 textAlign: "center",
                 marginLeft: "auto",
                 marginRight: "auto",
-                maxWidth: (WELCOME_TEXT_RELATIVE_WIDTH) + "%"
+                maxWidth: "80%"
             }}>
                 Diese Website ist Teil der Abschlussarbeiten von Lukas Pieger und Erik Schmidt.
                 In Zusammenarbeit mit Stabilo und dem xAI Lehrstuhl wollen wir die Handschrift von Schülern
@@ -77,7 +74,7 @@ export const Login: React.FC = () => {
             </p>
         </div>
         <div className={"grid-container"} style={{
-            maxWidth: (LOGIN_INPUT_RELATIVE_WIDTH) + "%",
+            maxWidth: "30%",
             minWidth: "300px",
             marginLeft: "auto",
             marginRight: "auto"
@@ -99,9 +96,9 @@ export const Login: React.FC = () => {
                 style={{
                     padding: "10px",
                     marginTop: "10px",
-                    maxWidth: (SUBMIT_BUTTON_RELATIVE_WIDTH) +"%",
+                    maxWidth: "30%",
                     minWidth: "300px"
-        }}>Bestätigen
+                }}>Bestätigen
         </button>
     </div>
 }
