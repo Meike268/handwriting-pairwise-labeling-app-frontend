@@ -17,6 +17,16 @@ h1 {
   font-size: 6vmin;
 }
 
+p {
+  font-size: 2vmin;
+}
+
+.grid-container {
+  display: grid;
+  column-gap: 20px;
+  row-gap: 10px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
