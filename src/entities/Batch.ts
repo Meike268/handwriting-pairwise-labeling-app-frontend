@@ -1,6 +1,5 @@
 import {PreloadableImageSrc} from "../components/Image";
 import {Me} from "../authentication/Login";
-import {sleep} from "../util/helpers";
 import {get} from "../authentication/io";
 import {BACKEND_BATCH} from "../constants/Urls";
 
