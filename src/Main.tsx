@@ -75,14 +75,13 @@ const Main: React.FC = () => {
                 <button onClick={() => prevPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: "lightgreen", fontWeight: "bolder", cursor: "pointer"}}>zurück</button>
             }
             <h1 style={{height: "min-content", maxWidth: (100-NAVIGATION_BUTTON_RELATIVE_WIDTH*2) + "%"}}>{batch.question.description}</h1>
-            <img src={currentSample.image.src} alt={"asdf"}/>
             { currentSample.score === undefined ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
                 <button onClick={() => nextPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: "lightgreen", fontWeight: "bolder", cursor: "pointer"}}>weiter</button>
             }
         </div>
         {/*<ProgressBar style={{height: "1.5%"}} current={page.number} end={8 * (1+wordIds.length)}/>*/}
         <div style={{height: "92.5%", width: "100%", display:"flex", justifyItems: "center", alignItems: "center"}}>
-            <TaskPage sample={currentSample} question={batch.question} onSubmit={(score) => onSubmit(score)}/>
+            <TaskPage question={batch.question} referenceSentence={batch.referenceSentence} examplePair={batch.examplePair} sample={currentSample} onSubmit={(score) => onSubmit(score)}/>
         </div>
     </div>
 }
