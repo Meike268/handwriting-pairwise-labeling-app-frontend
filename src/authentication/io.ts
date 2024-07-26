@@ -22,20 +22,29 @@ export async function fetchAuthenticated(input: RequestInfo | URL, init: Request
         throw Error(`${res.status} - Could not retrieve request ${init.method} ${input}. RequestInit: ${JSON.stringify(init)}`)
 }
 
-export async function get(url: RequestInfo | URL, init: RequestInit = {}) {
+export async function get(url: RequestInfo | URL, init: RequestInit = {}, asJson = true) {
     init.method = "GET"
     init.body = undefined
-    return await (await fetchAuthenticated(url, init)).json()
+    const response = await fetchAuthenticated(url, init)
+    if (asJson)
+        return await response.json()
+    return response
 }
 
-export async function post(url: RequestInfo | URL, body: any={}, init: RequestInit = {}) {
+export async function post(url: RequestInfo | URL, body: any={}, init: RequestInit = {}, asJson = true) {
     init.method = "POST"
     init.body = JSON.stringify(body)
-    return await (await fetchAuthenticated(url, init)).json()
+    const response = await fetchAuthenticated(url, init)
+    if (asJson)
+        return await response.json()
+    return response
 }
 
-export async function put(url: RequestInfo | URL, body: any={}, init: RequestInit = {}) {
+export async function put(url: RequestInfo | URL, body: any={}, init: RequestInit = {}, asJson = true) {
     init.method = "PUT"
     init.body = JSON.stringify(body)
-    return await (await fetchAuthenticated(url, init)).json()
+    const response = await fetchAuthenticated(url, init)
+    if (asJson)
+        return await response.json()
+    return response
 }

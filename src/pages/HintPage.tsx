@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useContext} from "react";
 import Feature from "../util/Feature";
 import {CheckRounded, CloseRounded} from "@mui/icons-material";
+import {BatchContext} from "../util/BatchProvider";
 
 const HintPage: React.FC<{feature: Feature, onStart: () => void}> = ({feature, onStart}) => {
     function getFeaturePage(feat: Feature = feature) {
@@ -33,7 +34,9 @@ const HintPage: React.FC<{feature: Feature, onStart: () => void}> = ({feature, o
 
 export default HintPage
 
-const GenericHintPage: React.FC<{headline: string, exampleNegativePath: string, examplePositivePath: string}> = ({headline, exampleNegativePath, examplePositivePath}) => {
+const GenericHintPage: React.FC<{headline: string, exampleNegativePath: string, examplePositivePath: string}> = ({headline}) => {
+    const [batch, ] = useContext(BatchContext)!
+
     return <div style={{width: "100%", boxSizing: "border-box"}}>
         <h3>{headline}</h3>
         <div style={{margin: "8px"}}>Beispiele für eine gute/schlechte Umsetzung:</div>
@@ -55,7 +58,7 @@ const GenericHintPage: React.FC<{headline: string, exampleNegativePath: string, 
                 flexGrow: "0",
                 flexBasis: "20%"
             }}/>
-            <img src={examplePositivePath} alt={"Positive example"}
+            <img src={batch!.question.examples?.positive.src} alt={"Positive example"}
                  style={{width: "81%"}}/>
         </div>
         <div style={{
@@ -75,7 +78,7 @@ const GenericHintPage: React.FC<{headline: string, exampleNegativePath: string, 
                 flexGrow: "0",
                 flexBasis: "20%"
             }}/>
-            <img src={exampleNegativePath} alt={"Negative example"}
+            <img src={batch!.question.examples?.negative.src} alt={"Negative example"}
                  style={{width: "81%"}}/>
         </div>
     </div>
