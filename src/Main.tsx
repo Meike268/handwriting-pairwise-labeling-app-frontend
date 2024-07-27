@@ -6,7 +6,8 @@ import {post, put} from "./authentication/io";
 import {APP_BATCH_LABELING_SAMPLE, APP_BATCH_LABELING_PATH, BACKEND_ANSWER} from "./constants/Urls";
 import TaskPage from "./pages/TaskPage";
 import { useNavigate, useParams} from "react-router-dom";
-import {BatchContext, Score, TaskBatch} from "./util/BatchProvider";
+import {BatchContext} from "./util/BatchProvider";
+import {Score, TaskBatch} from "./entities/Batch";
 
 const NAVIGATION_BUTTON_RELATIVE_WIDTH = 15
 
@@ -41,7 +42,7 @@ const Main: React.FC = () => {
                 res = await put(BACKEND_ANSWER, answer)
             else
                 res = await post(BACKEND_ANSWER, answer)
-            console.info(`Successfully sent answer ${res}`)
+            console.info(`Successfully sent answer ${JSON.stringify(res)}`)
             return res
         } catch (error) {
             console.warn("Something went wrong while sending new score to backend.")
@@ -55,7 +56,7 @@ const Main: React.FC = () => {
     }
 
     function nextPage() {
-        if (sampleInd+1 < batch.samples.length)
+        if (sampleInd < batch.samples.length)
             navigate(APP_BATCH_LABELING_SAMPLE(sampleInd+1))
         else {
             setBatch(undefined)
@@ -73,15 +74,14 @@ const Main: React.FC = () => {
             { sampleInd <= 0 ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
                 <button onClick={() => prevPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: "lightgreen", fontWeight: "bolder", cursor: "pointer"}}>zurück</button>
             }
-            <h1 style={{height: "min-content", maxWidth: (100-NAVIGATION_BUTTON_RELATIVE_WIDTH*2) + "%"}}>{batch.question.instruction}</h1>
-            <img src={currentSample.image.src} alt={"asdf"}/>
+            <h1 style={{height: "min-content", maxWidth: (100-NAVIGATION_BUTTON_RELATIVE_WIDTH*2) + "%"}}>{batch.question.description}</h1>
             { currentSample.score === undefined ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
                 <button onClick={() => nextPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: "lightgreen", fontWeight: "bolder", cursor: "pointer"}}>weiter</button>
             }
         </div>
         {/*<ProgressBar style={{height: "1.5%"}} current={page.number} end={8 * (1+wordIds.length)}/>*/}
         <div style={{height: "92.5%", width: "100%", display:"flex", justifyItems: "center", alignItems: "center"}}>
-            <TaskPage sample={currentSample} question={batch.question} onSubmit={(score) => onSubmit(score)}/>
+            <TaskPage question={batch.question} referenceSentence={batch.referenceSentence} examplePair={batch.examplePair} sample={currentSample} onSubmit={(score) => onSubmit(score)}/>
         </div>
     </div>
 }
