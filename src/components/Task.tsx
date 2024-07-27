@@ -1,10 +1,9 @@
-import "./QuestionPage.css"
 import React from "react";
 import {ExamplePair, Question, ReferenceSentence, Sample, Score} from "../entities/Batch";
-import QuestionDescription from "../components/QuestionDescription";
-import ScoreDescriptor from "../components/ScoreDescriptor";
+import QuestionDescription from "./QuestionDescription";
+import ScoreDescriptor from "./ScoreDescriptor";
 
-const TaskPage: React.FC<{
+const Task: React.FC<{
     question: Question,
     referenceSentence: ReferenceSentence,
     examplePair: ExamplePair,
@@ -60,4 +59,4 @@ const TaskPage: React.FC<{
     </div>
 }
 
-export default TaskPage
+export default Task

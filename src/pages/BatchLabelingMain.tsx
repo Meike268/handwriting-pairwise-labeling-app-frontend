@@ -1,16 +1,16 @@
 import React, {useContext} from "react";
-import {DisplayContext} from "./util/DisplayContext";
-import {post, put} from "./authentication/io";
-import {APP_BATCH_LABELING_SAMPLE, APP_BATCH_LABELING_PATH, BACKEND_ANSWER} from "./constants/Urls";
-import TaskPage from "./pages/TaskPage";
+import {DisplayContext} from "../util/DisplayContext";
+import {post, put} from "../authentication/io";
+import {APP_BATCH_LABELING_SAMPLE, APP_BATCH_LABELING_PATH, BACKEND_ANSWER} from "../constants/Urls";
+import Task from "../components/Task";
 import { useNavigate, useParams} from "react-router-dom";
-import {BatchContext} from "./util/BatchProvider";
-import {Sample, Score, TaskBatch} from "./entities/Batch";
-import ProgressBar from "./components/ProgressBar";
+import {BatchContext} from "../util/BatchProvider";
+import {Sample, Score, TaskBatch} from "../entities/Batch";
+import ProgressBar from "../components/ProgressBar";
 
 const NAVIGATION_BUTTON_RELATIVE_WIDTH = 15
 
-const Main: React.FC = () => {
+const BatchLabelingMain: React.FC = () => {
     const {sampleIndex} = useParams()
     const sampleInd = +sampleIndex!
     const display = useContext(DisplayContext)!
@@ -79,9 +79,9 @@ const Main: React.FC = () => {
         </div>
         <ProgressBar style={{height: "1.5%"}} current={sampleInd} end={batch.samples.length+1}/>
         <div style={{height: "92.5%", width: "100%", display:"flex", justifyItems: "center", alignItems: "center"}}>
-            <TaskPage question={batch.question} referenceSentence={batch.referenceSentence} examplePair={batch.examplePair} sample={currentSample} onSubmit={(score) => onSubmit(score)}/>
+            <Task question={batch.question} referenceSentence={batch.referenceSentence} examplePair={batch.examplePair} sample={currentSample} onSubmit={(score) => onSubmit(score)}/>
         </div>
     </div>
 }
 
-export default Main;
+export default BatchLabelingMain;
