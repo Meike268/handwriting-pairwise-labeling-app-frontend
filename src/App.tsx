@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Main from "./Main";
+import BatchLabelingMain from "./pages/BatchLabelingMain";
 import {DisplayProvider} from "./util/DisplayContext";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Login} from "./authentication/Login";
@@ -28,7 +28,7 @@ const App: React.FC = () => {
                             <Route path={APP_INDEX} element={<AuthenticationProvider/>}>
                                 <Route path={APP_INDEX} element={<Introduction/>}/>
                                 <Route path={APP_BATCH_LABELING_PATH} element={<BatchProvider/>}>
-                                    <Route path={APP_BATCH_LABELING_SAMPLE(":sampleIndex")} element={<Main/>}/>
+                                    <Route path={APP_BATCH_LABELING_SAMPLE(":sampleIndex")} element={<BatchLabelingMain/>}/>
                                 </Route>
                             </Route>
                             <Route path="*" element={<p>There's nothing here: 404!</p>} />

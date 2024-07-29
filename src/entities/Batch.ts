@@ -49,7 +49,9 @@ export type TaskBatch = {
     samples: Array<Sample>
 }
 
-export async function preloadImages(batch: TaskBatch) {
+async function preloadBatchImages(batch: TaskBatch) {
+    await batch.examplePair.negative.load()
+    await batch.examplePair.positive.load()
     for (const sample of batch.samples) {
         await sample.image.load()
     }
@@ -73,6 +75,6 @@ export async function fetchRandomBatch(user: Me) {
             score: undefined
         })),
     }
-    preloadImages(batch).then(() => console.debug("Preload of batch finished"))
+    preloadBatchImages(batch).then(() => console.debug("Preload of batch finished"))
     return batch
 }

@@ -1,4 +1,4 @@
-import {CSSProperties} from "react";
+import React, {CSSProperties} from "react";
 
 const ProgressBar: React.FC<{ current: number, end: number, style: CSSProperties }> = ({current, end, style}) => {
     const progress = current / end
@@ -9,14 +9,9 @@ const ProgressBar: React.FC<{ current: number, end: number, style: CSSProperties
             <div style={{backgroundColor: "#888", width: ((1 - progress) * 100) + "%"}}/>
         </div>
         <div style={{width: "100%", height: "56%", display: "flex", justifyContent: "space-between"}}>
+
             <div style={{height: "100%", width: "1px"}}/>
-            <div style={{height: "100%", width: "1px", backgroundColor: "white"}}/>
-            <div style={{height: "100%", width: "1px", backgroundColor: "white"}}/>
-            <div style={{height: "100%", width: "1px", backgroundColor: "white"}}/>
-            <div style={{height: "100%", width: "1px", backgroundColor: "white"}}/>
-            <div style={{height: "100%", width: "1px", backgroundColor: "white"}}/>
-            <div style={{height: "100%", width: "1px", backgroundColor: "white"}}/>
-            <div style={{height: "100%", width: "1px", backgroundColor: "white"}}/>
+            {[...Array(end-1)].map(() => <div style={{height: "100%", width: "1px", backgroundColor: "white"}}/>)}
             <div style={{height: "100%", width: "1px"}}/>
         </div>
     </div>
