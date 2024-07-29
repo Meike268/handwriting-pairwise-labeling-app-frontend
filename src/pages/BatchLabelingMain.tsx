@@ -77,7 +77,7 @@ const BatchLabelingMain: React.FC = () => {
                 <button onClick={() => nextPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: "lightgreen", fontWeight: "bolder", cursor: "pointer"}}>weiter</button>
             }
         </div>
-        <ProgressBar style={{height: "1.5%"}} current={sampleInd} end={batch.samples.length+1}/>
+        <ProgressBar style={{height: "1.5%"}} current={currentSample === null ? 0 : sampleInd-1} end={batch.samples.length}/>
         <div style={{height: "92.5%", width: "100%", display:"flex", justifyItems: "center", alignItems: "center"}}>
             <Task question={batch.question} referenceSentence={batch.referenceSentence} examplePair={batch.examplePair} sample={currentSample} onSubmit={(score) => onSubmit(score)}/>
         </div>
