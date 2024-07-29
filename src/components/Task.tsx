@@ -2,6 +2,7 @@ import React from "react";
 import {ExamplePair, Question, ReferenceSentence, Sample, Score} from "../entities/Batch";
 import QuestionDescription from "./QuestionDescription";
 import ScoreDescriptor from "./ScoreDescriptor";
+import {Image} from "./Image";
 
 const Task: React.FC<{
     question: Question,
@@ -21,7 +22,7 @@ const Task: React.FC<{
         justifyContent: "space-between"
     }}>
         <div style={{marginTop: "5%"}}>{<QuestionDescription question={question}/>}</div>
-        {sample && <img src={sample.image.src} alt={"sample"}/>}
+        {sample && <Image src={sample.image} alt={"sample"}/>}
         <div style={{
             display: "flex",
             flexDirection: "row",
@@ -29,7 +30,7 @@ const Task: React.FC<{
             width: "100%",
             height: "15%"
         }}>
-            <img src={examplePair.positive.src} alt={"positive_example"} style={{width: "35%", objectFit: "contain"}}/>
+            <Image src={examplePair.positive} alt={"positive_example"} style={{width: "35%", objectFit: "contain"}}/>
             {sample ? <div style={{
                 width: "30%",
                 display: "flex",
@@ -52,8 +53,8 @@ const Task: React.FC<{
                         <ScoreDescriptor score={score} question={question}/>
                     </button>
                 })}
-            </div> : <button style={{width: "100%", margin: "10px"}} onClick={() => onSubmit(null)}>Start</button>}
-            <img src={examplePair.negative.src} alt={"negative_example"}
+            </div> : <button style={{width: "30%", margin: "10px"}} onClick={() => onSubmit(null)}>Start</button>}
+            <Image src={examplePair.negative} alt={"negative_example"}
                  style={{width: "35%", objectFit: "contain"}}/>
         </div>
     </div>
