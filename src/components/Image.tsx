@@ -26,12 +26,6 @@ export class PreloadableImageSrc {
         this._loaded = false
     }
 
-    async getDataSrc(): Promise<string> {
-        if (!this._loaded)
-            await this.load()
-        return this.src
-    }
-
     async load() {
         if (this._loaded)
             return this
@@ -46,7 +40,7 @@ export const Image: React.FC<{src: PreloadableImageSrc | string, alt: string, st
 
     useEffect(() => {
         const preloadableSrc = (typeof src === "string") ? new PreloadableImageSrc(src) : src
-        preloadableSrc.getDataSrc().then(res => setDataSrc(res))
+        preloadableSrc.load().then(res => setDataSrc(res.src))
     }, []);
 
     if (dataSrc === undefined)
