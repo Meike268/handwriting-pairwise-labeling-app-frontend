@@ -1,6 +1,6 @@
 FROM node:22-slim
 WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
+ENV PATH=/app/node_modules/.bin:$PATH
 COPY . ./
 ARG REACT_APP_BACKEND_URL_ROOT
 RUN echo REACT_APP_BACKEND_URL_ROOT=${REACT_APP_BACKEND_URL_ROOT} > .env
