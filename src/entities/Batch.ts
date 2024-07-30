@@ -3,6 +3,11 @@ import {Me} from "../authentication/Login";
 import {get} from "../authentication/io";
 import {BACKEND_BATCH} from "../constants/Urls";
 
+type GetTaskBatchResponse = {
+    state: string,
+    body: BackendTaskBatch
+}
+
 type BackendTaskBatch = {
     question: {
         id: number,
@@ -60,21 +65,26 @@ async function preloadBatchImages(batch: TaskBatch) {
 export async function fetchRandomBatch(user: Me) {
     console.info(`Fetching batch for ${JSON.stringify(user)}`)
 
-    const batchJson = await get(BACKEND_BATCH) as BackendTaskBatch
-    const batch: TaskBatch = {
-        question: batchJson.question,
-        referenceSentence: batchJson.referenceSentence,
-        examplePair: {
-            positive: new PreloadableImageSrc(batchJson.examplePair.positiveResourceUrl),
-            negative: new PreloadableImageSrc(batchJson.examplePair.negativeResourceUrl)
-        },
-        samples: batchJson.samples.map(sampleJson => ({
-            id: sampleJson.id,
-            studentId: sampleJson.studentId,
-            image: new PreloadableImageSrc(sampleJson.resourceUrl),
-            score: undefined
-        })),
+    const batchResponseJson = await get(BACKEND_BATCH) as GetTaskBatchResponse
+
+    if (batchResponseJson.state === "finished") {
+        return null
+    } else {
+        const batch: TaskBatch = {
+            question: batchResponseJson.body.question,
+            referenceSentence: batchResponseJson.body.referenceSentence,
+            examplePair: {
+                positive: new PreloadableImageSrc(batchResponseJson.body.examplePair.positiveResourceUrl),
+                negative: new PreloadableImageSrc(batchResponseJson.body.examplePair.negativeResourceUrl)
+            },
+            samples: batchResponseJson.body.samples.map(sampleJson => ({
+                id: sampleJson.id,
+                studentId: sampleJson.studentId,
+                image: new PreloadableImageSrc(sampleJson.resourceUrl),
+                score: undefined
+            })),
+        }
+        preloadBatchImages(batch).then(() => console.debug("Preload of batch finished"))
+        return batch
     }
-    preloadBatchImages(batch).then(() => console.debug("Preload of batch finished"))
-    return batch
 }
