@@ -1,5 +1,5 @@
 import {get} from "../authentication/io";
-import React, {CSSProperties, useEffect, useState} from "react";
+import React, {CSSProperties, useState} from "react";
 
 export const preloadImage = async (src: string): Promise<string> => {
     const theBlob = await ((await get(src, undefined, false)) as Response).blob()
@@ -19,11 +19,13 @@ export const preloadImage = async (src: string): Promise<string> => {
 
 export class PreloadableImageSrc {
     src: string
+    origin: string
     private _loaded: boolean
 
     constructor(src: string) {
         this.src = src
         this._loaded = false
+        this.origin = src
     }
 
     async load() {
@@ -36,12 +38,22 @@ export class PreloadableImageSrc {
 }
 
 export const Image: React.FC<{src: PreloadableImageSrc | string, alt: string, style?: CSSProperties}> = ({src, alt, style}) => {
+    const [origin, setOrigin] = useState<string | undefined>(undefined)
+
     const [dataSrc, setDataSrc] = useState<string | undefined>(undefined)
 
-    useEffect(() => {
-        const preloadableSrc = (typeof src === "string") ? new PreloadableImageSrc(src) : src
-        preloadableSrc.load().then(res => setDataSrc(res.src))
-    }, []);
+    if (src instanceof PreloadableImageSrc) {
+        if (origin != src.origin) {
+            src.load().then(res =>
+                setDataSrc(res.src)
+            )
+            setOrigin(src.origin)
+
+        }
+    }
+
+
+
 
     if (dataSrc === undefined)
         return <div style={style}/>
