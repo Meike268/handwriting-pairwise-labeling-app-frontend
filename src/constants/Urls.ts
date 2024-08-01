@@ -9,3 +9,4 @@ export const APP_LOGOUT = "/logout"
 export const APP_BATCH_LABELING_PATH = "/batchLabeling"
 export const APP_BATCH_LABELING_START = APP_BATCH_LABELING_PATH + "/"
 export const APP_BATCH_LABELING_SAMPLE = (sampleIndex: string | number) => `${APP_BATCH_LABELING_PATH}/${sampleIndex}`
+export const APP_FINISHED = "/finished"
