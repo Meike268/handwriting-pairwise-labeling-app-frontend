@@ -17,20 +17,27 @@ export const preloadImage = async (src: string): Promise<string> => {
     });
 };
 
+/**
+ * src is initially a URL that points to the resource.
+ *
+ * calling the load-method loads the resource from the backend and changes src to the dataSrc that was loaded in the process
+ */
 export class PreloadableImageSrc {
-    src: string
-    private _loaded: boolean
+    _srcUrl: string
+    _dataSrc: string | undefined
 
     constructor(src: string) {
-        this.src = src
-        this._loaded = false
+        this._srcUrl = src
+    }
+
+    get src(): string {
+        return this._dataSrc ?? this._srcUrl;
     }
 
     async load() {
-        if (this._loaded)
+        if (this._dataSrc !== undefined)
             return this
-        this.src = await preloadImage(this.src)
-        this._loaded = true
+        this._dataSrc = await preloadImage(this._srcUrl)
         return this
     }
 }
@@ -41,7 +48,7 @@ export const Image: React.FC<{src: PreloadableImageSrc | string, alt: string, st
     useEffect(() => {
         const preloadableSrc = (typeof src === "string") ? new PreloadableImageSrc(src) : src
         preloadableSrc.load().then(res => setDataSrc(res.src))
-    }, []);
+    }, [dataSrc, src]);
 
     if (dataSrc === undefined)
         return <div style={style}/>
