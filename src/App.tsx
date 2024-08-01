@@ -31,8 +31,8 @@ const App: React.FC = () => {
                                 <Route path={APP_BATCH_LABELING_PATH} element={<BatchProvider/>}>
                                     <Route path={APP_BATCH_LABELING_SAMPLE(":sampleIndex")} element={<BatchLabelingMain/>}/>
                                 </Route>
+                                <Route path={APP_FINISHED} element={<Finished/>}/>
                             </Route>
-                            <Route path={APP_FINISHED} element={<Finished/>}/>
                             <Route path="*" element={<p>There's nothing here: 404!</p>} />
                         </Routes>
                     </BrowserRouter>
