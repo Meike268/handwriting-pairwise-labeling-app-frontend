@@ -45,7 +45,9 @@ const ScoreDescriptor: React.FC<{ score: number, question: Question }> = ({score
             default: text = "Not a score";
         } break;
     }
-    return <div>{text}</div>
+    return <div style={{
+        textAlign: "left"
+    }}>{text}</div>
 }
 
 export default ScoreDescriptor

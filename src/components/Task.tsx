@@ -21,41 +21,56 @@ const Task: React.FC<{
         flexDirection: "column",
         justifyContent: "space-between"
     }}>
-        <div style={{marginTop: "5%"}}>{<QuestionDescription question={question}/>}</div>
-        {sample && <Image src={sample.image} alt={"sample"}/>}
+
         <div style={{
             display: "flex",
             flexDirection: "row",
-            justifyContent: "space-between",
-            width: "100%",
-            height: "15%"
+            justifyContent: "center",
         }}>
-            <Image src={examplePair.positive} alt={"positive_example"} style={{width: "35%", objectFit: "contain"}}/>
-            {sample ? <div style={{
-                width: "30%",
+            <div style={{marginTop: "5%", margin: "10px"}}>{<QuestionDescription question={question}/>}</div>
+        </div>
+        <div style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+        }}>
+            {sample && <Image style={{margin: "10px", maxWidth: "700px"}} src={sample.image} alt={"sample"}/>}
+        </div>
+        <div style={{
+            height: "30%"
+        }}>
+            <div style={{
                 display: "flex",
-                justifyContent: "space-around"
+                flexDirection: "row",
+                justifyContent: "center",
+                height: "100%",
             }}>
-                {[...Array(5)].map((_, score) => {
-                    return <button
-                        className={"score-button"}
-                        key={`${sample.id}_${score}`}  // extra key per sample to remove hasactive-css-class between samples
-                        onClick={() => onSubmit(score as Score)}
-                        style={{
-                            width: "19%",
-                            backgroundColor: sample.score === score ? "green" : undefined,
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "flex-start",
-                            alignItems: "center"
-                        }}>
-                        <div style={{color: "lightgreen"}}><b>{score}</b></div>
-                        <ScoreDescriptor score={score} question={question}/>
-                    </button>
-                })}
-            </div> : <button style={{width: "30%", margin: "10px"}} onClick={() => onSubmit(null)}>Start</button>}
-            <Image src={examplePair.negative} alt={"negative_example"}
-                 style={{width: "35%", objectFit: "contain"}}/>
+                {sample ? <div style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-around",
+                    gap: "10px",
+                }}>
+                    {[...Array(5)].map((_, score) => {
+                        return <button
+                            className={"score-button"}
+                            key={`${sample.id}_${score}`}  // extra key per sample to remove hasactive-css-class between samples
+                            onClick={() => onSubmit(score as Score)}
+                            style={{
+                                backgroundColor: sample.score === score ? "green" : undefined,
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                gap: "10px",
+                                padding: "5px",
+                            }}>
+                            <div style={{color: "lightgreen"}}><b>{score}</b></div>
+                            <ScoreDescriptor score={score} question={question}/>
+                        </button>
+                    })}
+                </div> : <button style={{width: "30%", margin: "10px", textAlign: "center"}}
+                                 onClick={() => onSubmit(null)}>Start</button>}
+            </div>
         </div>
     </div>
 }
