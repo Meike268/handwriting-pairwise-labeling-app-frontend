@@ -8,7 +8,7 @@ const Introduction: React.FC = () => {
     return <div>
         <div className={"basic-long-text-div"}>
             Hallo, danke fürs Mitmachen.<br/>
-            Im folgenden wirst du immer erst eine Erklärungsseite sehen, bevor du auf den darauf folgenden Seiten selber
+            Im Folgenden wirst du immer erst eine Erklärungsseite sehen, bevor du auf den darauf folgenden Seiten selber
             Bewertungen abgibts.<br/>
             <br/>
             Die Erklärseite beschreibt auf welchen Gesichtspunkt von Handschrift du achten sollst.
