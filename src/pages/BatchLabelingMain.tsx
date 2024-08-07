@@ -30,7 +30,8 @@ const BatchLabelingMain: React.FC = () => {
         const answer = {
             sampleId: sample.id,
             questionId: batch.question.id,
-            score: score
+            score: score,
+            submissionTimestamp: Date.now().valueOf()
         }
 
         try {
