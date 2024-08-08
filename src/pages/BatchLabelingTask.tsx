@@ -76,7 +76,7 @@ const BatchLabelingMain: React.FC = () => {
         { showReportPopup && <ReportPopup onClose={() => setShowReportPopup(false)} batch={batch} sample={currentSample}/> }
         <BatchLabelingTaskLayout
             descriptionText={<QuestionDescription question={batch.question}/>}
-            image={<div style={{display: "flex", flexDirection: "column"}}>
+            image={<div style={{display: "flex", flexDirection: "column", height: "100%", width: "100%"}}>
                 <Image src={currentSample.image} alt={"sample"}/>
                 <div className={"reportButton"} style={{alignSelf: "flex-end", opacity: "50%", display: "flex", alignItems: "center", cursor: "pointer"}} onClick={() => setShowReportPopup(true)}>
                     <Flag sx={{fontSize: "1vh"}}/><div style={{fontSize: "smaller"}}> Problem melden</div>
