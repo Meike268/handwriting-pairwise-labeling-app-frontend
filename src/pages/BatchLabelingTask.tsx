@@ -13,24 +13,7 @@ import QuestionDescription from "../components/QuestionDescription";
 import {Image} from "../components/Image";
 import ScoreDescriptor from "../components/ScoreDescriptor";
 import BatchLabelingTaskLayout from "../components/BatchLabelingTaskLayout";
-
-
-export function getHeader(questionId: number): string {
-    switch (questionId) {
-        case 1:
-            return "Leserlichkeit";
-        case 2:
-            return "Neigung";
-        case 3:
-            return "Buchstabenform 'r', 'n' und 'h'";
-        case 4:
-            return "Buchstabenform 'a' und 'd'";
-        case 5:
-            return "Buchstabenform 'e' und 'l'";
-        default:
-            return "Schrift bewerten"
-    }
-}
+import {getHeader} from "./BatchLabelingIntro";
 
 const BatchLabelingMain: React.FC = () => {
     const {sampleIndex} = useParams()
