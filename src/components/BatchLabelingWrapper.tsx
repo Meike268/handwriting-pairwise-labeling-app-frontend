@@ -14,7 +14,7 @@ const BatchLabelingWrapper: React.FC<{children: ReactNode, headline: string, pro
                     zurück
                 </button>
             }
-            <h1 style={{height: "min-content", maxWidth: (100-NAVIGATION_BUTTON_RELATIVE_WIDTH*2) + "%"}}>
+            <h1 style={{maxWidth: (100-NAVIGATION_BUTTON_RELATIVE_WIDTH*2) + "%", whiteSpace: "nowrap"}}>
                 {headline}
             </h1>
             { navigateNextPage === null ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
