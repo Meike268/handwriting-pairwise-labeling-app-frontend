@@ -5,11 +5,13 @@ import {
     BACKEND_ANSWER,
     APP_BATCH_LABELING_END
 } from "../constants/Urls";
-import Task from "../components/Task";
 import { useNavigate, useParams} from "react-router-dom";
 import {BatchContext} from "../util/BatchProvider";
 import {Sample, Score, TaskBatch} from "../entities/Batch";
 import BatchLabelingWrapper from "../components/BatchLabelingWrapper";
+import QuestionDescription from "../components/QuestionDescription";
+import {Image} from "../components/Image";
+import ScoreDescriptor from "../components/ScoreDescriptor";
 
 
 export function getHeader(questionId: number): string {
@@ -89,7 +91,30 @@ const BatchLabelingMain: React.FC = () => {
         navigateNextPage={currentSample?.score === undefined ? null : () => nextPage()}
         progress={{current: currentSample === null ? 0 : sampleInd-1, end: batch.samples.length}}
     >
-        <Task question={batch.question} referenceSentence={batch.referenceSentence} example={batch.example} sample={currentSample} onSubmit={(score) => onSubmit(score)}/>
+        <QuestionDescription question={batch.question}/>
+        {currentSample === null && <Image style={{margin: "10px", maxWidth: "1024px"}} src={batch.example.image} alt={"sample"}/>}
+        {currentSample && <Image style={{margin: "10px", maxWidth: "700px"}} src={currentSample.image} alt={"sample"}/>}
+        <div className={"AnswerOrStartWrapper"} style={{height: "30%", width: "100%"}}>
+            {currentSample === null
+                ?
+                <button className={"StartButton"} style={{height: "100%", width: "30%", textAlign: "center"}}
+                        onClick={() => onSubmit(null)}>Start</button>
+                :
+                <div className={"AnswerWrapper"} style={{height: "100%", width: "30%", display: "flex", flexDirection: "column", justifyContent: "space-between", margin: "auto"}}>
+                    {[...Array(5)].map((_, score) => {
+                        return <button
+                            className={"score-button"}
+                            key={`${currentSample.id}_${score}`}  // extra key per sample to remove hasactive-css-class between samples
+                            onClick={() => onSubmit(score as Score)}
+                            style={{height: 98/5+"%", backgroundColor: currentSample.score === score ? "green" : undefined, display: "flex", flexDirection: "row", justifyContent: "left", alignItems: "center", padding: "5px"}}
+                        >
+                            <div style={{color: "lightgreen", marginRight: "10px"}}><b>{score+1}</b></div>
+                            <ScoreDescriptor score={score+1} question={batch.question}/>
+                        </button>
+                    })}
+                </div>
+            }
+        </div>
     </BatchLabelingWrapper>
 }
 
