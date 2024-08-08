@@ -15,7 +15,7 @@ const BatchLabelingMain: React.FC = () => {
 
     return <BatchLabelingWrapper
         headline={getHeader(batch.question.id)}
-        navigatePrevPage={() => navigate(APP_BATCH_LABELING_SAMPLE(batch.samples.length))}
+        navigatePrevPage={() => navigate(APP_BATCH_LABELING_SAMPLE(batch.samples.length-1))}
         navigateNextPage={null}
         progress={{current: batch.samples.length, end: batch.samples.length}}
     >
