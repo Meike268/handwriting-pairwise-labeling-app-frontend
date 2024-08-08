@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import {post, put} from "../authentication/io";
 import {
     APP_BATCH_LABELING_SAMPLE,
@@ -13,24 +13,9 @@ import QuestionDescription from "../components/QuestionDescription";
 import {Image} from "../components/Image";
 import ScoreDescriptor from "../components/ScoreDescriptor";
 import BatchLabelingTaskLayout from "../components/BatchLabelingTaskLayout";
-
-
-export function getHeader(questionId: number): string {
-    switch (questionId) {
-        case 1:
-            return "Leserlichkeit";
-        case 2:
-            return "Neigung";
-        case 3:
-            return "Buchstabenform 'r', 'n' und 'h'";
-        case 4:
-            return "Buchstabenform 'a' und 'd'";
-        case 5:
-            return "Buchstabenform 'e' und 'l'";
-        default:
-            return "Schrift bewerten"
-    }
-}
+import {getHeader} from "./BatchLabelingIntro";
+import {Flag} from "@mui/icons-material";
+import ReportPopup from "../components/ReportPopup";
 
 const BatchLabelingMain: React.FC = () => {
     const {sampleIndex} = useParams()
@@ -38,6 +23,7 @@ const BatchLabelingMain: React.FC = () => {
     const navigate = useNavigate()
     const [maybeBatch, setBatch] = useContext(BatchContext)!
     const batch: TaskBatch = maybeBatch!
+    const [showReportPopup, setShowReportPopup] = useState<boolean>(false)
 
     const currentSample = batch.samples[sampleInd]
 
@@ -87,9 +73,15 @@ const BatchLabelingMain: React.FC = () => {
         navigateNextPage={currentSample?.score === undefined ? null : () => nextPage()}
         progress={{current: sampleInd, end: batch.samples.length}}
     >
+        { showReportPopup && <ReportPopup onClose={() => setShowReportPopup(false)} batch={batch} sample={currentSample}/> }
         <BatchLabelingTaskLayout
             descriptionText={<QuestionDescription question={batch.question}/>}
-            image={<Image src={currentSample.image} alt={"sample"}/>}
+            image={<div style={{display: "flex", flexDirection: "column", height: "100%", width: "100%"}}>
+                <Image src={currentSample.image} alt={"sample"}/>
+                <div className={"reportButton"} style={{alignSelf: "flex-end", opacity: "50%", display: "flex", alignItems: "center", cursor: "pointer"}} onClick={() => setShowReportPopup(true)}>
+                    <Flag sx={{fontSize: "1vh"}}/><div style={{fontSize: "smaller"}}> Problem melden</div>
+                </div>
+            </div>}
             actions={<>
                 {[...Array(5)].map((_, score) => <button
                         className={"score-button"}
