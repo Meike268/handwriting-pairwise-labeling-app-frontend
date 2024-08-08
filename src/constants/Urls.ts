@@ -2,6 +2,7 @@ export const BACKEND_ROOT = `${process.env.REACT_APP_BACKEND_URL_ROOT}`
 export const BACKEND_LOGIN = `${BACKEND_ROOT}/users/login`
 export const BACKEND_BATCH = `${BACKEND_ROOT}/batch`
 export const BACKEND_ANSWER = `${BACKEND_ROOT}/answers`
+export const BACKEND_REPORT = `${BACKEND_ROOT}/reports`
 
 export const APP_INDEX = "/"
 export const APP_LOGIN = "/login"

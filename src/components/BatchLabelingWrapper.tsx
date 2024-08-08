@@ -32,4 +32,4 @@ const BatchLabelingWrapper: React.FC<{children: ReactNode, headline: string, pro
     </div>
 }
 
-        export default BatchLabelingWrapper
+export default BatchLabelingWrapper
