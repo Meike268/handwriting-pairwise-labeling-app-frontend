@@ -7,7 +7,12 @@ export const Finished: React.FC = () => {
     const navigate = useNavigate();
 
     return <div>
-        <div>Du hast alle Bilder bewertet. Aktuell werden keine weitern Bewertungen erhoben. Vielen Dank fürs Mitmachen!!!</div>
+        <div className={"basic-long-text-div"}>
+            Du hast alle Bilder bewertet für die wir im Moment Labels sammeln.
+            Aktuell werden keine weitern Bewertungen erhoben.
+            <br/>
+            <br/>
+            Vielen Dank fürs Mitmachen!!!</div>
         <button onClick={() => navigate(APP_LOGOUT)}>logout</button>
     </div>
 }

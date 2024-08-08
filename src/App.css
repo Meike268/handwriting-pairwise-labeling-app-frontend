@@ -27,6 +27,11 @@ p {
   row-gap: 10px;
 }
 
+.basic-long-text-div {
+  text-align: left;
+  max-width: 512px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

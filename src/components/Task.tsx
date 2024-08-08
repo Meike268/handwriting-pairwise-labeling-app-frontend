@@ -21,41 +21,49 @@ const Task: React.FC<{
         flexDirection: "column",
         justifyContent: "space-between"
     }}>
-        <div style={{marginTop: "5%"}}>{<QuestionDescription question={question}/>}</div>
-        {sample && <Image src={sample.image} alt={"sample"}/>}
+
         <div style={{
             display: "flex",
             flexDirection: "row",
-            justifyContent: "space-between",
-            width: "100%",
-            height: "15%"
+            justifyContent: "center",
         }}>
-            <Image src={examplePair.positive} alt={"positive_example"} style={{width: "35%", objectFit: "contain"}}/>
-            {sample ? <div style={{
-                width: "30%",
-                display: "flex",
-                justifyContent: "space-around"
-            }}>
-                {[...Array(5)].map((_, score) => {
-                    return <button
-                        className={"score-button"}
-                        key={`${sample.id}_${score}`}  // extra key per sample to remove hasactive-css-class between samples
-                        onClick={() => onSubmit(score as Score)}
-                        style={{
-                            width: "19%",
-                            backgroundColor: sample.score === score ? "green" : undefined,
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "flex-start",
-                            alignItems: "center"
-                        }}>
-                        <div style={{color: "lightgreen"}}><b>{score}</b></div>
-                        <ScoreDescriptor score={score} question={question}/>
-                    </button>
-                })}
-            </div> : <button style={{width: "30%", margin: "10px"}} onClick={() => onSubmit(null)}>Start</button>}
-            <Image src={examplePair.negative} alt={"negative_example"}
-                 style={{width: "35%", objectFit: "contain"}}/>
+            <div style={{marginTop: "5%", margin: "10px"}}>{<QuestionDescription question={question}/>}</div>
+        </div>
+        <div style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+        }}>
+            {sample && <Image style={{margin: "10px", maxWidth: "700px"}} src={sample.image} alt={"sample"}/>}
+        </div>
+        <div className={"AnswerOrStartWrapper"} style={{
+            height: "30%"
+        }}>
+            {sample === null
+                ?
+                <button className={"StartButton"} style={{height: "100%", width: "30%", textAlign: "center"}}
+                                            onClick={() => onSubmit(null)}>Start</button>
+                :
+                <div className={"AnswerWrapper"} style={{height: "100%", width: "30%", display: "flex", flexDirection: "column", justifyContent: "space-between", margin: "auto"}}>
+                    {[...Array(5)].map((_, score) => {
+                        return <button
+                            className={"score-button"}
+                            key={`${sample.id}_${score}`}  // extra key per sample to remove hasactive-css-class between samples
+                            onClick={() => onSubmit(score as Score)}
+                            style={{
+                                height: 98/5+"%",
+                                backgroundColor: sample.score === score ? "green" : undefined,
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "left",
+                                alignItems: "center",
+                                padding: "5px",
+                            }}>
+                            <div style={{color: "lightgreen", marginRight: "10px"}}><b>{score+1}</b></div>
+                            <ScoreDescriptor score={score+1} question={question}/>
+                        </button>
+                    })}
+                </div>}
         </div>
     </div>
 }

@@ -54,18 +54,16 @@ export const Login: React.FC = () => {
                 marginRight: "auto",
                 maxWidth: "60%"
             }}>Willkommen</h1>
-            <p style={{
-                textAlign: "center",
+            <p className={"basic-long-text-div"} style={{
                 marginLeft: "auto",
-                marginRight: "auto",
-                maxWidth: "80%"
+                marginRight: "auto"
             }}>
                 Diese Website ist Teil der Abschlussarbeiten von Lukas Pieger und Erik Schmidt.
                 In Zusammenarbeit mit Stabilo und dem xAI Lehrstuhl wollen wir die Handschrift von Schülern
-                automatisiert bezüglich ihrer Leserlichkeit Bewerten. Dazu haben wir von etwa 200 Schülern die selben 10
-                Sätze aufgezeichnet. Zweck dieser Website ist es deine Einschätzung zur Leserlichkeit einzelner Sätze zu
-                sammeln. Diese Bewertungen dienen später als Grundlage (Trainings-Besipiele) für KI-Modelle, die
-                Handschrift möglichst so bewerten sollen, wie das Menschen tun.
+                automatisiert bezüglich ihrer Leserlichkeit bewerten. Dazu haben wir von etwa 200 Schülern dieselben 10
+                Sätze aufgezeichnet. Zweck dieser Website ist es, deine Einschätzung zur Leserlichkeit einzelner Sätze zu
+                sammeln. Diese Bewertungen dienen später als Grundlage (Trainings-Beispiele) für KI-Modelle, die
+                Handschrift möglichst so bewerten sollen, wie Menschen das tun.
                 <br/>
                 <br/>
                 Bitte melde dich mit den Daten an, die wir dir geschickt haben. Danach geht es direkt los.
