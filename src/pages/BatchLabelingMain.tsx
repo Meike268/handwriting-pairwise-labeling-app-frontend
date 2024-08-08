@@ -1,19 +1,37 @@
 import React, {useContext} from "react";
-import {DisplayContext} from "../util/DisplayContext";
 import {post, put} from "../authentication/io";
-import {APP_BATCH_LABELING_SAMPLE, APP_BATCH_LABELING_PATH, BACKEND_ANSWER} from "../constants/Urls";
+import {
+    APP_BATCH_LABELING_SAMPLE,
+    BACKEND_ANSWER,
+    APP_BATCH_LABELING_END
+} from "../constants/Urls";
 import Task from "../components/Task";
 import { useNavigate, useParams} from "react-router-dom";
 import {BatchContext} from "../util/BatchProvider";
 import {Sample, Score, TaskBatch} from "../entities/Batch";
-import ProgressBar from "../components/ProgressBar";
+import BatchLabelingWrapper from "../components/BatchLabelingWrapper";
 
-const NAVIGATION_BUTTON_RELATIVE_WIDTH = 15
+
+export function getHeader(questionId: number): string {
+    switch (questionId) {
+        case 1:
+            return "Leserlichkeit";
+        case 2:
+            return "Neigung";
+        case 3:
+            return "Buchstabenform 'r', 'n' und 'h'";
+        case 4:
+            return "Buchstabenform 'a' und 'd'";
+        case 5:
+            return "Buchstabenform 'e' und 'l'";
+        default:
+            return "Schrift bewerten"
+    }
+}
 
 const BatchLabelingMain: React.FC = () => {
     const {sampleIndex} = useParams()
     const sampleInd = +sampleIndex!
-    const display = useContext(DisplayContext)!
     const navigate = useNavigate()
     const [maybeBatch, setBatch] = useContext(BatchContext)!
     const batch: TaskBatch = maybeBatch!
@@ -21,7 +39,6 @@ const BatchLabelingMain: React.FC = () => {
     const currentSample = sampleInd === 0 ? null : batch.samples[sampleInd-1]
 
     async function updateScore(score: Score, sample: Sample) {
-
         const exists = sample.score !== undefined
 
         sample.score = score
@@ -58,8 +75,7 @@ const BatchLabelingMain: React.FC = () => {
         if (sampleInd < batch.samples.length)
             navigate(APP_BATCH_LABELING_SAMPLE(sampleInd+1))
         else {
-            setBatch(undefined)
-            navigate(APP_BATCH_LABELING_PATH + "/")
+            navigate(APP_BATCH_LABELING_END)
         }
     }
 
@@ -67,39 +83,14 @@ const BatchLabelingMain: React.FC = () => {
         navigate(APP_BATCH_LABELING_SAMPLE(sampleInd-1))
     }
 
-    function getHeader(questionId: number): string {
-        switch (questionId) {
-            case 1:
-                return "Leserlichkeit";
-            case 2:
-                return "Neigung";
-            case 3:
-                return "Buchstabenform 'r', 'n' und 'h'";
-            case 4:
-                return "Buchstabenform 'a' und 'd'";
-            case 5:
-                return "Buchstabenform 'e' und 'l'";
-            default:
-                return "Schrift bewerten"
-        }
-    }
-
-
-    return <div style={{width: display.width, height: display.height, maxWidth: "1024px"}}>
-        <div style={{position: "relative", width: "100%", top: "0", height: "6%", overflow: "hidden", display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
-            { sampleInd <= 0 ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
-                <button onClick={() => prevPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: "lightgreen", fontWeight: "bolder", cursor: "pointer"}}>zurück</button>
-            }
-            <h1 style={{height: "min-content", maxWidth: (100-NAVIGATION_BUTTON_RELATIVE_WIDTH*2) + "%"}}>{getHeader(batch.question.id)}</h1>
-            { currentSample?.score === undefined ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
-                <button onClick={() => nextPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: "lightgreen", fontWeight: "bolder", cursor: "pointer"}}>weiter</button>
-            }
-        </div>
-        <ProgressBar style={{height: "1.5%"}} current={currentSample === null ? 0 : sampleInd-1} end={batch.samples.length}/>
-        <div style={{height: "92.5%", width: "100%", display:"flex", justifyItems: "center", alignItems: "center"}}>
-            <Task question={batch.question} referenceSentence={batch.referenceSentence} example={batch.example} sample={currentSample} onSubmit={(score) => onSubmit(score)}/>
-        </div>
-    </div>
+    return <BatchLabelingWrapper
+        headline={getHeader(batch.question.id)}
+        navigatePrevPage={sampleInd <= 0 ? null : () => prevPage()}
+        navigateNextPage={currentSample?.score === undefined ? null : () => nextPage()}
+        progress={{current: currentSample === null ? 0 : sampleInd-1, end: batch.samples.length}}
+    >
+        <Task question={batch.question} referenceSentence={batch.referenceSentence} example={batch.example} sample={currentSample} onSubmit={(score) => onSubmit(score)}/>
+    </BatchLabelingWrapper>
 }
 
 export default BatchLabelingMain;

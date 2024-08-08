@@ -14,31 +14,12 @@ const Task: React.FC<{
           question, referenceSentence, example, sample, onSubmit = () => {
     }
       }) => {
-    return <div style={{
-        height: "100%",
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between"
-    }}>
-
-        <div style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-        }}>
-            <div style={{marginTop: "5%", margin: "10px"}}>{<QuestionDescription question={question}/>}</div>
-        </div>
-        <div style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-        }}>
+    return <>
+            <QuestionDescription question={question}/>
             {sample === null && <Image style={{margin: "10px", maxWidth: "1024px"}} src={example.image} alt={"sample"}/>}
             {sample && <Image style={{margin: "10px", maxWidth: "700px"}} src={sample.image} alt={"sample"}/>}
-        </div>
         <div className={"AnswerOrStartWrapper"} style={{
-            height: "30%"
+            height: "30%", width: "100%"
         }}>
             {sample === null
                 ?
@@ -66,7 +47,7 @@ const Task: React.FC<{
                     })}
                 </div>}
         </div>
-    </div>
+        </>
 }
 
 export default Task
