@@ -12,10 +12,11 @@ import {
     APP_BATCH_LABELING_PATH,
     APP_INDEX,
     APP_LOGIN,
-    APP_LOGOUT, APP_FINISHED
+    APP_LOGOUT, APP_FINISHED, APP_BATCH_LABELING_END
 } from "./constants/Urls";
 import {AuthenticationProvider} from "./authentication/AuthenticationProvider";
 import {Finished} from "./pages/Finished";
+import BatchLabelingEnd from "./pages/BatchLabelingEnd";
 
 const App: React.FC = () => {
     return (
@@ -29,6 +30,7 @@ const App: React.FC = () => {
                             <Route path={APP_INDEX} element={<AuthenticationProvider/>}>
                                 <Route path={APP_INDEX} element={<Introduction/>}/>
                                 <Route path={APP_BATCH_LABELING_PATH} element={<BatchProvider/>}>
+                                    <Route path={APP_BATCH_LABELING_END} element={<BatchLabelingEnd/>}/>
                                     <Route path={APP_BATCH_LABELING_SAMPLE(":sampleIndex")} element={<BatchLabelingMain/>}/>
                                 </Route>
                                 <Route path={APP_FINISHED} element={<Finished/>}/>
