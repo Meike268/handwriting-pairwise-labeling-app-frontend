@@ -67,17 +67,17 @@ const BatchLabelingMain: React.FC = () => {
         navigate(APP_BATCH_LABELING_SAMPLE(sampleInd-1))
     }
 
-    function getHeader(questionDescription: string): string {
-        switch (questionDescription) {
-            case "overall-legibility":
+    function getHeader(questionId: number): string {
+        switch (questionId) {
+            case 1:
                 return "Leserlichkeit";
-            case "letter-alignment":
+            case 2:
                 return "Neigung";
-            case "letter-size_ad":
-                return "Buchstabenform 'a' und 'd'";
-            case "letter-size_rnh":
+            case 3:
                 return "Buchstabenform 'r', 'n' und 'h'";
-            case "letter-size_el":
+            case 4:
+                return "Buchstabenform 'a' und 'd'";
+            case 5:
                 return "Buchstabenform 'e' und 'l'";
             default:
                 return "Schrift bewerten"
@@ -90,7 +90,7 @@ const BatchLabelingMain: React.FC = () => {
             { sampleInd <= 0 ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
                 <button onClick={() => prevPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: "lightgreen", fontWeight: "bolder", cursor: "pointer"}}>zurück</button>
             }
-            <h1 style={{height: "min-content", maxWidth: (100-NAVIGATION_BUTTON_RELATIVE_WIDTH*2) + "%"}}>{getHeader(batch.question.description)}</h1>
+            <h1 style={{height: "min-content", maxWidth: (100-NAVIGATION_BUTTON_RELATIVE_WIDTH*2) + "%"}}>{getHeader(batch.question.id)}</h1>
             { currentSample?.score === undefined ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
                 <button onClick={() => nextPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: "lightgreen", fontWeight: "bolder", cursor: "pointer"}}>weiter</button>
             }
