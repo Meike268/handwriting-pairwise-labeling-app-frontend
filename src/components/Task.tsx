@@ -1,5 +1,5 @@
 import React from "react";
-import {ExamplePair, Question, ReferenceSentence, Sample, Score} from "../entities/Batch";
+import {Example, Question, ReferenceSentence, Sample, Score} from "../entities/Batch";
 import QuestionDescription from "./QuestionDescription";
 import ScoreDescriptor from "./ScoreDescriptor";
 import {Image} from "./Image";
@@ -7,11 +7,11 @@ import {Image} from "./Image";
 const Task: React.FC<{
     question: Question,
     referenceSentence: ReferenceSentence,
-    examplePair: ExamplePair,
+    example: Example,
     sample: Sample | null,
     onSubmit: (score: Score | null) => void
 }> = ({
-          question, referenceSentence, examplePair, sample, onSubmit = () => {
+          question, referenceSentence, example, sample, onSubmit = () => {
     }
       }) => {
     return <div style={{
@@ -34,6 +34,7 @@ const Task: React.FC<{
             flexDirection: "row",
             justifyContent: "center",
         }}>
+            {sample === null && <Image style={{margin: "10px", maxWidth: "1024px"}} src={example.image} alt={"sample"}/>}
             {sample && <Image style={{margin: "10px", maxWidth: "700px"}} src={sample.image} alt={"sample"}/>}
         </div>
         <div className={"AnswerOrStartWrapper"} style={{

@@ -97,7 +97,7 @@ const BatchLabelingMain: React.FC = () => {
         </div>
         <ProgressBar style={{height: "1.5%"}} current={currentSample === null ? 0 : sampleInd-1} end={batch.samples.length}/>
         <div style={{height: "92.5%", width: "100%", display:"flex", justifyItems: "center", alignItems: "center"}}>
-            <Task question={batch.question} referenceSentence={batch.referenceSentence} examplePair={batch.examplePair} sample={currentSample} onSubmit={(score) => onSubmit(score)}/>
+            <Task question={batch.question} referenceSentence={batch.referenceSentence} example={batch.example} sample={currentSample} onSubmit={(score) => onSubmit(score)}/>
         </div>
     </div>
 }

@@ -13,13 +13,12 @@ type BackendTaskBatch = {
         id: number,
         description: string
     }
+    example: {
+        exampleImagePath: string
+    }
     referenceSentence: {
         id: number
         content: string
-    }
-    examplePair:{
-        positiveResourceUrl: string
-        negativeResourceUrl: string
     }
     samples: Array<{
         id: number,
@@ -36,9 +35,8 @@ export type ReferenceSentence = {
     id: number
     content: string
 }
-export type ExamplePair = {
-    positive: PreloadableImageSrc
-    negative: PreloadableImageSrc
+export type Example = {
+    image: PreloadableImageSrc
 }
 export type Score = 0 | 1 | 2 | 3 | 4
 export type Sample = {
@@ -50,13 +48,12 @@ export type Sample = {
 export type TaskBatch = {
     question: Question
     referenceSentence: ReferenceSentence
-    examplePair: ExamplePair
+    example: Example
     samples: Array<Sample>
 }
 
 async function preloadBatchImages(batch: TaskBatch) {
-    await batch.examplePair.negative.load()
-    await batch.examplePair.positive.load()
+    await batch.example.image.load()
     for (const sample of batch.samples) {
         await sample.image.load()
     }
@@ -73,9 +70,8 @@ export async function fetchRandomBatch(user: Me) {
         const batch: TaskBatch = {
             question: batchResponseJson.body.question,
             referenceSentence: batchResponseJson.body.referenceSentence,
-            examplePair: {
-                positive: new PreloadableImageSrc(batchResponseJson.body.examplePair.positiveResourceUrl),
-                negative: new PreloadableImageSrc(batchResponseJson.body.examplePair.negativeResourceUrl)
+            example: {
+                image: new PreloadableImageSrc(batchResponseJson.body.example.exampleImagePath)
             },
             samples: batchResponseJson.body.samples.map(sampleJson => ({
                 id: sampleJson.id,
