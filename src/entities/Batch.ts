@@ -1,7 +1,7 @@
 import {PreloadableImageSrc} from "../components/Image";
 import {Me} from "../authentication/Login";
 import {get} from "../authentication/io";
-import {BACKEND_BATCH} from "../constants/Urls";
+import {BACKEND_BATCH, BACKEND_ROOT} from "../constants/Urls";
 
 type GetTaskBatchResponse = {
     state: string,
@@ -71,12 +71,12 @@ export async function fetchRandomBatch(user: Me) {
             question: batchResponseJson.body.question,
             referenceSentence: batchResponseJson.body.referenceSentence,
             example: {
-                image: new PreloadableImageSrc(batchResponseJson.body.example.exampleImagePath)
+                image: new PreloadableImageSrc(`${BACKEND_ROOT}${batchResponseJson.body.example.exampleImagePath}`)
             },
             samples: batchResponseJson.body.samples.map(sampleJson => ({
                 id: sampleJson.id,
                 studentId: sampleJson.studentId,
-                image: new PreloadableImageSrc(sampleJson.resourceUrl),
+                image: new PreloadableImageSrc(`${BACKEND_ROOT}${sampleJson.resourceUrl}`),
                 score: undefined
             })),
         }
