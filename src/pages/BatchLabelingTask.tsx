@@ -70,6 +70,7 @@ const BatchLabelingMain: React.FC = () => {
 
     function onSubmit(score: Score) {
         updateScore(score, currentSample!).then()
+        nextPage()
     }
 
     function nextPage() {
