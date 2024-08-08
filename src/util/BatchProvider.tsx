@@ -1,7 +1,11 @@
 import React, {createContext, Dispatch, ReactNode, SetStateAction, useContext, useState} from "react";
 import {Outlet, useLocation, useNavigate} from 'react-router-dom';
 import {UserContext} from "../authentication/AuthenticationProvider";
-import {APP_BATCH_LABELING_PATH, APP_BATCH_LABELING_SAMPLE, APP_FINISHED} from "../constants/Urls";
+import {
+    APP_BATCH_LABELING_INTRO,
+    APP_BATCH_LABELING_RESET,
+    APP_FINISHED
+} from "../constants/Urls";
 import {fetchRandomBatch, TaskBatch} from "../entities/Batch";
 
 export const BatchContext = createContext<[TaskBatch | undefined, Dispatch<SetStateAction<TaskBatch | undefined>>] | undefined>(undefined);
@@ -12,7 +16,7 @@ export const BatchProvider: React.FC<{ children?: ReactNode }> = ({children}) =>
     const navigate = useNavigate()
     const [batch, setBatch] = useState<TaskBatch | undefined>(undefined)
 
-    if (location.pathname === APP_BATCH_LABELING_PATH + "/" && batch !== undefined) {
+    if (location.pathname === APP_BATCH_LABELING_RESET && batch !== undefined) {
         setBatch(undefined)
     }
 
@@ -20,11 +24,10 @@ export const BatchProvider: React.FC<{ children?: ReactNode }> = ({children}) =>
         fetchRandomBatch(user).then(res => {
             if (res != null) {
                 setBatch(res)
-                navigate(APP_BATCH_LABELING_SAMPLE(0))
+                navigate(APP_BATCH_LABELING_INTRO)
             } else {
                 navigate(APP_FINISHED)
             }
-
         })
     }
 

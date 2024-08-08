@@ -52,5 +52,5 @@ export const Image: React.FC<{src: PreloadableImageSrc | string, alt: string, st
 
     if (dataSrc === undefined)
         return <div style={style}/>
-    return <img src={dataSrc} alt={alt} style={style}/>
+    return <img src={dataSrc} alt={alt} style={{...style, maxWidth: "100%", maxHeight: "100%", objectFit: "contain"}}/>
 }
