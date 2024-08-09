@@ -20,6 +20,13 @@ const BatchLabelingMain: React.FC = () => {
         progress={{current: batch.samples.length, end: batch.samples.length}}
     >
         <div className={"basic-long-text-div"}>
+            Toll! Du hast uns schon mit <span style={{
+            fontFamily: "bold"
+        }}>{batch.userAnswerCounts.submittedAnswersCount + batch.samples.length}</span> Bewertungen geholfen.<br/>
+            Aktuell suchen wir noch <span style={{
+            fontFamily: "bold"
+        }}>{batch.userAnswerCounts.pendingAnswersCount ? batch.userAnswerCounts.pendingAnswersCount - batch.samples.length : ""}</span> weiter Bewertungen.<br/>
+            <br/>
             Danke für deine mithilfe. Wir bereiten gleich neue Fragen für dich vor.<br/>
             Bitte achte darauf immer wieder kurze Pausen einzulegen und genug zu trinken, um konzentriert zu
             bleiben.<br/>
