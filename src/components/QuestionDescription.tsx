@@ -34,14 +34,16 @@ const QuestionDescription: React.FC<{question: Question}> = ({question}) => {
     const letterSizeRNHDescription = <div className={"basic-long-text-div"}>
         Bitte lese den unten angezeigten Satz.<br/>
         Achte dabei auf die Buchstaben 'r','n' und 'h'.<br/>
+        Diese drei Buchstaben entstehen durch einen ähnlichen Schwung des Stiftes. Sie unterscheiden sich nur darin wie
+        weit oben der vertikale Strich beginnt und wie weit unten der Bogen endet.<br/>
         Sind diese Buchstaben einzeln eindeutig zu erkennen?<br/>
         Oder sieht eines der 'n' eher aus wie ein 'r' oder wie ein 'h', bzw. andersherum.<br/>
         <br/>
         1 - Alle Vorkommen der Buchstaben 'r', 'n' und 'h' sind wohlgeformt und eindeutig zu erkennen.
-        Der vertikale Strich des ‘n’ ist deutlich kürzer als der des ‘h’, deshalb sind die beiden Buchstaben leicht zu
+        Der vertikale Strich des ‘n’ ist deutlich kürzer als der eines ‘h’, deshalb sind die beiden Buchstaben leicht zu
         unterscheiden.
-        Der Strich des 'n' reicht weiter hinunter zur Grundlinie als der des 'r', deshalb sind die beiden Buchstaben leicht zu
-        unterscheiden.
+        Der Bogen des 'n' reicht weiter hinunter zur Grundlinie als der eines 'r', deshalb sind die beiden Buchstaben
+        leicht zu unterscheiden.
         Es bedarf nicht den Kontext im Wort, um zu wissen, dass es sich um den jeweiligen Buchstaben handelt.<br/>
         <br/>
         5 - Es gibt mindestens ein 'n', das eher wie ein 'r' oder 'h' aussieht, bzw. andersherum.
@@ -51,11 +53,13 @@ const QuestionDescription: React.FC<{question: Question}> = ({question}) => {
     const letterSizeADDescription = <div className={"basic-long-text-div"}>
         Bitte lese den unten angezeigten Satz.<br/>
         Achte dabei auf die Buchstaben 'a' und 'd'.<br/>
+        Diese zwei Buchstaben entstehen durch einen ähnlichen Schwung des Stiftes. Sie unterscheiden sich nur darin wie
+        weit nach oben der vertikale Strich gezogen wurde.<br/>
         Sind diese Buchstaben einzeln eindeutig zu erkennen?<br/>
         Oder sieht eines der 'a' eher aus wie ein 'd', bzw. andersherum.<br/>
         <br/>
         1 - Alle Vorkommen der Buchstaben 'a' und 'd' sind wohlgeformt und eindeutig zu erkennen.
-        Der vertikale Strich des ‘a’ ist deutlich kürzer als der des ‘d’, deshalb sind die beiden Buchstaben leicht zu
+        Der vertikale Strich des ‘a’ ist deutlich kürzer als der eines ‘d’, deshalb sind die beiden Buchstaben leicht zu
         unterscheiden.
         Es bedarf nicht den Kontext im Wort, um zu wissen, dass es sich um den jeweiligen Buchstaben handelt.<br/>
         <br/>

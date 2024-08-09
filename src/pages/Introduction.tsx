@@ -14,7 +14,7 @@ const Introduction: React.FC = () => {
             Die Erklärseite beschreibt auf welchen Gesichtspunkt von Handschrift du achten sollst.
             Danach bewertest du eine Reihe von Fotos von Handschrift in Bezug auf diesen Gesichtspunkt.<br/>
             <br/>
-            Auf der Erklärseite zeigen wir dir auserdem bespielhafte Bewertungen solcher Fotos.
+            Auf der Erklärseite zeigen wir dir außerdem bespielhafte Bewertungen solcher Fotos.
         </div>
         <button onClick={() => navigate(APP_BATCH_LABELING_INTRO)}>weiter</button>
     </div>

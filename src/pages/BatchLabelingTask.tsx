@@ -1,9 +1,10 @@
 import React, {useContext, useState} from "react";
 import {post, put} from "../authentication/io";
 import {
+    APP_BATCH_LABELING_END,
+    APP_BATCH_LABELING_INTRO,
     APP_BATCH_LABELING_SAMPLE,
-    BACKEND_ANSWER,
-    APP_BATCH_LABELING_END, APP_BATCH_LABELING_INTRO
+    BACKEND_ANSWER
 } from "../constants/Urls";
 import {useNavigate, useParams} from "react-router-dom";
 import {BatchContext} from "../util/BatchProvider";
@@ -14,8 +15,9 @@ import {Image} from "../components/Image";
 import ScoreDescriptor from "../components/ScoreDescriptor";
 import BatchLabelingTaskLayout from "../components/BatchLabelingTaskLayout";
 import {getHeader} from "./BatchLabelingIntro";
-import {Flag} from "@mui/icons-material";
+import {Flag, ImageSearch} from "@mui/icons-material";
 import ReportPopup from "../components/ReportPopup";
+import ExampleImagePopup from "../components/ExampleImagePopup";
 
 const BatchLabelingMain: React.FC = () => {
     const {sampleIndex} = useParams()
@@ -24,6 +26,7 @@ const BatchLabelingMain: React.FC = () => {
     const [maybeBatch, setBatch] = useContext(BatchContext)!
     const batch: TaskBatch = maybeBatch!
     const [showReportPopup, setShowReportPopup] = useState<boolean>(false)
+    const [showExamplePopup, setShowExamplePopup] = useState<boolean>(false)
 
     const currentSample = batch.samples[sampleInd]
 
@@ -73,23 +76,51 @@ const BatchLabelingMain: React.FC = () => {
         navigateNextPage={currentSample?.score === undefined ? null : () => nextPage()}
         progress={{current: sampleInd, end: batch.samples.length}}
     >
-        { showReportPopup && <ReportPopup onClose={() => setShowReportPopup(false)} batch={batch} sample={currentSample}/> }
+        {showExamplePopup && <ExampleImagePopup onClose={() => setShowExamplePopup(false)} batch={batch}/>}
+        {showReportPopup &&
+            <ReportPopup onClose={() => setShowReportPopup(false)} batch={batch} sample={currentSample}/>}
         <BatchLabelingTaskLayout
             descriptionText={<QuestionDescription question={batch.question}/>}
             image={<div style={{display: "flex", flexDirection: "column", height: "100%", width: "100%"}}>
                 <Image src={currentSample.image} alt={"sample"}/>
-                <div className={"reportButton"} style={{alignSelf: "flex-end", opacity: "50%", display: "flex", alignItems: "center", cursor: "pointer"}} onClick={() => setShowReportPopup(true)}>
-                    <Flag sx={{fontSize: "1vh"}}/><div style={{fontSize: "smaller"}}> Problem melden</div>
+                <div className={"popups-container"} style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    width: "100%",
+                    justifyContent: "space-between"
+                }}>
+                    <div className={"exampleButton"} style={{
+                        alignSelf: "flex-start",
+                        opacity: "60%",
+                        display: "flex",
+                        alignItems: "center",
+                        cursor: "pointer",
+                        padding: "10px"
+                    }} onClick={() => setShowExamplePopup(true)}>
+                        <ImageSearch sx={{fontSize: "2vh"}}/>
+                        <div style={{fontSize: "smaller"}}>Beispiele ansehen</div>
+                    </div>
+                    <div className={"reportButton"} style={{
+                        alignSelf: "flex-end",
+                        opacity: "60%",
+                        display: "flex",
+                        alignItems: "center",
+                        cursor: "pointer",
+                        padding: "10px"
+                    }} onClick={() => setShowReportPopup(true)}>
+                        <Flag sx={{fontSize: "2vh"}}/>
+                        <div style={{fontSize: "smaller"}}> Problem melden</div>
+                    </div>
                 </div>
             </div>}
             actions={<>
                 {[...Array(5)].map((_, score) => <button
-                        className={"score-button"}
-                        key={`${currentSample.id}_${score}`}  // extra key per sample to remove hasactive-css-class between samples
-                        onClick={() => onSubmit(score as Score)}
-                        style={{
-                            height: 98 / 5 + "%",
-                            backgroundColor: currentSample.score === score ? "green" : undefined,
+                    className={"score-button"}
+                    key={`${currentSample.id}_${score}`}  // extra key per sample to remove hasactive-css-class between samples
+                    onClick={() => onSubmit(score as Score)}
+                    style={{
+                        height: 98 / 5 + "%",
+                        backgroundColor: currentSample.score === score ? "green" : undefined,
                             display: "flex",
                             flexDirection: "row",
                             justifyContent: "left",
