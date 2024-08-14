@@ -43,6 +43,11 @@ const BatchLabelingIntro: React.FC = () => {
         navigateNextPage={() => navigateNext()}
         progress={{current: 0, end: batch.samples.length}}
     >
+        <div className={"basic-long-text-div"}>
+            Toll! Du hast uns schon mit <b style={{color: "lightseagreen"}}>{batch.userAnswerCounts.submittedAnswersCount}</b> Bewertungen geholfen.<br/>
+            Aktuell suchen wir noch <b>{batch.userAnswerCounts.pendingAnswersCount}</b> weiter Bewertungen.<br/>
+            <br/>
+        </div>
         <BatchLabelingTaskLayout
             descriptionText={<QuestionDescription question={batch.question}/>}
             image={<Image src={batch.example.image} alt={"example"}/>}
