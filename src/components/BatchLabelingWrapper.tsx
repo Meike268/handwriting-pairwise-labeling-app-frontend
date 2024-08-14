@@ -34,34 +34,30 @@ const BatchLabelingWrapper: React.FC<{children: ReactNode, headline: string, pro
             </div>
         </div>
         <div className={"footer"} style={{
-
             height: "2%",
+            width: "100%",
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
-            paddingLeft: "10px",
-            paddingRight: "10px"
+            alignItems: "center",
+            fontSize: "2.5vmin",
+            whiteSpace: "nowrap",
+            opacity: "50%",
+            overflow: "hidden",
         }}>
             <div style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center"
+                marginLeft: "2%",
+                maxWidth: "65%"
             }}>
-                <div style={{
-                    fontSize: "1.5vmin",
-                    opacity: "50%"
-                }}>Handwriting Legibility Labeling App by Lukas Pieger and Erik Schmidt
-                </div>
+                Handwriting Legibility Labeling App by Lukas Pieger and Erik Schmidt
             </div>
             <div className={"logoutButton"} style={{
-                alignSelf: "flex-end",
-                opacity: "50%",
+                marginRight: "2%",
                 display: "flex",
-                alignItems: "center",
-                cursor: "pointer"
+                cursor: "pointer",
+                maxWidth: "25%"
             }} onClick={() => navigate(APP_LOGOUT)}>
-                <House sx={{fontSize: "2vh"}}/>
-                <div style={{fontSize: "smaller"}}>logout</div>
+                <House sx={{fontSize: "inherit"}}/>logout
             </div>
         </div>
     </div>
