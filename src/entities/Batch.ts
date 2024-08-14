@@ -9,6 +9,10 @@ type GetTaskBatchResponse = {
 }
 
 type BackendTaskBatch = {
+    userAnswerCounts: {
+        submittedAnswersCount: number,
+        pendingAnswersCount?: number
+    }
     question: {
         id: number,
         description: string
@@ -25,6 +29,11 @@ type BackendTaskBatch = {
         studentId: number,
         resourceUrl: string
     }>
+}
+
+export type UserAnswerCounts = {
+    submittedAnswersCount: number,
+    pendingAnswersCount?: number
 }
 
 export type Question = {
@@ -46,6 +55,7 @@ export type Sample = {
     score: Score | undefined
 }
 export type TaskBatch = {
+    userAnswerCounts: UserAnswerCounts
     question: Question
     referenceSentence: ReferenceSentence
     example: Example
@@ -68,6 +78,7 @@ export async function fetchRandomBatch(user: Me) {
         return null
     } else {
         const batch: TaskBatch = {
+            userAnswerCounts: batchResponseJson.body.userAnswerCounts,
             question: batchResponseJson.body.question,
             referenceSentence: batchResponseJson.body.referenceSentence,
             example: {
