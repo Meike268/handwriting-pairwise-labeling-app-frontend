@@ -34,11 +34,13 @@ const BatchLabelingWrapper: React.FC<{children: ReactNode, headline: string, pro
             </div>
         </div>
         <div className={"footer"} style={{
-            width: "100%",
+
             height: "2%",
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
+            paddingLeft: "10px",
+            paddingRight: "10px"
         }}>
             <div style={{
                 display: "flex",
@@ -46,7 +48,7 @@ const BatchLabelingWrapper: React.FC<{children: ReactNode, headline: string, pro
                 justifyContent: "center"
             }}>
                 <div style={{
-                    fontSize: "1vmin",
+                    fontSize: "1.5vmin",
                     opacity: "50%"
                 }}>Handwriting Legibility Labeling App by Lukas Pieger and Erik Schmidt
                 </div>
