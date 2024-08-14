@@ -28,7 +28,7 @@ const BatchLabelingWrapper: React.FC<{children: ReactNode, headline: string, pro
             }
         </div>
         <ProgressBar style={{height: "1.5%", marginBottom: "2%"}} current={progress.current} end={progress.end}/>
-        <div style={{height: "87.5%", width: "100%"}}>
+        <div style={{height: "88.5%", width: "100%"}}>
             <div style={{height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center"}}>
                 {children}
             </div>
@@ -39,8 +39,8 @@ const BatchLabelingWrapper: React.FC<{children: ReactNode, headline: string, pro
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
-            alignItems: "center",
-            fontSize: "2.5vmin",
+            alignItems: "flex-end",
+            fontSize: display.width < 600 ? "1.5vmin" : "1vmin",
             whiteSpace: "nowrap",
             opacity: "50%",
             overflow: "hidden",
