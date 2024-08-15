@@ -17,7 +17,7 @@ const Introduction: React.FC = () => {
             Auf der Erklärseite zeigen wir dir außerdem bespielhafte Bewertungen solcher Fotos.<br/>
             <br/>
             Nach ein paar Bewertungen, wirst du die Sätze schnell auswendig kennen. Versuche die Sätze trotzdem Wort für
-            Wort zu lesen, so wie du es beim ersten Mal Durchlesen tun würdest.<br/>
+            Wort zu lesen, so wie du sie beim ersten Mal durchlesen würdest.<br/>
             Es können Striche aus darüber und darunter liegenden Zeilen ins Bild reichen. Diese sollen die Bewertung nicht beeinflussen.
         </div>
         <button onClick={() => navigate(APP_BATCH_LABELING_INTRO)}>weiter</button>
