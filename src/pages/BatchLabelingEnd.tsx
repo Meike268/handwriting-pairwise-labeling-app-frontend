@@ -15,8 +15,6 @@ const BatchLabelingMain: React.FC = () => {
     const nextBatch: TaskBatch | null | undefined = useContext(NextBatchContext)
     const navigate = useNavigate()
 
-    console.log(batch.question.id !== nextBatch?.question.id)
-
     return <BatchLabelingWrapper
         headline={getHeader(batch.question.id)}
         navigatePrevPage={() => navigate(APP_BATCH_LABELING_SAMPLE(batch.samples.length-1))}

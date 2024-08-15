@@ -28,7 +28,6 @@ export const BatchProvider: React.FC<{ children?: ReactNode }> = ({children}) =>
     }, [batch, nextBatch, user]);
 
     function navigateNextAfterLoading(loading_result: TaskBatch | null) {
-        console.log(loading_result)
         if (loading_result === null)
             navigate(APP_FINISHED)
         else

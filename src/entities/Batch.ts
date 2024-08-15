@@ -70,7 +70,7 @@ async function preloadBatchImages(batch: TaskBatch) {
 export async function fetchRandomBatch(user: Me, excludedTasks: Array<{question: Question, samples: Array<Sample>}> | null = null) {
     console.info(`Fetching batch for ${JSON.stringify(user)}`)
 
-    const excludedTasksMap = excludedTasks === null ? new Map() : new Map(excludedTasks.map(questionSamples => [questionSamples.question.id, questionSamples.samples.map(sample => sample.id)]))
+    const excludedTasksMap = excludedTasks === null ? {} : Object.fromEntries(excludedTasks.map(questionSamples => [questionSamples.question.id, questionSamples.samples.map(sample => sample.id)]))
     const batchResponseJson = await get(BACKEND_BATCH, {excludedTasks: excludedTasksMap}) as GetTaskBatchResponse
 
     if (batchResponseJson.state === "finished") {
