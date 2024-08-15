@@ -18,6 +18,7 @@ import {getHeader} from "./BatchLabelingIntro";
 import {Flag, ImageSearch} from "@mui/icons-material";
 import ReportPopup from "../components/ReportPopup";
 import ExampleImagePopup from "../components/ExampleImagePopup";
+import {DisplayContext} from "../util/DisplayContext";
 
 const BatchLabelingMain: React.FC = () => {
     const {sampleIndex} = useParams()
@@ -28,6 +29,7 @@ const BatchLabelingMain: React.FC = () => {
     const [showReportPopup, setShowReportPopup] = useState<boolean>(false)
     const [showExamplePopup, setShowExamplePopup] = useState<boolean>(false)
     const themeHighlight = useContext(ThemeContext)
+    const display = useContext(DisplayContext)!
 
     const currentSample = batch.samples[sampleInd]
 
@@ -119,15 +121,11 @@ const BatchLabelingMain: React.FC = () => {
                     className={"score-button"}
                     key={`${currentSample.id}_${score}`}  // extra key per sample to remove hasactive-css-class between samples
                     onClick={() => onSubmit(score as Score)}
-                    style={{
-                        height: 98 / 5 + "%",
-                        backgroundColor: currentSample.score === score ? themeHighlight.main : undefined,
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "left",
-                            alignItems: "center",
-                            padding: "5px"
-                        }}
+                    style={display.height > 600 ?
+                        {height: 98 / 5 + "%", backgroundColor: currentSample.score === score ? themeHighlight.main : undefined, display: "flex", flexDirection: "row",justifyContent: "left",alignItems: "center",padding: "5px"}
+                        :
+                        {height: "100%", width: 99 / 5 + "%", display:"flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center"}
+                    }
                     >
                         <div style={{color: themeHighlight.light, marginRight: "10px"}}><b>{score + 1}</b></div>
                         <ScoreDescriptor score={score + 1} question={batch.question}/>

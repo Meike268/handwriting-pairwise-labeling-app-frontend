@@ -16,7 +16,7 @@
 h1 {
   font-size: xxx-large;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 600px), only screen and (max-height: 600px) {
   h1 {
     font-size: 5vmin;
   }
@@ -25,7 +25,7 @@ h1 {
 p {
   font-size: medium;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 600px), only screen and (max-height: 600px) {
   p {
     font-size: 2vmin;
   }
@@ -43,7 +43,7 @@ p {
   max-width: 512px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 600px), only screen and (max-height: 600px) {
   .basic-long-text-div {
     font-size: 2.8vmin;
   }
