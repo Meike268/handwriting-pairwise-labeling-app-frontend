@@ -20,15 +20,15 @@ const QuestionDescription: React.FC<{question: Question}> = ({question}) => {
 
     const letterAlignmentDescription = <div className={"basic-long-text-div"}>
         Bitte lese den unten angezeigten Satz.<br/>
-        Achte dabei auf die Neigung der Buchstaben.<br/>
+        Nachdem du den Satz einmal gelesen hast, schaue dir einen Buchstaben nach dem anderen an. Achte auf die Neigung der vertikalen Striche.<br/>
         Sind alle Buchstaben in die gleiche Richtung geneigt (nach links oder rechts)?<br/>
         Ist die Neigung bei allen Buchstaben gleich, ähnlich oder unterschiedlich?<br/>
         Vergleiche den Satz mit den angezeigten Beispielen, um besser einschätzen zu können, welche Bewertung zutreffend ist.<br/>
+        Die Bewertung richtet sich nach dem größten Neigungsunterschied zweier Buchstaben und nicht nach der durchschnittlichen Abweichung.<br/>
         <br/>
-        1 - Alle Buchstaben haben nach Augenmaß die gleiche Neigung.<br/>
+        1- Die vertikalen Striche aller Buchstaben sind einheitlich geneigt. Mit dem blossen Auge lässt sich keine Abweichung im Winkel erkennen.<br/>
         <br/>
-        5 - Verschiedene Buchstaben sind unterschiedlich ausgerichtet. Die Neigung variiert sichtlich von Buchstabe zu
-        Buchstabe.
+        5- Verschiedene Buchstaben sind unterschiedlich ausgerichtet. Zwischen mindestens zwei Buchstaben mit vertikalem Strich ist eine starke Abweichung des Winkels zu erkennen.
     </div>
 
     const letterSizeRNHDescription = <div className={"basic-long-text-div"}>

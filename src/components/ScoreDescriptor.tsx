@@ -13,11 +13,11 @@ const ScoreDescriptor: React.FC<{ score: number, question: Question }> = ({score
             default: text = "Not a score";
         } break;
         case 2: switch (score) {
-            case 1: text = "einheitliche Neigung (<X°)"; break;
-            case 2: text = "leicht variierende Neigung (<X°)"; break;
-            case 3: text = "variierende Neigung (<X°)"; break;
-            case 4: text = "stark variierende Neigung (<X°)"; break;
-            case 5: text = "sehr stark variierende Neigung (<X°)"; break;
+            case 1: text = "einheitliche Neigung"; break;
+            case 2: text = "leicht variierende Neigung"; break;
+            case 3: text = "variierende Neigung"; break;
+            case 4: text = "stark variierende Neigung"; break;
+            case 5: text = "sehr stark variierende Neigung"; break;
             default: text = "Not a score";
         } break;
         case 3: switch (score) {
