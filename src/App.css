@@ -14,11 +14,21 @@
 }
 
 h1 {
-  font-size: 5vmin;
+  font-size: xxx-large;
+}
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 5vmin;
+  }
 }
 
 p {
-  font-size: 2vmin;
+  font-size: medium;
+}
+@media only screen and (max-width: 600px) {
+  p {
+    font-size: 2vmin;
+  }
 }
 
 .grid-container {
@@ -28,7 +38,7 @@ p {
 }
 
 .basic-long-text-div {
-  margin: 0 8px;
+  padding: 0 8px;
   text-align: left;
   max-width: 512px;
 }
