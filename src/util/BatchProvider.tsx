@@ -20,6 +20,8 @@ export const BatchProvider: React.FC<{ children?: ReactNode }> = ({children}) =>
     const [batch, setBatch] = useState<TaskBatch | null | undefined>(undefined)
     const [nextBatch, setNextBatch] = useState<TaskBatch | null | undefined>(undefined)
 
+    let loading = false
+
     useEffect(() => {
         if (!!batch && nextBatch === undefined)
             fetchRandomBatch(user, [{question: batch!.question, samples: batch!.samples}]).then(res => setNextBatch(res))
@@ -34,11 +36,13 @@ export const BatchProvider: React.FC<{ children?: ReactNode }> = ({children}) =>
     }
 
     if (location.pathname === APP_BATCH_LABELING_RESET) {
-        if (batch === undefined)
+        if (batch === undefined) {
             fetchRandomBatch(user).then(res => {
                 setBatch(res)
                 navigateNextAfterLoading(res)
             })
+            loading = true
+        }
         else if (nextBatch !== undefined) {
             setBatch(nextBatch);
             setNextBatch(undefined)
@@ -46,8 +50,10 @@ export const BatchProvider: React.FC<{ children?: ReactNode }> = ({children}) =>
         }
     }
 
-    if (batch === undefined)
+    if (loading)
         return <div>"Loading new tasks..."</div>
+    else if (batch === undefined)
+        return <Navigate to={APP_BATCH_LABELING_RESET}/>
     else if (batch === null)
         return <Navigate to={APP_FINISHED}/>
     else {
