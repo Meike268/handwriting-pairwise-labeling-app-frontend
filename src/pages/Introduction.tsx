@@ -1,6 +1,6 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
-import {APP_BATCH_LABELING_INTRO} from "../constants/Urls";
+import {APP_BATCH_LABELING_RESET} from "../constants/Urls";
 
 const Introduction: React.FC = () => {
     const navigate = useNavigate();
@@ -16,7 +16,7 @@ const Introduction: React.FC = () => {
             <br/>
             Auf der Erklärseite zeigen wir dir außerdem bespielhafte Bewertungen solcher Fotos.
         </div>
-        <button onClick={() => navigate(APP_BATCH_LABELING_INTRO)}>weiter</button>
+        <button onClick={() => navigate(APP_BATCH_LABELING_RESET)}>weiter</button>
     </div>
 }
 
