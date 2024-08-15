@@ -26,7 +26,6 @@ type BackendTaskBatch = {
     }
     samples: Array<{
         id: number,
-        studentId: number,
         resourceUrl: string
     }>
 }
@@ -50,7 +49,6 @@ export type Example = {
 export type Score = 0 | 1 | 2 | 3 | 4
 export type Sample = {
     id: number
-    studentId: number
     image: PreloadableImageSrc
     score: Score | undefined
 }
@@ -86,7 +84,6 @@ export async function fetchRandomBatch(user: Me) {
             },
             samples: batchResponseJson.body.samples.map(sampleJson => ({
                 id: sampleJson.id,
-                studentId: sampleJson.studentId,
                 image: new PreloadableImageSrc(`${BACKEND_ROOT}${sampleJson.resourceUrl}`),
                 score: undefined
             })),
