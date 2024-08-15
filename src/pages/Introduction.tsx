@@ -1,6 +1,6 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
-import {APP_BATCH_LABELING_INTRO} from "../constants/Urls";
+import {APP_BATCH_LABELING_RESET} from "../constants/Urls";
 
 const Introduction: React.FC = () => {
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ const Introduction: React.FC = () => {
             Wort zu lesen, so wie du sie beim ersten Mal durchlesen würdest.<br/>
             Es können Striche aus darüber und darunter liegenden Zeilen ins Bild reichen. Diese sollen die Bewertung nicht beeinflussen.
         </div>
-        <button onClick={() => navigate(APP_BATCH_LABELING_INTRO)}>weiter</button>
+        <button onClick={() => navigate(APP_BATCH_LABELING_RESET)}>weiter</button>
     </div>
 }
 

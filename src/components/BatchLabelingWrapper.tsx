@@ -4,17 +4,19 @@ import {DisplayContext} from "../util/DisplayContext";
 import {House} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {APP_LOGOUT} from "../constants/Urls";
+import {ThemeContext} from "../util/BatchProvider";
 
 const NAVIGATION_BUTTON_RELATIVE_WIDTH = 15
 
 const BatchLabelingWrapper: React.FC<{children: ReactNode, headline: string, progress: {current: number, end: number}, navigatePrevPage: (() => void) | null, navigateNextPage: (() => void) | null}> = ({children, headline, progress, navigatePrevPage, navigateNextPage}) => {
     const display = useContext(DisplayContext)!
+    const themeHighlight = useContext(ThemeContext)
     const navigate = useNavigate();
 
     return <div style={{width: display.width, height: display.height, maxWidth: "1024px"}}>
         <div style={{position: "relative", width: "100%", top: "0", height: "6%", overflow: "hidden", display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
             { navigatePrevPage === null ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
-                <button onClick={() => navigatePrevPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: "lightgreen", fontWeight: "bolder", cursor: "pointer", fontSize: "2vmin"}}>
+                <button onClick={() => navigatePrevPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: themeHighlight.light, fontWeight: "bolder", cursor: "pointer", fontSize: "2vmin"}}>
                     zurück
                 </button>
             }
@@ -22,7 +24,7 @@ const BatchLabelingWrapper: React.FC<{children: ReactNode, headline: string, pro
                 {headline}
             </h1>
             { navigateNextPage === null ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
-                <button onClick={() => navigateNextPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: "lightgreen", fontWeight: "bolder", cursor: "pointer", fontSize: "2vmin"}}>
+                <button onClick={() => navigateNextPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: themeHighlight.light, fontWeight: "bolder", cursor: "pointer", fontSize: "2vmin"}}>
                     weiter
                 </button>
             }

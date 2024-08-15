@@ -3,7 +3,7 @@ import {
     APP_BATCH_LABELING_SAMPLE,
 } from "../constants/Urls";
 import { useNavigate } from "react-router-dom";
-import {BatchContext} from "../util/BatchProvider";
+import {BatchContext, ThemeContext} from "../util/BatchProvider";
 import {TaskBatch} from "../entities/Batch";
 import BatchLabelingWrapper from "../components/BatchLabelingWrapper";
 import QuestionDescription from "../components/QuestionDescription";
@@ -31,6 +31,7 @@ export function getHeader(questionId: number): string {
 const BatchLabelingIntro: React.FC = () => {
     const navigate = useNavigate()
     const [maybeBatch] = useContext(BatchContext)!
+    const themeHighlight = useContext(ThemeContext)
     const batch: TaskBatch = maybeBatch!
 
     function navigateNext() {
@@ -43,15 +44,16 @@ const BatchLabelingIntro: React.FC = () => {
         navigateNextPage={() => navigateNext()}
         progress={{current: 0, end: batch.samples.length}}
     >
-        <div className={"basic-long-text-div"}>
-            Toll! Du hast uns schon mit <b style={{color: "lightseagreen"}}>{batch.userAnswerCounts.submittedAnswersCount}</b> Bewertungen geholfen.<br/>
-            Aktuell suchen wir noch <b>{batch.userAnswerCounts.pendingAnswersCount}</b> weiter Bewertungen.<br/>
-            <br/>
-        </div>
+        { batch.userAnswerCounts.submittedAnswersCount > 0 && <div className={"basic-long-text-div"}>
+                Toll! Du hast uns schon mit <b style={{color: themeHighlight.light}}>{batch.userAnswerCounts.submittedAnswersCount}</b> Bewertungen geholfen.<br/>
+                Aktuell suchen wir noch <b style={{color: themeHighlight.light}}>{batch.userAnswerCounts.pendingAnswersCount}</b> weiter Bewertungen.<br/>
+                <br/>
+            </div>
+        }
         <BatchLabelingTaskLayout
             descriptionText={<QuestionDescription question={batch.question}/>}
             image={<Image src={batch.example.image} alt={"example"}/>}
-            actions={<button style={{height: "100%"}} onClick={() => navigateNext()}>Start</button>}/>
+            actions={<button style={{height: "100%", width: "100%", color: themeHighlight.light}} onClick={() => navigateNext()}>Start</button>}/>
     </BatchLabelingWrapper>
 }
 

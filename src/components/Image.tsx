@@ -2,7 +2,7 @@ import {get} from "../authentication/io";
 import React, {CSSProperties, useEffect, useState} from "react";
 
 export const preloadImage = async (src: string): Promise<string> => {
-    const theBlob = await ((await get(src, undefined, false)) as Response).blob()
+    const theBlob = await ((await get(src, undefined, undefined, false)) as Response).blob()
     return new Promise((resolve, reject)  => {
         const fr = new FileReader();
         fr.onload = () => {

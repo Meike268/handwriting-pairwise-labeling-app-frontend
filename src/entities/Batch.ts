@@ -26,7 +26,6 @@ type BackendTaskBatch = {
     }
     samples: Array<{
         id: number,
-        studentId: number,
         resourceUrl: string
     }>
 }
@@ -50,7 +49,6 @@ export type Example = {
 export type Score = 0 | 1 | 2 | 3 | 4
 export type Sample = {
     id: number
-    studentId: number
     image: PreloadableImageSrc
     score: Score | undefined
 }
@@ -69,10 +67,11 @@ async function preloadBatchImages(batch: TaskBatch) {
     }
 }
 
-export async function fetchRandomBatch(user: Me) {
+export async function fetchRandomBatch(user: Me, excludedTasks: Array<{question: Question, samples: Array<Sample>}> | null = null) {
     console.info(`Fetching batch for ${JSON.stringify(user)}`)
 
-    const batchResponseJson = await get(BACKEND_BATCH) as GetTaskBatchResponse
+    const excludedTasksMap = excludedTasks === null ? {} : Object.fromEntries(excludedTasks.map(questionSamples => [questionSamples.question.id, questionSamples.samples.map(sample => sample.id)]))
+    const batchResponseJson = await get(BACKEND_BATCH, {excludedTasks: excludedTasksMap}) as GetTaskBatchResponse
 
     if (batchResponseJson.state === "finished") {
         return null
@@ -86,7 +85,6 @@ export async function fetchRandomBatch(user: Me) {
             },
             samples: batchResponseJson.body.samples.map(sampleJson => ({
                 id: sampleJson.id,
-                studentId: sampleJson.studentId,
                 image: new PreloadableImageSrc(`${BACKEND_ROOT}${sampleJson.resourceUrl}`),
                 score: undefined
             })),
