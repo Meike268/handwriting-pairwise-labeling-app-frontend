@@ -7,7 +7,7 @@ import {
     BACKEND_ANSWER
 } from "../constants/Urls";
 import {useNavigate, useParams} from "react-router-dom";
-import {BatchContext} from "../util/BatchProvider";
+import {BatchContext, ThemeContext} from "../util/BatchProvider";
 import {Sample, Score, TaskBatch} from "../entities/Batch";
 import BatchLabelingWrapper from "../components/BatchLabelingWrapper";
 import QuestionDescription from "../components/QuestionDescription";
@@ -27,6 +27,7 @@ const BatchLabelingMain: React.FC = () => {
     const batch: TaskBatch = maybeBatch!
     const [showReportPopup, setShowReportPopup] = useState<boolean>(false)
     const [showExamplePopup, setShowExamplePopup] = useState<boolean>(false)
+    const themeHighlight = useContext(ThemeContext)
 
     const currentSample = batch.samples[sampleInd]
 
@@ -120,7 +121,7 @@ const BatchLabelingMain: React.FC = () => {
                     onClick={() => onSubmit(score as Score)}
                     style={{
                         height: 98 / 5 + "%",
-                        backgroundColor: currentSample.score === score ? "green" : undefined,
+                        backgroundColor: currentSample.score === score ? themeHighlight.main : undefined,
                             display: "flex",
                             flexDirection: "row",
                             justifyContent: "left",
@@ -128,7 +129,7 @@ const BatchLabelingMain: React.FC = () => {
                             padding: "5px"
                         }}
                     >
-                        <div style={{color: "lightgreen", marginRight: "10px"}}><b>{score + 1}</b></div>
+                        <div style={{color: themeHighlight.light, marginRight: "10px"}}><b>{score + 1}</b></div>
                         <ScoreDescriptor score={score + 1} question={batch.question}/>
                     </button>
                 )}

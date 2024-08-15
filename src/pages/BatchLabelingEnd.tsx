@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import {
     APP_BATCH_LABELING_SAMPLE, APP_BATCH_LABELING_RESET,
 } from "../constants/Urls";
-import {BatchContext} from "../util/BatchProvider";
+import {BatchContext, ThemeContext} from "../util/BatchProvider";
 import {TaskBatch} from "../entities/Batch";
 import BatchLabelingWrapper from "../components/BatchLabelingWrapper";
 import {getHeader} from "./BatchLabelingIntro";
@@ -10,6 +10,7 @@ import {useNavigate} from "react-router-dom";
 
 const BatchLabelingMain: React.FC = () => {
     const [maybeBatch] = useContext(BatchContext)!
+    const themeHighlight = useContext(ThemeContext)
     const batch: TaskBatch = maybeBatch!
     const navigate = useNavigate()
 
@@ -36,7 +37,7 @@ const BatchLabelingMain: React.FC = () => {
         </div>
         <div className={"lastElement"} style={{height: "100%", width: "100%"}}>
             <div style={{height: "10%"}}/>
-            <button className={"StartButton"} style={{height: "30%", width: "30%", textAlign: "center"}}
+            <button className={"StartButton"} style={{height: "30%", width: "30%", textAlign: "center", color: themeHighlight.light}}
                     onClick={() => navigate(APP_BATCH_LABELING_RESET)}>
                 Nächste Frage
             </button>

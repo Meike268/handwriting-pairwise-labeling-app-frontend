@@ -7,8 +7,10 @@ import {
     APP_FINISHED
 } from "../constants/Urls";
 import {fetchRandomBatch, TaskBatch} from "../entities/Batch";
+import {HighlightColor, getHighlightColorByQuestionId} from "./helpers";
 
 export const BatchContext = createContext<[TaskBatch | undefined, Dispatch<SetStateAction<TaskBatch | null | undefined>>] | undefined>(undefined);
+export const ThemeContext = createContext<HighlightColor>(getHighlightColorByQuestionId(1));
 
 export const BatchProvider: React.FC<{ children?: ReactNode }> = ({children}) => {
     const user = useContext(UserContext)!;
@@ -48,7 +50,9 @@ export const BatchProvider: React.FC<{ children?: ReactNode }> = ({children}) =>
         return <Navigate to={APP_FINISHED}/>
     else {
         return <BatchContext.Provider value={[batch, setBatch]}>
-            {children ? children : <Outlet/>}
+            <ThemeContext.Provider value={getHighlightColorByQuestionId(batch.question.id)}>
+                {children ? children : <Outlet/>}
+            </ThemeContext.Provider>
         </BatchContext.Provider>
     }
 }
