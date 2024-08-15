@@ -1,5 +1,5 @@
-import React, {createContext, Dispatch, ReactNode, SetStateAction, useContext, useState} from "react";
-import {Outlet, useLocation, useNavigate} from 'react-router-dom';
+import React, {createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState} from "react";
+import {Navigate, Outlet, useLocation, useNavigate} from 'react-router-dom';
 import {UserContext} from "../authentication/AuthenticationProvider";
 import {
     APP_BATCH_LABELING_INTRO,
@@ -8,35 +8,47 @@ import {
 } from "../constants/Urls";
 import {fetchRandomBatch, TaskBatch} from "../entities/Batch";
 
-export const BatchContext = createContext<[TaskBatch | undefined, Dispatch<SetStateAction<TaskBatch | undefined>>] | undefined>(undefined);
+export const BatchContext = createContext<[TaskBatch | undefined, Dispatch<SetStateAction<TaskBatch | null | undefined>>] | undefined>(undefined);
 
 export const BatchProvider: React.FC<{ children?: ReactNode }> = ({children}) => {
     const user = useContext(UserContext)!;
     const location = useLocation()
     const navigate = useNavigate()
-    const [batch, setBatch] = useState<TaskBatch | undefined>(undefined)
+    const [batch, setBatch] = useState<TaskBatch | null | undefined>(undefined)
+    const [nextBatch, setNextBatch] = useState<TaskBatch | null | undefined>(undefined)
 
-    if (location.pathname === APP_BATCH_LABELING_RESET && batch !== undefined) {
-        setBatch(undefined)
+    useEffect(() => {
+        if (batch !== undefined && nextBatch === undefined)
+            fetchRandomBatch(user, [{question: batch!.question, samples: batch!.samples}]).then(res => setNextBatch(res))
+    }, [batch, nextBatch, user]);
+
+    function navigateNextAfterLoading(loading_result: TaskBatch | null) {
+        if (loading_result === null)
+            navigate(APP_FINISHED)
+        else
+            navigate(APP_BATCH_LABELING_INTRO)
     }
 
-    if (batch === undefined) {
-        fetchRandomBatch(user).then(res => {
-            if (res != null) {
+    if (location.pathname === APP_BATCH_LABELING_RESET) {
+        if (batch === undefined)
+            fetchRandomBatch(user).then(res => {
                 setBatch(res)
-                navigate(APP_BATCH_LABELING_INTRO)
-            } else {
-                navigate(APP_FINISHED)
-            }
-        })
+                navigateNextAfterLoading(res)
+            })
+        else if (nextBatch !== undefined) {
+            setBatch(nextBatch);
+            setNextBatch(undefined)
+            navigateNextAfterLoading(nextBatch)
+        }
     }
 
-
-    if (batch === undefined) {
+    if (batch === undefined)
         return <div>"Loading new tasks..."</div>
-    } else {
+    else if (batch === null)
+        return <Navigate to={APP_FINISHED}/>
+    else {
         return <BatchContext.Provider value={[batch, setBatch]}>
-            {children ? children : <Outlet />}
+            {children ? children : <Outlet/>}
         </BatchContext.Provider>
     }
 }

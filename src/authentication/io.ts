@@ -22,10 +22,14 @@ export async function fetchAuthenticated(input: RequestInfo | URL, init: Request
         throw Error(`${res.status} - Could not retrieve request ${init.method} ${input}. RequestInit: ${JSON.stringify(init)}`)
 }
 
-export async function get(url: RequestInfo | URL, init: RequestInit = {}, asJson = true) {
+export async function get(url: RequestInfo | URL, query: any | null = null, init: RequestInit = {}, asJson = true) {
     init.method = "GET"
     init.body = undefined
-    const response = await fetchAuthenticated(url, init)
+    const encodedQuery = query === null ? "" : `?${Object.entries(query).map(([paramKey, paramValue]) => {
+        return `${paramKey}=${encodeURIComponent(JSON.stringify(paramValue))}`
+    }).join("&")}`
+    const urlWithQuery = `${url}${encodedQuery}`
+    const response = await fetchAuthenticated(urlWithQuery, init)
     if (asJson)
         return await response.json()
     return response
