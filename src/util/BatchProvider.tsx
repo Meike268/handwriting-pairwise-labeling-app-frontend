@@ -44,6 +44,11 @@ export const BatchProvider: React.FC<{ children?: ReactNode }> = ({children}) =>
             loading = true
         }
         else if (nextBatch !== undefined) {
+            if (nextBatch !== null)
+                nextBatch.userAnswerCounts = {
+                    submittedAnswersCount: nextBatch.userAnswerCounts.submittedAnswersCount + (batch?.samples.length ?? 0),
+                    pendingAnswersCount: (nextBatch.userAnswerCounts.pendingAnswersCount ?? 0) - (batch?.samples.length ?? 0)
+                }
             setBatch(nextBatch);
             setNextBatch(undefined)
             navigateNextAfterLoading(nextBatch)
