@@ -46,7 +46,7 @@ export const BatchProvider: React.FC<{ children?: ReactNode }> = ({children}) =>
             if (nextBatch !== null)
                 nextBatch.userAnswerCounts = {
                     submittedAnswersCount: nextBatch.userAnswerCounts.submittedAnswersCount + (batch?.samples.length ?? 0),
-                    pendingAnswersCount: (nextBatch.userAnswerCounts.pendingAnswersCount ?? 0) - (batch?.samples.length ?? 0)
+                    pendingAnswersCount: nextBatch.userAnswerCounts.pendingAnswersCount
                 }
             setBatch(nextBatch);
             setNextBatch(undefined)
