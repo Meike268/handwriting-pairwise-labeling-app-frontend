@@ -46,8 +46,7 @@ const ScoreDescriptor: React.FC<{ score: number, question: Question }> = ({score
         } break;
     }
     return <div style={{
-        textAlign: "left",
-        marginLeft: "10px"
+        textAlign: "left"
     }}>{text}</div>
 }
 

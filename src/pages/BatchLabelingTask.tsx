@@ -122,12 +122,12 @@ const BatchLabelingMain: React.FC = () => {
                     key={`${currentSample.id}_${score}`}  // extra key per sample to remove hasactive-css-class between samples
                     onClick={() => onSubmit(score as Score)}
                     style={display.height > 600 ?
-                        {height: 98 / 5 + "%", backgroundColor: currentSample.score === score ? themeHighlight.main : undefined, display: "flex", flexDirection: "row",justifyContent: "left",alignItems: "center",padding: "5px"}
+                        {height: 98 / 5 + "%", backgroundColor: currentSample.score === score ? themeHighlight.main : undefined, display: "flex", flexDirection: "row",justifyContent: "left", alignItems: "center", gap: "10px", padding: "5px"}
                         :
-                        {height: "100%", width: 99 / 5 + "%", display:"flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center"}
+                        {height: "100%", width: 99 / 5 + "%", backgroundColor: currentSample.score === score ? themeHighlight.main : undefined, display:"flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center", padding: "10px"}
                     }
                     >
-                        <div style={{color: themeHighlight.light, marginRight: "10px"}}><b>{score + 1}</b></div>
+                        <div style={{color: themeHighlight.light}}><b>{score + 1}</b></div>
                         <ScoreDescriptor score={score + 1} question={batch.question}/>
                     </button>
                 )}
