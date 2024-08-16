@@ -4,7 +4,7 @@ import {Question} from "../entities/Batch";
 const QuestionDescription: React.FC<{question: Question}> = ({question}) => {
 
     const overallLegibilityDescription = <div className={"basic-long-text-div"}>
-        Bitte lese den unten angezeigten Satz.<br/>
+        Bitte lies den unten angezeigten Satz.<br/>
         Bewerte anschließend, wie leserlich du die Schrift findest.<br/>
         Achte darauf, ob du den Satz mehrfach lesen musst, oder ob du ihn in einem Schwung lesen kannst.<br/>
         Musst du den Satz oder einzelne Wörter mehrfach lesen, dann ist der Satz weniger leserlich.<br/>
@@ -19,7 +19,7 @@ const QuestionDescription: React.FC<{question: Question}> = ({question}) => {
     </div>
 
     const letterAlignmentDescription = <div className={"basic-long-text-div"}>
-        Bitte lese den unten angezeigten Satz.<br/>
+        Bitte lies den unten angezeigten Satz.<br/>
         Nachdem du den Satz einmal gelesen hast, schaue dir einen Buchstaben nach dem anderen an. Achte auf die Neigung der vertikalen Striche.<br/>
         Sind alle Buchstaben in die gleiche Richtung geneigt (nach links oder rechts)?<br/>
         Ist die Neigung bei allen Buchstaben gleich, ähnlich, oder unterschiedlich?<br/>
@@ -32,12 +32,12 @@ const QuestionDescription: React.FC<{question: Question}> = ({question}) => {
     </div>
 
     const letterSizeRNHDescription = <div className={"basic-long-text-div"}>
-        Bitte lese den unten angezeigten Satz.<br/>
-        Achte dabei auf die Buchstaben 'r','n' und 'h'.<br/>
-        Diese drei Buchstaben entstehen durch einen ähnlichen Schwung des Stiftes. Sie unterscheiden sich nur darin wie
+        Bitte lies den unten angezeigten Satz.<br/>
+        Achte dabei auf die Buchstaben 'r', 'n' und 'h'.<br/>
+        Diese drei Buchstaben entstehen durch einen ähnlichen Schwung des Stiftes. Sie unterscheiden sich nur darin, wie
         weit oben der vertikale Strich beginnt und wie weit unten der Bogen endet.<br/>
         Sind diese Buchstaben einzeln eindeutig zu erkennen?<br/>
-        Oder sieht eines der 'n' eher aus wie ein 'r' oder wie ein 'h', bzw. andersherum.<br/>
+        Oder sieht eines der 'n' eher aus wie ein 'r' oder 'h' bzw. andersherum.<br/>
         <br/>
         1 - Alle Vorkommen der Buchstaben 'r', 'n' und 'h' sind wohlgeformt und eindeutig zu erkennen.
         Der vertikale Strich des ‘n’ ist deutlich kürzer als der eines ‘h’, deshalb sind die beiden Buchstaben leicht zu
@@ -51,9 +51,9 @@ const QuestionDescription: React.FC<{question: Question}> = ({question}) => {
     </div>
 
     const letterSizeADDescription = <div className={"basic-long-text-div"}>
-        Bitte lese den unten angezeigten Satz.<br/>
+        Bitte lies den unten angezeigten Satz.<br/>
         Achte dabei auf die Buchstaben 'a' und 'd'.<br/>
-        Diese zwei Buchstaben entstehen durch einen ähnlichen Schwung des Stiftes. Sie unterscheiden sich nur darin wie
+        Diese zwei Buchstaben entstehen durch einen ähnlichen Schwung des Stiftes. Sie unterscheiden sich nur darin, wie
         weit nach oben der vertikale Strich gezogen wurde.<br/>
         Sind diese Buchstaben einzeln eindeutig zu erkennen?<br/>
         Oder sieht eines der 'a' eher aus wie ein 'd', bzw. andersherum.<br/>
@@ -68,7 +68,7 @@ const QuestionDescription: React.FC<{question: Question}> = ({question}) => {
     </div>
 
     const letterSizeELDescription = <div className={"basic-long-text-div"}>
-        Bitte lese den unten angezeigten Satz.<br/>
+        Bitte lies den unten angezeigten Satz.<br/>
         Achte dabei auf die Buchstaben 'e' und 'l'.<br/>
         Sind diese Buchstaben einzeln eindeutig zu erkennen?<br/>
         Oder sieht eines der 'e' eher aus wie ein 'l', bzw. andersherum.<br/>

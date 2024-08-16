@@ -29,12 +29,12 @@ const BatchLabelingMain: React.FC = () => {
             style={{color: themeHighlight.light}}>{batch.userAnswerCounts.pendingAnswersCount ? batch.userAnswerCounts.pendingAnswersCount - batch.samples.length : ""}</b> weiter
             Bewertungen.<br/>
             <br/>
-            Danke für deine mithilfe. Wir bereiten gleich neue Fragen für dich vor.<br/>
-            Bitte achte darauf immer wieder kurze Pausen einzulegen und genug zu trinken, um konzentriert zu
+            Danke für deine Mithilfe. Wir bereiten gleich neue Fragen für dich vor.<br/>
+            Bitte achte darauf, immer wieder kurze Pausen einzulegen und genug zu trinken, um konzentriert zu
             bleiben.<br/>
             <br/>
             Wir fragen verschiedene Eigenschaften über unsere Schreibproben ab. Unter Umständen wird die nächste
-            Fragestellung also eine andere sein. Wenn das passiert ändern wir zusätzlich einige Farben auf der Seite,
+            Fragestellung also eine andere sein. Wenn das passiert, ändern wir zusätzlich einige Farben auf der Seite,
             damit du es nicht übersiehst.<br/>
             <br/>
             {batch.question.id !== nextBatch?.question.id && <div><b style={{color: "red", fontSize: "3.5vmin"}}>ACHTUNG:</b><br/>Die Fragestellung wird jetzt eine andere sein!</div>}
