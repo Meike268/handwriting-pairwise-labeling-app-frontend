@@ -9,7 +9,7 @@ const Introduction: React.FC = () => {
         <div className={"basic-long-text-div"}>
             Hallo, danke fürs Mitmachen.<br/>
             Im Folgenden wirst du immer erst eine Erklärungsseite sehen, bevor du auf den darauf folgenden Seiten selber
-            Bewertungen abgibts.<br/>
+            Bewertungen abgibst.<br/>
             <br/>
             Die Erklärseite beschreibt auf welchen Gesichtspunkt von Handschrift du achten sollst.
             Danach bewertest du eine Reihe von Fotos von Handschrift in Bezug auf diesen Gesichtspunkt.<br/>

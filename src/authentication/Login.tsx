@@ -58,10 +58,10 @@ export const Login: React.FC = () => {
                 marginLeft: "auto",
                 marginRight: "auto"
             }}>
-                Diese Website ist Teil der Abschlussarbeiten von Lukas Pieger und Erik Schmidt.
+                Diese Webseite ist Teil der Abschlussarbeiten von Lukas Pieger und Erik Schmidt.
                 In Zusammenarbeit mit Stabilo und dem xAI Lehrstuhl wollen wir die Handschrift von Schülern
                 automatisiert bezüglich ihrer Leserlichkeit bewerten. Dazu haben wir von etwa 200 Schülern dieselben 10
-                Sätze aufgezeichnet. Zweck dieser Website ist es, deine Einschätzung zur Leserlichkeit einzelner Sätze zu
+                Sätze aufgezeichnet. Zweck dieser Webseite ist es, deine Einschätzung zur Leserlichkeit einzelner Sätze zu
                 sammeln. Diese Bewertungen dienen später als Grundlage (Trainings-Beispiele) für KI-Modelle, die
                 Handschrift möglichst so bewerten sollen, wie Menschen das tun.
                 <br/>

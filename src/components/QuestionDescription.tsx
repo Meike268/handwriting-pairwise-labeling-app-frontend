@@ -22,7 +22,7 @@ const QuestionDescription: React.FC<{question: Question}> = ({question}) => {
         Bitte lese den unten angezeigten Satz.<br/>
         Nachdem du den Satz einmal gelesen hast, schaue dir einen Buchstaben nach dem anderen an. Achte auf die Neigung der vertikalen Striche.<br/>
         Sind alle Buchstaben in die gleiche Richtung geneigt (nach links oder rechts)?<br/>
-        Ist die Neigung bei allen Buchstaben gleich, ähnlich oder unterschiedlich?<br/>
+        Ist die Neigung bei allen Buchstaben gleich, ähnlich, oder unterschiedlich?<br/>
         Vergleiche den Satz mit den angezeigten Beispielen, um besser einschätzen zu können, welche Bewertung zutreffend ist.<br/>
         Die Bewertung richtet sich nach dem größten Neigungsunterschied zweier Buchstaben und nicht nach der durchschnittlichen Abweichung.<br/>
         <br/>
