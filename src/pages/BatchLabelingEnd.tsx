@@ -26,7 +26,7 @@ const BatchLabelingMain: React.FC = () => {
             style={{color: themeHighlight.light}}>{batch.userAnswerCounts.submittedAnswersCount + batch.samples.length}</b> Bewertungen
             geholfen.<br/>
             Aktuell suchen wir noch <b
-            style={{color: themeHighlight.light}}>{batch.userAnswerCounts.pendingAnswersCount ? batch.userAnswerCounts.pendingAnswersCount - batch.samples.length : ""}</b> weiter
+            style={{color: themeHighlight.light}}>{batch.userAnswerCounts.pendingAnswersCount ? batch.userAnswerCounts.pendingAnswersCount - batch.samples.length : ""}</b> weitere
             Bewertungen.<br/>
             <br/>
             Danke für deine Mithilfe. Wir bereiten gleich neue Fragen für dich vor.<br/>
