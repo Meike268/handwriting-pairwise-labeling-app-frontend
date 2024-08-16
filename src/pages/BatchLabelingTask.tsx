@@ -89,8 +89,9 @@ const BatchLabelingMain: React.FC = () => {
                 <div className={"popups-container"} style={{
                     display: "flex",
                     flexDirection: "row",
-                    width: "100%",
-                    justifyContent: "space-between"
+                    justifyContent: "space-between",
+                    margin: "-10px auto",
+                    width: display.height < 600 ? "90%" : "100%"
                 }}>
                     <div className={"exampleButton"} style={{
                         alignSelf: "flex-start",
@@ -100,7 +101,7 @@ const BatchLabelingMain: React.FC = () => {
                         cursor: "pointer",
                         padding: "10px"
                     }} onClick={() => setShowExamplePopup(true)}>
-                        <ImageSearch sx={{fontSize: "2vh"}}/>
+                        <ImageSearch sx={{fontSize: "2vmin"}}/>
                         <div style={{fontSize: "smaller"}}>Beispiele ansehen</div>
                     </div>
                     <div className={"reportButton"} style={{
@@ -111,7 +112,7 @@ const BatchLabelingMain: React.FC = () => {
                         cursor: "pointer",
                         padding: "10px"
                     }} onClick={() => setShowReportPopup(true)}>
-                        <Flag sx={{fontSize: "2vh"}}/>
+                        <Flag sx={{fontSize: "2vmin"}}/>
                         <div style={{fontSize: "smaller"}}> Problem melden</div>
                     </div>
                 </div>
