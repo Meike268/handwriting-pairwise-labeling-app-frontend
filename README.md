@@ -1,46 +1,65 @@
-# Getting Started with Create React App
+# Handwriting Labeling App Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## What is this project for?
+This is the React frontend of the Handwriting Labeling App.
+This app serves to collect labels on handwriting legibility from annotators.
+This project is part of research in the direction of automatic handwriting assessment.
+It was developed by Aaron Lukas Pieger and Erik Jonathan Schmidt as part of our Master Thesis projects.
 
-## Available Scripts
+## Functionality of the app
+This app was developed to carry out the data labeling for a handwriting legibility dataset.
+We collect scores from "very good" 1 to "very bad" 5 for four questions about the legibility of
+handwritten sentences. The web app provides authentication with the user system in the backend.
+After login the web app provides UI to carry out the labeling task.
+All admin functionality is implemented in the backend only.
 
-In the project directory, you can run:
+### Annotator UI
+Annotators use the UI of the web app.
+The admin needs to create an account with credentials (username + password) for each user.
+The UI is in German.
 
-### `npm start`
+**login**  
+Page where users login with their credentials  
+![screenshot login](images/screenshot_ui_login.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**welcome**
+Welcome page with instructions to user  
+![screenshot login](images/screenshot_ui_welcome.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**introduction**  
+Page that explains the annotation task  
+![screenshot task intro](images/screenshot_ui_task_introduction.png)
 
-### `npm test`
+**labeling**  
+Page to collect label on one displayed sample  
+![screenshot task page](images/screenshot_ui_task.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**outro**
+A page that appears after finishing a batch of tasks.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Backend
+This react frontend works with the spring backend application
+[handwriting-labeling-app-backend](https://github.com/LukasPieger1/handwriting-labeling-app-backend)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## How to run
+1. Setup project and make sure env variables are provided.
+2. Verify backend is running.
+3. Run react frontend.
+### Setup
+The backend url is specified as environment variable in .env which is excluded from git.
+The [provide-defaults](provide-defaults.sh) creates the .env file locally if not available and sets the backend
+root url to REACT_APP_BACKEND_URL_ROOT=http://localhost:8080 as default.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Verify backend is running
+For explanation on how to run the backend go to the linked [repository](https://github.com/LukasPieger1/handwriting-labeling-app-backend).
 
-### `npm run eject`
+### Run React Frontend
+From within the working directory _/handwriting-labeling-app-frontend_ run  
+`npm install`  
+to install dependencies from [package.json](package.json).  
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Once dependencies are installed and the backend is up and running, you need to run  
+`npm run start`  
+The web app should show up in your browser.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
