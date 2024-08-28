@@ -38,6 +38,8 @@ const BatchLabelingIntro: React.FC = () => {
         navigate(APP_BATCH_LABELING_SAMPLE(0))
     }
 
+    let estimate_remaining_tasks= batch.userAnswerCounts.pendingAnswersCount ? Math.round(batch.userAnswerCounts.pendingAnswersCount /100) * 100 : 0
+
     return <BatchLabelingWrapper
         headline={getHeader(batch.question.id)}
         navigatePrevPage={null}
@@ -46,7 +48,7 @@ const BatchLabelingIntro: React.FC = () => {
     >
         { batch.userAnswerCounts.submittedAnswersCount > 0 && <div className={"basic-long-text-div"}>
                 Toll! Du hast uns schon mit <b style={{color: themeHighlight.light}}>{batch.userAnswerCounts.submittedAnswersCount}</b> Bewertungen geholfen.<br/>
-                Aktuell suchen wir noch <b style={{color: themeHighlight.light}}>{batch.userAnswerCounts.pendingAnswersCount}</b> weitere Bewertungen.<br/>
+                Aktuell suchen wir noch ca. <b style={{color: themeHighlight.light}}>{estimate_remaining_tasks}</b> weitere Bewertungen zu denen du beitragen kannst.<br/>
                 <br/>
             </div>
         }
