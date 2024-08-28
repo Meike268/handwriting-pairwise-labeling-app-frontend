@@ -8,7 +8,7 @@ const BatchLabelingTaskLayout: React.FC<{
 }> = ({descriptionText, image, actions}) => {
     const display = useContext(DisplayContext)!
     return <>
-        <div style={{height: "30%"}}>{descriptionText}</div>
+        <div className={"basic-long-text-div"} style={{height: "30%", overflow: "auto"}}>{descriptionText}</div>
         <div style={{height: "30%", width: "100%", display: "flex", justifyContent: "space-around"}}>{image}</div>
         <div className={"ActionWrapper"} style={ display.height > 600 ?
             {height: "30%", width: "100%", maxWidth: "400px", display: "flex", flexDirection: "column", justifyContent: "space-between"}
