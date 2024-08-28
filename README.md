@@ -2,9 +2,9 @@
 
 ## What is this project for?
 This is the React frontend of the Handwriting Labeling App.
-This app servers to collect labels on handwriting legibility from annotators.
+This app serves to collect labels on handwriting legibility from annotators.
 This project is part of research in the direction of automatic handwriting assessment.
-It was developed by Aaron Lukas Pieger and Erik Jonathan Schmidt as part of our Master Theis projects.
+It was developed by Aaron Lukas Pieger and Erik Jonathan Schmidt as part of our Master Thesis projects.
 
 ## Functionality of the app
 This app was developed to carry out the data labeling for a handwriting legibility dataset.
@@ -15,7 +15,7 @@ All admin functionality is implemented in the backend only.
 
 ### Annotator UI
 Annotators use the UI of the web app.
-The admin needs to creat an account with credentials (username + password) for each user.
+The admin needs to create an account with credentials (username + password) for each user.
 The UI is in German.
 
 **login**  
@@ -52,15 +52,14 @@ The [provide-defaults](provide-defaults.sh) creates the .env file locally if not
 root url to REACT_APP_BACKEND_URL_ROOT=http://localhost:8080 as default.
 
 ### Verify backend is running
-For explanation on how to run the backend go to the linked [repository]((https://github.com/LukasPieger1/handwriting-labeling-app-backend)
-).
+For explanation on how to run the backend go to the linked [repository](https://github.com/LukasPieger1/handwriting-labeling-app-backend).
 
 ### Run React Frontend
 From within the working directory _/handwriting-labeling-app-frontend_ run  
 `npm install`  
 to install dependencies from [package.json](package.json).  
 
-Once dependencies are installed and the backend is up and running run  
-`npm run`  
+Once dependencies are installed and the backend is up and running, you need to run  
+`npm run start`  
 The web app should show up in your browser.
 
