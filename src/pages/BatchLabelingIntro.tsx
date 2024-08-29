@@ -46,7 +46,7 @@ const BatchLabelingIntro: React.FC = () => {
     >
         { batch.userAnswerCounts.submittedAnswersCount > 0 && <div className={"basic-long-text-div"}>
                 Toll! Du hast uns schon mit <b style={{color: themeHighlight.light}}>{batch.userAnswerCounts.submittedAnswersCount}</b> Bewertungen geholfen.<br/>
-                Aktuell suchen wir noch <b style={{color: themeHighlight.light}}>{batch.userAnswerCounts.submittedAnswersCount}</b> weitere Bewertungen zu denen du beitragen kannst.<br/>
+                Aktuell suchen wir noch <b style={{color: themeHighlight.light}}>{batch.userAnswerCounts.pendingAnswersCount}</b> weitere Bewertungen zu denen du beitragen kannst.<br/>
                 <br/>
             </div>
         }
