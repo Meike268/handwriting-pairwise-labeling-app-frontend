@@ -12,7 +12,9 @@ const Introduction: React.FC = () => {
             Bewertungen abgibst.<br/>
             <br/>
             Die Erklärseite beschreibt auf welchen Gesichtspunkt von Handschrift du achten sollst.
-            Danach bewertest du eine Reihe von Fotos von Handschrift in Bezug auf diesen Gesichtspunkt.<br/>
+            Danach bewertest du eine Reihe von Fotos von Handschrift in Bezug auf diesen Gesichtspunkt. Wir speichern
+            deine Bewertungen immer direkt. Du kannst die Seite jeder Zeit schließen oder über den logout Button unten
+            rechts verlassen.<br/>
             <br/>
             Auf der Erklärseite zeigen wir dir außerdem bespielhafte Bewertungen solcher Fotos.<br/>
             <br/>

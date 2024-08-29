@@ -14,7 +14,7 @@ const QuestionDescription: React.FC<{question: Question}> = ({question}) => {
         1 - Die Bewertung 1 bedeutet, dass der Satz sehr leserlich ist. Du konntest ihn schnell und problemlos lesen. Du
         bist nicht in Stocken gekommen.<br/>
         <br/>
-        5 - Die Bewertung 5 bedeutet, dass der Satz sehr schwer leserlich ist. Selbst nach mehrfachem lesen ist mindestens ein
+        5 - Die Bewertung 5 bedeutet, dass der Satz sehr schwer leserlich ist. Selbst nach mehrfachem Lesen ist mindestens ein
         Wort nicht eindeutig zu entziffern.
     </div>
 
