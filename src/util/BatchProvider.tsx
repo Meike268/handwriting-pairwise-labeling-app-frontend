@@ -24,7 +24,7 @@ export const BatchProvider: React.FC<{ children?: ReactNode }> = ({children}) =>
 
     useEffect(() => {
         if (!!batch && nextBatch === undefined)
-            fetchRandomBatch(user, [{question: batch!.question, samplePairs: batch!.samples}]).then(res => setNextBatch(res))
+            fetchRandomBatch(user).then(res => setNextBatch(res))
     }, [batch, nextBatch, user]);
 
     function navigateNextAfterLoading(loading_result: TaskBatch | null) {

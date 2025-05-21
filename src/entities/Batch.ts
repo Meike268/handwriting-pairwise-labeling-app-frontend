@@ -20,16 +20,22 @@ type BackendTaskBatch = {
     example: {
         exampleImagePath: string
     }
+    // list of sample tuples
     samples: Array<[
-        Sample,
-        Sample
+        sample1: BackendSample,
+        sample2: BackendSample
     ]>
 }
-
 
 export type UserAnswerCounts = {
     submittedAnswersCount: number,
     pendingAnswersCount?: number
+}
+
+export type BackendSample = {
+    id: number,
+    resourceUrl: string,
+    referenceSentenceId: number
 }
 
 export type Question = {
@@ -43,7 +49,7 @@ export type ReferenceSentence = {
 export type Example = {
     image: PreloadableImageSrc
 }
-export type Score = 0 | 1
+export type Score = -1 | 0 | 1
 export type Sample = {
     id: number
     image: PreloadableImageSrc
@@ -64,13 +70,12 @@ async function preloadBatchImages(batch: TaskBatch) {
     }
 }
 
-export async function fetchRandomBatch(user: Me, excludedTasks: Array<{question: Question, samples: Array<Sample>}> | null = null) {
+export async function fetchRandomBatch(user: Me) {
     console.info(`Fetching batch for ${JSON.stringify(user)}`)
 
-    const excludedTasksMap = excludedTasks === null ? {} : Object.fromEntries(excludedTasks.map(questionSamples => [questionSamples.question.id, questionSamples.samples.map(sample => sample.id)]))
-    const batchResponseJson = await get(BACKEND_BATCH, {excludedTasks: excludedTasksMap}) as GetTaskBatchResponse
+    const batchResponseJson = await get(BACKEND_BATCH) as GetTaskBatchResponse // save batch from backend in batchResponseJson
 
-    if (batchResponseJson.state === "finished") {
+    if (batchResponseJson.state === "finished") { // batch is finished
         return null
     } else {
         const batch: TaskBatch = {
@@ -79,7 +84,7 @@ export async function fetchRandomBatch(user: Me, excludedTasks: Array<{question:
             example: {
                 image: new PreloadableImageSrc(`${BACKEND_ROOT}${batchResponseJson.body.example.exampleImagePath}`)
             },
-            samples: batchResponseJson.body.samplePairs.map(([sample1, sample2]) => ([
+            samples: batchResponseJson.body.samples.map(([sample1, sample2]) => ([
             {
                 id: sample1.id,
                 image: new PreloadableImageSrc(`${BACKEND_ROOT}${sample1.resourceUrl}`),

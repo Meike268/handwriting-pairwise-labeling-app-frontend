@@ -11,5 +11,5 @@ export const APP_BATCH_LABELING_PATH = "/batchLabeling"
 export const APP_BATCH_LABELING_RESET = APP_BATCH_LABELING_PATH + "/"
 export const APP_BATCH_LABELING_INTRO = APP_BATCH_LABELING_PATH + "/batchIntro"
 export const APP_BATCH_LABELING_END = APP_BATCH_LABELING_PATH + "/batchEnd"
-export const APP_BATCH_LABELING_SAMPLE = (sampleIndex: string | number) => `${APP_BATCH_LABELING_PATH}/${sampleIndex}`
+export const APP_BATCH_LABELING_SAMPLE = (index: number) => `${APP_BATCH_LABELING_PATH}/${index}`
 export const APP_FINISHED = "/finished"
