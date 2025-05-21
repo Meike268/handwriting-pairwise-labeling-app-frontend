@@ -5,12 +5,13 @@ import {TextField} from "@mui/material";
 import {post} from "../authentication/io";
 import {BACKEND_REPORT} from "../constants/Urls";
 
-const ReportPopup: React.FC<{onClose: () => void, batch: TaskBatch, sample: Sample}> = ({onClose, sample, batch}) => {
+const ReportPopup: React.FC<{onClose: () => void, batch: TaskBatch, sample1: Sample, sample2: Sample}> = ({onClose, sample1, sample2, batch}) => {
     const [message, setMessage] = useState("")
 
     function onSubmit() {
         post(BACKEND_REPORT, {
-            sampleId: sample.id,
+            sampleId1: sample1.id,
+            sampleId2: sample2.id,
             questionId: batch.question.id,
             message: message,
             submissionTimestamp: Date.now().valueOf()
