@@ -77,13 +77,13 @@ const BatchLabelingMain: React.FC = () => {
         navigate(sampleInd < batch.samples.length - 1 ? APP_BATCH_LABELING_SAMPLE(sampleInd + 1) : APP_BATCH_LABELING_END)
     }
 
-    function prevPage() {
-        navigate(sampleInd > 0 ? APP_BATCH_LABELING_SAMPLE(sampleInd - 1) : APP_BATCH_LABELING_INTRO)
-    }
+    //function prevPage() {
+    //    navigate(sampleInd > 0 ? APP_BATCH_LABELING_SAMPLE(sampleInd - 1) : APP_BATCH_LABELING_INTRO)
+    //}
 
     return <BatchLabelingWrapper
         headline={getHeader(batch.question.id)}
-        navigatePrevPage={() => prevPage()}
+        //navigatePrevPage={() => prevPage()}
         navigateNextPage={
           currentSample1.score === undefined && currentSample2.score === undefined
             ? null
