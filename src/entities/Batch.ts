@@ -20,15 +20,12 @@ type BackendTaskBatch = {
     example: {
         exampleImagePath: string
     }
-    referenceSentence: {
-        id: number
-        content: string
-    }
-    samples: Array<{
-        id: number,
-        resourceUrl: string
-    }>
+    samples: Array<[
+        Sample,
+        Sample
+    ]>
 }
+
 
 export type UserAnswerCounts = {
     submittedAnswersCount: number,
@@ -46,7 +43,7 @@ export type ReferenceSentence = {
 export type Example = {
     image: PreloadableImageSrc
 }
-export type Score = 0 | 1 | 2 | 3 | 4
+export type Score = 0 | 1
 export type Sample = {
     id: number
     image: PreloadableImageSrc
@@ -55,15 +52,15 @@ export type Sample = {
 export type TaskBatch = {
     userAnswerCounts: UserAnswerCounts
     question: Question
-    referenceSentence: ReferenceSentence
     example: Example
-    samples: Array<Sample>
+    samples: Array<[Sample, Sample]>
 }
 
 async function preloadBatchImages(batch: TaskBatch) {
     await batch.example.image.load()
-    for (const sample of batch.samples) {
-        await sample.image.load()
+    for (const [sample1, sample2] of batch.samples) {
+        await sample1.image.load();
+        await sample2.image.load();
     }
 }
 
@@ -79,15 +76,22 @@ export async function fetchRandomBatch(user: Me, excludedTasks: Array<{question:
         const batch: TaskBatch = {
             userAnswerCounts: batchResponseJson.body.userAnswerCounts,
             question: batchResponseJson.body.question,
-            referenceSentence: batchResponseJson.body.referenceSentence,
             example: {
                 image: new PreloadableImageSrc(`${BACKEND_ROOT}${batchResponseJson.body.example.exampleImagePath}`)
             },
-            samples: batchResponseJson.body.samples.map(sampleJson => ({
-                id: sampleJson.id,
-                image: new PreloadableImageSrc(`${BACKEND_ROOT}${sampleJson.resourceUrl}`),
+            samples: batchResponseJson.body.samplePairs.map(([sample1, sample2]) => ([
+            {
+                id: sample1.id,
+                image: new PreloadableImageSrc(`${BACKEND_ROOT}${sample1.resourceUrl}`),
                 score: undefined
-            })),
+            },
+            {
+                id: sample2.id,
+                image: new PreloadableImageSrc(`${BACKEND_ROOT}${sample2.resourceUrl}`),
+                score: undefined
+            }
+        ]))
+            ,
         }
         preloadBatchImages(batch).then(() => console.debug("Preload of batch finished"))
         return batch
