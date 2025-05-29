@@ -8,26 +8,45 @@ import {ThemeContext} from "../util/BatchProvider";
 
 const NAVIGATION_BUTTON_RELATIVE_WIDTH = 15
 
-const BatchLabelingWrapper: React.FC<{children: ReactNode, headline: string, progress: {current: number, end: number}, navigatePrevPage: (() => void) | null, navigateNextPage: (() => void) | null}> = ({children, headline, progress, navigatePrevPage, navigateNextPage}) => {
+const BatchLabelingWrapper: React.FC<{children: ReactNode, headline: string, progress: {current: number, end: number}, navigatePrevPage?: (() => void) | null, navigateNextPage?: (() => void) | null}> = ({children, headline, progress, navigatePrevPage, navigateNextPage}) => {
     const display = useContext(DisplayContext)!
     const themeHighlight = useContext(ThemeContext)
     const navigate = useNavigate();
 
     return <div style={{width: display.width, height: display.height, maxWidth: "1024px"}}>
         <div style={{position: "relative", width: "100%", top: "0", height: "6%", overflow: "hidden", display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
-            { navigatePrevPage === null ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
-                <button onClick={() => navigatePrevPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: themeHighlight.light, fontWeight: "bolder", cursor: "pointer", fontSize: "2vmin"}}>
-                    zurück
+            { !navigatePrevPage ? (
+                <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}} />
+              ) : (
+                <button
+                  onClick={() => navigatePrevPage?.()}
+                  style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: themeHighlight.light, fontWeight: "bolder", cursor: "pointer", fontSize: "2vmin"}}
+                >
+                  zurück
                 </button>
+              )
             }
             <h1 style={{maxWidth: (100-NAVIGATION_BUTTON_RELATIVE_WIDTH*2) + "%", whiteSpace: "nowrap"}}>
                 {headline}
             </h1>
-            { navigateNextPage === null ? <div style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%"}}/> :
-                <button onClick={() => navigateNextPage()} style={{width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%", height: "100%", color: themeHighlight.light, fontWeight: "bolder", cursor: "pointer", fontSize: "2vmin"}}>
+            { navigateNextPage ? (
+                <button
+                    onClick={() => navigateNextPage?.()}
+                    style={{
+                        width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%",
+                        height: "100%",
+                        color: themeHighlight.light,
+                        fontWeight: "bolder",
+                        cursor: "pointer",
+                        fontSize: "2vmin"
+                    }}
+                >
                     weiter
                 </button>
-            }
+            ) : (
+                <div style={{ width: NAVIGATION_BUTTON_RELATIVE_WIDTH + "%" }} />
+            )}
+
         </div>
         <ProgressBar style={{height: "1.5%", marginBottom: "2%"}} current={progress.current} end={progress.end}/>
         <div style={{height: "88.5%", width: "100%"}}>

@@ -12,7 +12,6 @@ const BatchLabelingMain: React.FC = () => {
     const [maybeBatch] = useContext(BatchContext)!
     const themeHighlight = useContext(ThemeContext)
     const batch: TaskBatch = maybeBatch!
-    const nextBatch: TaskBatch | null | undefined = useContext(NextBatchContext)
     const navigate = useNavigate()
 
     return <BatchLabelingWrapper
@@ -32,9 +31,7 @@ const BatchLabelingMain: React.FC = () => {
             Danke für deine Mithilfe. Wir bereiten gleich neue Fragen für dich vor.<br/>
             Bitte achte darauf, immer wieder kurze Pausen einzulegen und genug zu trinken, um konzentriert zu
             bleiben.<br/>
-            <br/>
-            {batch.question.id !== nextBatch?.question.id && <div><b style={{color: "red", fontSize: "3.5vmin"}}>ACHTUNG:</b><br/>Die Fragestellung wird jetzt eine andere sein!</div>}
-        </div>
+            </div>
         <div className={"lastElement"} style={{height: "100%", width: "100%"}}>
             <div style={{height: "10%"}}/>
             <button className={"StartButton"} style={{height: "30%", width: "30%", textAlign: "center", color: themeHighlight.light}}

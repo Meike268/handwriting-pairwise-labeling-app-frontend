@@ -72,33 +72,39 @@ async function preloadBatchImages(batch: TaskBatch) {
 
 export async function fetchRandomBatch(user: Me) {
     console.info(`Fetching batch for ${JSON.stringify(user)}`)
+    try {
+        console.log("Calling backend:", BACKEND_BATCH)
+        const batchResponseJson = await get(BACKEND_BATCH) as GetTaskBatchResponse
+        console.log("Successfully fetched batch:", batchResponseJson)
 
-    const batchResponseJson = await get(BACKEND_BATCH) as GetTaskBatchResponse // save batch from backend in batchResponseJson
-
-    if (batchResponseJson.state === "finished") { // batch is finished
-        return null
-    } else {
-        const batch: TaskBatch = {
-            userAnswerCounts: batchResponseJson.body.userAnswerCounts,
-            question: batchResponseJson.body.question,
-            example: {
-                image: new PreloadableImageSrc(`${BACKEND_ROOT}${batchResponseJson.body.example.exampleImagePath}`)
-            },
-            samples: batchResponseJson.body.samples.map(([sample1, sample2]) => ([
-            {
-                id: sample1.id,
-                image: new PreloadableImageSrc(`${BACKEND_ROOT}${sample1.resourceUrl}`),
-                score: undefined
-            },
-            {
-                id: sample2.id,
-                image: new PreloadableImageSrc(`${BACKEND_ROOT}${sample2.resourceUrl}`),
-                score: undefined
+        if (batchResponseJson.state === "finished") { // batch is finished
+            return null
+        } else {
+            const batch: TaskBatch = {
+                userAnswerCounts: batchResponseJson.body.userAnswerCounts,
+                question: batchResponseJson.body.question,
+                example: {
+                    image: new PreloadableImageSrc(`${BACKEND_ROOT}${batchResponseJson.body.example.exampleImagePath}`)
+                },
+                samples: batchResponseJson.body.samples.map(([sample1, sample2]) => ([
+                {
+                    id: sample1.id,
+                    image: new PreloadableImageSrc(`${BACKEND_ROOT}${sample1.resourceUrl}`),
+                    score: undefined
+                },
+                {
+                    id: sample2.id,
+                    image: new PreloadableImageSrc(`${BACKEND_ROOT}${sample2.resourceUrl}`),
+                    score: undefined
+                }
+            ]))
+                ,
             }
-        ]))
-            ,
+            preloadBatchImages(batch).then(() => console.debug("Preload of batch finished"))
+            return batch
         }
-        preloadBatchImages(batch).then(() => console.debug("Preload of batch finished"))
-        return batch
+    } catch (error) {
+        console.error("Error fetching batch:", error);
     }
 }
+

@@ -21,7 +21,6 @@ const ReportPopup: React.FC<{onClose: () => void, batch: TaskBatch, sample1: Sam
 
     return <Popup onClose={onClose} title={"Problem melden"}>
         <div>Bitte beschreibe das aufgetretene Problem <br/>
-        z.B. "Hier steht nicht '{batch.referenceSentence.content}'"
         </div>
         <TextField multiline={true} value={message} onChange={event => setMessage(event.target.value)} sx={{backgroundColor: "white", width: "100%"}}/>
         <button onClick={() => onSubmit()}>Nachricht senden</button>
