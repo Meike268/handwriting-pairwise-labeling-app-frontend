@@ -14,9 +14,10 @@ const BatchLabelingMain: React.FC = () => {
     const batch: TaskBatch = maybeBatch!
     const navigate = useNavigate()
 
+
     return <BatchLabelingWrapper
         headline={getHeader(batch.question.id)}
-        navigatePrevPage={() => navigate(APP_BATCH_LABELING_SAMPLE(batch.samples.length-1))}
+        //navigatePrevPage={() => navigate(APP_BATCH_LABELING_SAMPLE(batch.samples.length-1))}
         navigateNextPage={null}
         progress={{current: batch.samples.length, end: batch.samples.length}}
     >
@@ -26,7 +27,8 @@ const BatchLabelingMain: React.FC = () => {
             geholfen.<br/>
             Aktuell suchen wir noch <b
             style={{color: themeHighlight.light}}>{batch.userAnswerCounts.pendingAnswersCount ? batch.userAnswerCounts.pendingAnswersCount - batch.samples.length : ""}</b> weitere
-            Bewertungen.<br/>
+            Bewertungen. Also nur noch <b
+            style={{color: themeHighlight.light}}>{batch.userAnswerCounts.pendingAnswersCount ? batch.userAnswerCounts.pendingAnswersCount / batch.samples.length - 1: ""}</b> weitere Durchläufe! <br/>
             <br/>
             Danke für deine Mithilfe. Wir bereiten gleich neue Fragen für dich vor.<br/>
             Bitte achte darauf, immer wieder kurze Pausen einzulegen und genug zu trinken, um konzentriert zu

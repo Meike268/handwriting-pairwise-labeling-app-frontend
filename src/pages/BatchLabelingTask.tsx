@@ -41,7 +41,7 @@ const BatchLabelingMain: React.FC = () => {
 
     async function updateScore(score: Score, sample1: Sample, sample2: Sample) {
         // Check if either sample has already been scored in this pair
-        const exists = sample1.score !== undefined && sample2.score !== undefined;
+        //const exists = sample1.score !== undefined && sample2.score !== undefined;
 
         console.log("currentSample1.score", sample1.score)
         console.log("currentSample2.score", sample2.score)
@@ -64,10 +64,7 @@ const BatchLabelingMain: React.FC = () => {
 
         try {
             let res
-            if (exists)
-                res = await put(BACKEND_ANSWER, answer)
-            else
-                res = await post(BACKEND_ANSWER, answer)
+            res = await post(BACKEND_ANSWER, answer)
             console.info(`Successfully sent answer ${JSON.stringify(res)}`)
             return res
         } catch (error) {
