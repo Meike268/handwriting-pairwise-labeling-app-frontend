@@ -34,10 +34,17 @@ const BatchLabelingMain: React.FC = () => {
     const currentSample = batch.samples[sampleInd] // get current sample pair
     const currentSample1 = currentSample[0] // get sample 1
     const currentSample2 = currentSample[1] // get sample 2
+    console.log("currentSample", currentSample)
+    console.log("currentSample1", currentSample1)
+    console.log("currentSample2", currentSample2)
+
 
     async function updateScore(score: Score, sample1: Sample, sample2: Sample) {
         // Check if either sample has already been scored in this pair
         const exists = sample1.score !== undefined && sample2.score !== undefined;
+
+        console.log("currentSample1.score", sample1.score)
+        console.log("currentSample2.score", sample2.score)
 
         // Store the result locally (optional, helps with rendering or state updates)
         sample1.score = score === 1 ? 1 : 0;   // sample1 won → 1, else 0
@@ -52,6 +59,8 @@ const BatchLabelingMain: React.FC = () => {
             score: score, // +1 if sample1 won, -1 if sample2 won
             submissionTimestamp: Date.now().valueOf()
         }
+
+        console.log("answer:", answer)
 
         try {
             let res

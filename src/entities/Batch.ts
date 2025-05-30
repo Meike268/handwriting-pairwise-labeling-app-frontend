@@ -12,30 +12,30 @@ type BackendTaskBatch = {
     userAnswerCounts: {
         submittedAnswersCount: number,
         pendingAnswersCount?: number
-    }
+    },
     question: {
         id: number,
         description: string
-    }
+    },
     example: {
         exampleImagePath: string
-    }
-    // list of sample tuples
-    samples: Array<[
-        sample1: BackendSample,
-        sample2: BackendSample
-    ]>
+    },
+    samplePairs: Array<{
+        first: BackendSample,
+        second: BackendSample
+    }>
+}
+
+type BackendSample = {
+    id: number,
+    resourceUrl: string,
+    referenceSentenceId: number | null,
+    reports: any[] | null
 }
 
 export type UserAnswerCounts = {
     submittedAnswersCount: number,
     pendingAnswersCount?: number
-}
-
-export type BackendSample = {
-    id: number,
-    resourceUrl: string,
-    referenceSentenceId: number
 }
 
 export type Question = {
@@ -72,39 +72,39 @@ async function preloadBatchImages(batch: TaskBatch) {
 
 export async function fetchRandomBatch(user: Me) {
     console.info(`Fetching batch for ${JSON.stringify(user)}`)
-    try {
-        console.log("Calling backend:", BACKEND_BATCH)
-        const batchResponseJson = await get(BACKEND_BATCH) as GetTaskBatchResponse
-        console.log("Successfully fetched batch:", batchResponseJson)
 
-        if (batchResponseJson.state === "finished") { // batch is finished
-            return null
-        } else {
-            const batch: TaskBatch = {
-                userAnswerCounts: batchResponseJson.body.userAnswerCounts,
-                question: batchResponseJson.body.question,
-                example: {
-                    image: new PreloadableImageSrc(`${BACKEND_ROOT}${batchResponseJson.body.example.exampleImagePath}`)
-                },
-                samples: batchResponseJson.body.samples.map(([sample1, sample2]) => ([
+    console.log("Calling backend:", BACKEND_BATCH)
+    const batchResponseJson = await get(BACKEND_BATCH) as GetTaskBatchResponse
+    console.log("Successfully fetched batch:", batchResponseJson)
+
+    if (batchResponseJson.state === "finished") { // batch is finished
+        return null
+    } else {
+        const batch: TaskBatch = {
+            userAnswerCounts: batchResponseJson.body.userAnswerCounts,
+            question: batchResponseJson.body.question,
+            example: {
+                image: new PreloadableImageSrc(`${BACKEND_ROOT}${batchResponseJson.body.example.exampleImagePath}`)
+            },
+            samples: batchResponseJson.body.samplePairs.map(pair => ([
                 {
-                    id: sample1.id,
-                    image: new PreloadableImageSrc(`${BACKEND_ROOT}${sample1.resourceUrl}`),
+                    id: pair.first.id,
+                    image: new PreloadableImageSrc(`${BACKEND_ROOT}${pair.first.resourceUrl}`),
                     score: undefined
                 },
                 {
-                    id: sample2.id,
-                    image: new PreloadableImageSrc(`${BACKEND_ROOT}${sample2.resourceUrl}`),
+                    id: pair.second.id,
+                    image: new PreloadableImageSrc(`${BACKEND_ROOT}${pair.second.resourceUrl}`),
                     score: undefined
                 }
             ]))
-                ,
-            }
-            preloadBatchImages(batch).then(() => console.debug("Preload of batch finished"))
-            return batch
+
+            ,
         }
-    } catch (error) {
-        console.error("Error fetching batch:", error);
+        console.log("batch:", batch)
+        preloadBatchImages(batch).then(() => console.debug("Preload of batch finished"))
+        return batch
     }
+
 }
 
