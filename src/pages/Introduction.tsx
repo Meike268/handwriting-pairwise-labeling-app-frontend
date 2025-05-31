@@ -7,16 +7,24 @@ const Introduction: React.FC = () => {
 
     return <div>
         <div className={"basic-long-text-div"}>
-            Hallo, danke fürs Mitmachen.<br/>
-            Im Folgenden wirst du immer erst eine Erklärungsseite sehen, bevor du auf den darauf folgenden Seiten selber
+            Hallo!<br/>
+            Im Folgenden wirst du erst eine Erklärseite sehen, bevor du auf den darauf folgenden Seiten deine
             Bewertungen abgibst.<br/>
             <br/>
-            Die Erklärseite beschreibt auf welchen Gesichtspunkt von Handschrift du achten sollst.
-            Danach bewertest du eine Reihe von Fotos von Handschrift in Bezug auf diesen Gesichtspunkt. Wir speichern
-            deine Bewertungen immer direkt. Du kannst die Seite jeder Zeit schließen oder über den logout Button unten
-            rechts verlassen.<br/>
+            Die Erklärseite beschreibt genau, auf was du während der Bewertung achten musst.
+            Danach bewertest du eine Reihe von Schriftproben in Bezug auf ihre Leserlichkeit. Dir werden immer zwei
+            Schriftproben nebeneinander angezeigt. Deine Aufgabe ist, die Probe auszuwählen, die deiner Meinung nach besser
+            lesbar ist. <br/>
             <br/>
-            Auf der Erklärseite zeigen wir dir außerdem bespielhafte Bewertungen solcher Fotos.<br/>
+            Ein Durchlauf besteht immer aus 99 Bildpaaren. Anhand der Forschrittsanzeige
+            oben kannst du sehen, wieviele Bewertungen noch in diesem Durchlauf fehlen.
+            Bitte bewerte einen Durchgang komplett, ohne dich zwischenzeitlich auszuloggen oder die Seite zu schließen.
+            Sobald du mit dem Durchlauf fertig bist kannst du die Seite schließen, die Seite über den
+            logout Button unten rechts verlassen oder mit dem nächsten Durchlauf starten.<br/>
+            <br/>
+            Bitte beachte, dass du deine abgegebene Bewertung nicht nachträglich ändern kannst. Sobald du dich für eine
+            Schriftprobe entscheidest, kommst du auf die nächste Seite und kannst
+            nicht wieder zurückgehen. Sei dir also sicher, bevor du eine Schriftprobe auswählst.<br/>
             <br/>
             Nach ein paar Bewertungen, wirst du die Sätze schnell auswendig kennen. Versuche die Sätze trotzdem Wort für
             Wort zu lesen, so wie du sie beim ersten Mal durchlesen würdest.<br/>

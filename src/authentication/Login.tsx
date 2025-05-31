@@ -58,17 +58,18 @@ export const Login: React.FC = () => {
                 marginLeft: "auto",
                 marginRight: "auto"
             }}>
-                Diese Webseite ist Teil der Abschlussarbeiten von Lukas Pieger und Erik Schmidt.
-                In Zusammenarbeit mit Stabilo und dem xAI Lehrstuhl wollen wir die Handschrift von Schülern
-                automatisiert bezüglich ihrer Leserlichkeit bewerten. Dazu haben wir von etwa 200 Schülern dieselben 10
-                Sätze aufgezeichnet. Zweck dieser Webseite ist es, deine Einschätzung zur Leserlichkeit einzelner Sätze zu
-                sammeln. Diese Bewertungen dienen später als Grundlage (Trainings-Beispiele) für KI-Modelle, die
-                Handschrift möglichst so bewerten sollen, wie Menschen das tun.
+                Diese Webseite ist Teil der Abschlussarbeit von Meike Bauer.
+                In Zusammenarbeit mit Stabilo und dem xAI Lehrstuhl der Uni Bamberg arbeite ich an einem KI-Modell, das
+                die Handschrift von Schülern automatisiert bezüglich ihrer Leserlichkeit bewertet. Dazu wurden im Rahmen
+                von vergangenen Masterarbeiten Schriftproben von etwa 200 Schülern gesammelt. Mithilfe dieser Webseite
+                möchte ich Bewertungen zur Leserlichkeit der einzelnen Schriftproben sammeln. Diese Bewertungen
+                dienen später als Grundlage (Trainings-Beispiele) für KI-Modelle.
+                Deine Mithilfe ist also essenziell für den Erfolg dieses Projekts!
                 <br/>
                 <br/>
-                Bitte melde dich mit den Daten an, die wir dir geschickt haben. Danach geht es direkt los.
-                Falls du keine Login-Daten hast und gerne helfen willst, melde dich
-                bei erik-jonathan.schmidt@stud.uni-bamberg.de .
+                Bitte melde dich mit den Daten an, die ich dir geschickt habe. Danach geht es direkt los.
+                Falls du keine Login-Daten hast und gerne helfen willst, melde dich bitte
+                bei meike-valentina.bauer@stud.uni-bamberg.de .
             </p>
         </div>
         <div className={"grid-container"} style={{

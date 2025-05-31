@@ -175,21 +175,22 @@ const BatchLabelingMain: React.FC = () => {
             }
 
 
+
             actions={<>
-                <div style={{display: "flex", justifyContent: "center", gap: "2rem"}}>
+                <div style={{display: "flex", justifyContent: "space-between", width: "100%"}}>
                     <button
                         className={"score-button"}
                         onClick={() => onSubmit(1)}
                         style={{padding: "1rem", backgroundColor: themeHighlight.main}}
                     >
-                        Sample 1 is better
+                        Links ist besser leserlich
                     </button>
                     <button
                         className={"score-button"}
                         onClick={() => onSubmit(-1)}
                         style={{padding: "1rem", backgroundColor: themeHighlight.main}}
                     >
-                        Sample 2 is better
+                        Rechts ist besser leserlich
                     </button>
                 </div>
             </>

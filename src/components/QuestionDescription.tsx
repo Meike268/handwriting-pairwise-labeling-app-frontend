@@ -4,18 +4,13 @@ import {Question} from "../entities/Batch";
 const QuestionDescription: React.FC<{question: Question}> = ({question}) => {
 
     const overallLegibilityDescription = <div className={"basic-long-text-div"}>
-        Bitte lies den unten angezeigten Satz.<br/>
-        Bewerte anschließend, wie leserlich du die Schrift findest.<br/>
-        Achte darauf, ob du den Satz mehrfach lesen musst, oder ob du ihn in einem Schwung lesen kannst.<br/>
-        Musst du den Satz oder einzelne Wörter mehrfach lesen, dann ist der Satz weniger leserlich.<br/>
-        Vergleiche den Satz mit den angezeigten Beispielen, um besser einschätzen zu können, welche Bewertung zutreffend
-        ist.<br/>
-        <br/>
-        1 - Die Bewertung 1 bedeutet, dass der Satz sehr leserlich ist. Du konntest ihn schnell und problemlos lesen. Du
-        bist nicht in Stocken gekommen.<br/>
-        <br/>
-        5 - Die Bewertung 5 bedeutet, dass der Satz sehr schwer leserlich ist. Selbst nach mehrfachem Lesen ist mindestens ein
-        Wort nicht eindeutig zu entziffern.
+        Auf den folgenden Seiten werden dir pro Seite zwei Schriftproben angezeigt. Bitte lies beide Sätze und
+        schaue dir beide Proben an. Entscheide anschließend, welche Probe du besser leserlich findest.<br/>
+        Achte darauf, ob du den Satz mehrfach lesen musst oder ob du ihn in einem Schwung lesen kannst.<br/>
+        Kannst du den Satz schnell und problemlos lesen, ohne ins Stocken zu kommen? Dann ist der Satz eher gut leserlich.<br/>
+        Musst du den Satz oder einzelne Wörter mehrfach lesen? Dann ist der Satz eher schlecht leserlich.<br/>
+        Schaue dir die untenstehenden Beispiele an, um ein Gefühl für die Leserlichkeit von Schriftproben zu bekommen.
+        Du kannst die Beispiele jederzeit über den "Beispiele ansehen" Button einblenden. <br/>
     </div>
 
     const letterAlignmentDescription = <div className={"basic-long-text-div"}>
