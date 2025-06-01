@@ -70,7 +70,7 @@ const BatchLabelingWrapper: React.FC<{children: ReactNode, headline: string, pro
                 marginLeft: "2%",
                 maxWidth: "65%"
             }}>
-                Handwriting Legibility Labeling App by Lukas Pieger and Erik Schmidt
+                Handwriting Legibility Labeling App by Meike Bauer
             </div>
             <div className={"logoutButton"} style={{
                 marginRight: "2%",

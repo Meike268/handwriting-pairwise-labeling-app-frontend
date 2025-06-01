@@ -102,7 +102,7 @@ export async function fetchRandomBatch(user: Me) {
             ,
         }
         console.log("batch:", batch)
-        preloadBatchImages(batch).then(() => console.debug("Preload of batch finished"))
+        // preloadBatchImages(batch).then(() => console.debug("Preload of batch finished"))
         return batch
     }
 

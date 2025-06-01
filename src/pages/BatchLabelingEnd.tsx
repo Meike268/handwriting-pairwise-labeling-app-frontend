@@ -1,12 +1,14 @@
 import React, {useContext} from "react";
 import {
-    APP_BATCH_LABELING_SAMPLE, APP_BATCH_LABELING_RESET,
+    APP_BATCH_LABELING_SAMPLE, APP_BATCH_LABELING_RESET, BACKEND_BATCH,
 } from "../constants/Urls";
 import {BatchContext, NextBatchContext, ThemeContext} from "../util/BatchProvider";
 import {TaskBatch} from "../entities/Batch";
 import BatchLabelingWrapper from "../components/BatchLabelingWrapper";
 import {getHeader} from "./BatchLabelingIntro";
 import {useNavigate} from "react-router-dom";
+import {post} from "../authentication/io";
+
 
 const BatchLabelingMain: React.FC = () => {
     const [maybeBatch] = useContext(BatchContext)!
@@ -27,8 +29,7 @@ const BatchLabelingMain: React.FC = () => {
             geholfen.<br/>
             Aktuell suchen wir noch <b
             style={{color: themeHighlight.light}}>{batch.userAnswerCounts.pendingAnswersCount ? batch.userAnswerCounts.pendingAnswersCount - batch.samples.length : ""}</b> weitere
-            Bewertungen. Also nur noch <b
-            style={{color: themeHighlight.light}}>{batch.userAnswerCounts.pendingAnswersCount ? batch.userAnswerCounts.pendingAnswersCount / batch.samples.length - 1: ""}</b> weitere Durchläufe! <br/>
+            Bewertungen.
             <br/>
             Danke für deine Mithilfe. Wir bereiten gleich neue Fragen für dich vor.<br/>
             Bitte achte darauf, immer wieder kurze Pausen einzulegen und genug zu trinken, um konzentriert zu

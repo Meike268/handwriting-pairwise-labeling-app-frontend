@@ -21,37 +21,38 @@ export const BatchProvider: React.FC<{ children?: ReactNode }> = ({ children }) 
     const navigate = useNavigate();
     const [batch, setBatch] = useState<TaskBatch | null | undefined>(undefined);
 
-    let loading = false;
-
-    function navigateNextAfterLoading(loading_result: TaskBatch | null | undefined) {
-      if (!loading_result)  // handles both null and undefined
-          navigate(APP_FINISHED);
-      else
-          navigate(APP_BATCH_LABELING_INTRO);
-    }
-
-    if (location.pathname === APP_BATCH_LABELING_RESET) {
-        if (batch === undefined) {
-            fetchRandomBatch(user).then(res => {
-                setBatch(res);
-                navigateNextAfterLoading(res);
-            });
-            loading = true;
-        } else {
-            // Re-entering reset with an existing batch — assume new cycle
-            setBatch(undefined);
-            navigate(APP_BATCH_LABELING_RESET);
-            loading = true;
+    // We use useEffect for side-effects like fetching data
+    useEffect(() => {
+        if (location.pathname === APP_BATCH_LABELING_RESET) {
+            if (batch === undefined) {
+                // Asynchronous operation inside useEffect
+                fetchRandomBatch(user).then(res => {
+                    setBatch(res);  // Set batch after fetch is complete
+                    navigateNextAfterLoading(res);  // Handle navigation after loading
+                });
+            } else {
+                // Reset logic if batch already exists
+                setBatch(undefined);  // Clear batch
+                navigate(APP_BATCH_LABELING_RESET); // Navigate back to reset
+            }
         }
-    }
+    }, [location.pathname, batch, user, navigate]); // Dependencies for the useEffect
 
-    if (loading)
-        return <div>"Loading new tasks..."</div>;
-    else if (batch === undefined)
-        return <Navigate to={APP_BATCH_LABELING_RESET} />;
-    else if (batch === null)
+    const navigateNextAfterLoading = (loading_result: TaskBatch | null | undefined) => {
+        if (!loading_result)  // handles both null and undefined
+            navigate(APP_FINISHED);
+        else
+            navigate(APP_BATCH_LABELING_INTRO);
+    };
+
+    if (batch === undefined) {
+        // Show loading state if the batch is undefined
+        return <div>Loading new tasks...</div>;
+    } else if (batch === null) {
+        // Redirect if batch is null (finished)
         return <Navigate to={APP_FINISHED} />;
-    else {
+    } else {
+        // Provide the batch context and render children or outlet
         return (
             <BatchContext.Provider value={[batch, setBatch]}>
                 <ThemeContext.Provider value={getHighlightColorByQuestionId(batch.question.id)}>
@@ -61,4 +62,3 @@ export const BatchProvider: React.FC<{ children?: ReactNode }> = ({ children }) 
         );
     }
 };
-
