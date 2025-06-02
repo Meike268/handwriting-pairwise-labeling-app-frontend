@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useState, useEffect} from "react";
 import {post, put} from "../authentication/io";
 import {
     APP_BATCH_LABELING_END,
@@ -20,6 +20,7 @@ import ReportPopup from "../components/ReportPopup";
 import ExampleImagePopup from "../components/ExampleImagePopup";
 import {DisplayContext} from "../util/DisplayContext";
 
+
 const BatchLabelingMain: React.FC = () => {
     const {sampleIndex} = useParams()
     const sampleInd = +sampleIndex!
@@ -31,7 +32,25 @@ const BatchLabelingMain: React.FC = () => {
     const themeHighlight = useContext(ThemeContext)
     const display = useContext(DisplayContext)!
 
+    useEffect(() => {
+      if (sampleInd >= batch.samples.length) {
+        console.warn("Sample index out of bounds:", sampleInd)
+        navigate(APP_BATCH_LABELING_END)
+      }
+    }, [sampleInd, batch.samples.length, navigate])
+
+    if (sampleInd >= batch.samples.length) {
+      return null
+    }
+
+
+
     const currentSample = batch.samples[sampleInd] // get current sample pair
+    if (!currentSample || currentSample.length !== 2) {
+      console.warn("Invalid sample data at index", sampleInd)
+      navigate(APP_BATCH_LABELING_END)
+      return null
+    }
     const currentSample1 = currentSample[0] // get sample 1
     const currentSample2 = currentSample[1] // get sample 2
     console.log("currentSample", currentSample)
@@ -43,8 +62,8 @@ const BatchLabelingMain: React.FC = () => {
         // Check if either sample has already been scored in this pair
         //const exists = sample1.score !== undefined && sample2.score !== undefined;
 
-        console.log("currentSample1.score", sample1.score)
-        console.log("currentSample2.score", sample2.score)
+        // console.log("currentSample1.score", sample1.score)
+        // console.log("currentSample2.score", sample2.score)
 
         // Store the result locally (optional, helps with rendering or state updates)
         sample1.score = score === 1 ? 1 : 0;   // sample1 won → 1, else 0
@@ -80,7 +99,10 @@ const BatchLabelingMain: React.FC = () => {
 
 
     function nextPage() {
-        navigate(sampleInd < batch.samples.length - 1 ? APP_BATCH_LABELING_SAMPLE(sampleInd + 1) : APP_BATCH_LABELING_END)
+        // console.log(`Navigating from sample ${sampleInd} to ${sampleInd + 1} of ${batch.samples.length-1}`)
+        navigate(sampleInd <= batch.samples.length - 1
+            ? APP_BATCH_LABELING_SAMPLE(sampleInd+1)
+            : APP_BATCH_LABELING_END)
     }
 
     //function prevPage() {
