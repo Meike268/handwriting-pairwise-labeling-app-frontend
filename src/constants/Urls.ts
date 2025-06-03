@@ -1,4 +1,4 @@
-export const BACKEND_ROOT = process.env.REACT_APP_BACKEND_URL_ROOT || 'http://localhost:8080';
+export const BACKEND_ROOT = `${process.env.REACT_APP_BACKEND_URL_ROOT}`
 export const BACKEND_LOGIN = `${BACKEND_ROOT}/users/login`
 export const BACKEND_BATCH = `${BACKEND_ROOT}/batch`
 export const BACKEND_ANSWER = `${BACKEND_ROOT}/answers`

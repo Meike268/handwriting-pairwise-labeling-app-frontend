@@ -97,12 +97,9 @@ export async function fetchRandomBatch(user: Me) {
                     image: new PreloadableImageSrc(`${BACKEND_ROOT}${pair.second.resourceUrl}`),
                     score: undefined
                 }
-            ]))
-
-            ,
+            ])),
         }
         console.log("batch:", batch)
-        // preloadBatchImages(batch).then(() => console.debug("Preload of batch finished"))
         return batch
     }
 

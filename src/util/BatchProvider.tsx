@@ -21,25 +21,22 @@ export const BatchProvider: React.FC<{ children?: ReactNode }> = ({ children }) 
     const navigate = useNavigate();
     const [batch, setBatch] = useState<TaskBatch | null | undefined>(undefined);
 
-    // We use useEffect for side-effects like fetching data
     useEffect(() => {
         if (location.pathname === APP_BATCH_LABELING_RESET) {
             if (batch === undefined) {
-                // Asynchronous operation inside useEffect
                 fetchRandomBatch(user).then(res => {
                     setBatch(res);  // Set batch after fetch is complete
-                    navigateNextAfterLoading(res);  // Handle navigation after loading
+                    navigateNextAfterLoading(res);
                 });
             } else {
-                // Reset logic if batch already exists
                 setBatch(undefined);  // Clear batch
-                navigate(APP_BATCH_LABELING_RESET); // Navigate back to reset
+                navigate(APP_BATCH_LABELING_RESET);
             }
         }
-    }, [location.pathname, batch, user, navigate]); // Dependencies for the useEffect
+    }, [location.pathname, batch, user, navigate]);
 
     const navigateNextAfterLoading = (loading_result: TaskBatch | null | undefined) => {
-        if (!loading_result)  // handles both null and undefined
+        if (!loading_result)
             navigate(APP_FINISHED);
         else
             navigate(APP_BATCH_LABELING_INTRO);
