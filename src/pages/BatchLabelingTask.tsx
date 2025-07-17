@@ -196,24 +196,43 @@ const BatchLabelingMain: React.FC = () => {
 
 
             actions={<>
-                <div style={{display: "flex", justifyContent: "space-between", width: "100%"}}>
-                    <button
-                        className={"score-button"}
-                        onClick={() => onSubmit(1)}
-                        style={{padding: "1rem", backgroundColor: themeHighlight.main}}
-                    >
-                        Links ist besser leserlich
-                    </button>
-                    <button
-                        className={"score-button"}
-                        onClick={() => onSubmit(-1)}
-                        style={{padding: "1rem", backgroundColor: themeHighlight.main}}
-                    >
-                        Rechts ist besser leserlich
-                    </button>
-                </div>
-            </>
-            }/>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                  gap: "1rem", // optional space between buttons
+                }}
+              >
+                <button
+                  className={"score-button"}
+                  onClick={() => onSubmit(1)}
+                  style={{
+                    flex: 1,
+                    padding: "1rem",
+                    backgroundColor: themeHighlight.main,
+                    textAlign: "left", // aligns text to the left
+                  }}
+                >
+                  Links ist besser leserlich
+                </button>
+
+                <button
+                  className={"score-button"}
+                  onClick={() => onSubmit(-1)}
+                  style={{
+                    flex: 1,
+                    padding: "1rem",
+                    backgroundColor: themeHighlight.main,
+                    textAlign: "right", // aligns text to the right
+                  }}
+                >
+                  Rechts ist besser leserlich
+                </button>
+              </div>
+            </>}/>
+
+
     </BatchLabelingWrapper>
 }
 
