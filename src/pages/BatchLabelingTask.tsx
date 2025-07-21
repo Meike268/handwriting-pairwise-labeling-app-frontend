@@ -131,106 +131,132 @@ const BatchLabelingMain: React.FC = () => {
             descriptionText={<QuestionDescription question={batch.question}/>}
 
             image={
-              <div style={{ display: "flex", flexDirection: "column", width: "100%", height: "100%" }}>
-                {/* Image Row */}
-                <div style={{ display: "flex", flexDirection: "row", gap: "2%", width: "100%", height: "100%" }}>
-                  {[currentSample1, currentSample2].map((sample, idx) => (
-                    <div
-                      key={sample.id}
-                      style={{
-                        flex: 1,
-                        display: "flex",
-                        flexDirection: "column",
-                        height: "100%",
-                      }}
-                    >
-                      <Image src={sample.image} alt={`sample-${idx + 1}`} />
+                <div style={{display: "flex", flexDirection: "column", width: "100%", height: "100%"}}>
+                    {/* Image Row */}
+                    <div style={{display: "flex", flexDirection: "row", gap: "2%", width: "100%", height: "100%"}}>
+                        {[currentSample1, currentSample2].map((sample, idx) => (
+                            <div
+                                key={sample.id}
+                                style={{
+                                    flex: 1,
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    height: "100%",
+                                }}
+                            >
+                                <Image src={sample.image} alt={`sample-${idx + 1}`}/>
+                            </div>
+                        ))}
                     </div>
-                  ))}
-                </div>
 
-                {/* Shared Buttons Row */}
-                <div
-                  className={"popups-container"}
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    margin: "10px auto 0",
-                    width: "100%",
-                  }}
-                >
-                  <div
-                    className={"exampleButton"}
-                    style={{
-                      opacity: "60%",
-                      display: "flex",
-                      alignItems: "center",
-                      cursor: "pointer",
-                      padding: "10px",
-                    }}
-                    onClick={() => setShowExamplePopup(true)}
-                  >
-                    <ImageSearch sx={{ fontSize: "2vmin" }} />
-                    <div style={{ fontSize: "smaller" }}>Beispiele ansehen</div>
-                  </div>
+                    {/* Shared Buttons Row */}
+                    <div
+                        className="popups-container"
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            margin: "10px auto 0",
+                            width: "100%",
+                            gap: "1rem",
+                        }}
+                    >
+                        <div
+                            className="exampleButton"
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "0.5rem",
+                                padding: "0.5rem 1rem",
+                                backgroundColor: "#e8f5e9", // light green background
+                                color: "#2e7d32", // darker green text/icon
+                                borderRadius: "6px",
+                                cursor: "pointer",
+                                fontSize: "0.9rem",
+                                transition: "background-color 0.2s ease",
+                                border: "1px solid #c8e6c9",
+                            }}
+                            onClick={() => setShowExamplePopup(true)}
+                            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#dcedc8")}
+                            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#e8f5e9")}
+                        >
+                            <ImageSearch sx={{fontSize: "1.5rem"}}/>
+                            <div>Beispiele ansehen</div>
+                        </div>
 
-                  <div
-                    className={"reportButton"}
-                    style={{
-                      opacity: "60%",
-                      display: "flex",
-                      alignItems: "center",
-                      cursor: "pointer",
-                      padding: "10px",
-                    }}
-                    onClick={() => setShowReportPopup(true)}
-                  >
-                    <Flag sx={{ fontSize: "2vmin" }} />
-                    <div style={{ fontSize: "smaller" }}>Problem melden</div>
-                  </div>
+                        <div
+                            className="reportButton"
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "0.5rem",
+                                padding: "0.5rem 1rem",
+                                backgroundColor: "#fff3e0", // light orange background
+                                color: "#ef6c00", // darker orange for alert tone
+                                borderRadius: "6px",
+                                cursor: "pointer",
+                                fontSize: "0.9rem",
+                                transition: "background-color 0.2s ease",
+                                border: "1px solid #ffe0b2",
+                            }}
+                            onClick={() => setShowReportPopup(true)}
+                            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#ffe0b2")}
+                            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#fff3e0")}
+                        >
+                            <Flag sx={{fontSize: "1.5rem"}}/>
+                            <div>Problem melden</div>
+                        </div>
+                    </div>
+
                 </div>
-              </div>
             }
 
 
-
-            actions={<>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  width: "100%",
-                  gap: "1rem", // optional space between buttons
-                }}
-              >
-                <button
-                  className={"score-button"}
-                  onClick={() => onSubmit(1)}
-                  style={{
-                    flex: 1,
-                    padding: "1rem",
-                    backgroundColor: themeHighlight.main,
-                    textAlign: "left", // aligns text to the left
-                  }}
+            actions={
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        width: "100%",
+                        padding: "1rem 0",
+                    }}
                 >
-                  Links ist besser leserlich
-                </button>
+                    <button
+                        className="score-button"
+                        onClick={() => onSubmit(1)}
+                        style={{
+                            padding: "0.75rem 1.5rem", // more vertical and horizontal padding
+                            backgroundColor: themeHighlight.main,
+                            color: "#fff", // optional: make text stand out
+                            borderRadius: "8px", // optional: rounded corners
+                            fontSize: "1rem",
+                            border: "none",
+                            cursor: "pointer",
+                        }}
+                    >
+                        Links ist besser leserlich
+                    </button>
 
-                <button
-                  className={"score-button"}
-                  onClick={() => onSubmit(-1)}
-                  style={{
-                    flex: 1,
-                    padding: "1rem",
-                    backgroundColor: themeHighlight.main,
-                    textAlign: "right", // aligns text to the right
-                  }}
-                >
-                  Rechts ist besser leserlich
-                </button>
-              </div>
-            </>}/>
+                    <button
+                        className="score-button"
+                        onClick={() => onSubmit(-1)}
+                        style={{
+                            padding: "0.75rem 1.5rem",
+                            backgroundColor: themeHighlight.main,
+                            color: "#fff",
+                            borderRadius: "8px",
+                            fontSize: "1rem",
+                            border: "none",
+                            cursor: "pointer",
+                        }}
+                    >
+                        Rechts ist besser leserlich
+                    </button>
+                </div>
+            }
+
+        />
 
 
     </BatchLabelingWrapper>
