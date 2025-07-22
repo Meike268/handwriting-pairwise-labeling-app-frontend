@@ -16,7 +16,7 @@ const Introduction: React.FC = () => {
             Schriftproben nebeneinander angezeigt. Deine Aufgabe ist, die Probe auszuwählen, die deiner Meinung nach besser
             lesbar ist. <br/>
             <br/>
-            Ein Durchlauf besteht immer aus 99 Bildpaaren. Anhand der Forschrittsanzeige
+            Ein Durchlauf besteht immer aus 20 Bildpaaren. Anhand der Forschrittsanzeige
             oben kannst du sehen, wieviele Bewertungen noch in diesem Durchlauf fehlen.
             Bitte bewerte einen Durchgang komplett, ohne dich zwischenzeitlich auszuloggen oder die Seite zu schließen.
             Sobald du mit dem Durchlauf fertig bist kannst du die Seite schließen, die Seite über den

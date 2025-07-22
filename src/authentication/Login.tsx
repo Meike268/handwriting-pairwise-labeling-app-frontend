@@ -69,7 +69,7 @@ export const Login: React.FC = () => {
                 <br/>
                 Bitte melde dich mit den Daten an, die ich dir geschickt habe. Danach geht es direkt los.
                 Falls du keine Login-Daten hast und gerne helfen willst, melde dich bitte
-                bei meike-valentina.bauer@stud.uni-bamberg.de .
+                bei meike-valentina.bauer@stud.uni-bamberg.de.
             </p>
         </div>
         <div className={"grid-container"} style={{

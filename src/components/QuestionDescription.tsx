@@ -5,7 +5,8 @@ const QuestionDescription: React.FC<{question: Question}> = ({question}) => {
 
     const overallLegibilityDescription = <div className={"basic-long-text-div"}>
         Auf den folgenden Seiten werden dir pro Seite zwei Schriftproben angezeigt. Bitte lies beide Sätze und
-        schaue dir beide Proben an. Entscheide anschließend, welche Probe du besser leserlich findest.<br/>
+        schaue dir beide Proben an. Entscheide anschließend, welche Probe du besser leserlich findest.
+        Achte dabei auf die Leserlichkeit der Schriftproben, nicht auf ihre Schönheit!<br/>
         Achte darauf, ob du den Satz mehrfach lesen musst oder ob du ihn in einem Schwung lesen kannst.<br/>
         Kannst du den Satz schnell und problemlos lesen, ohne ins Stocken zu kommen? Dann ist der Satz eher gut leserlich.<br/>
         Musst du den Satz oder einzelne Wörter mehrfach lesen? Dann ist der Satz eher schlecht leserlich.<br/>
