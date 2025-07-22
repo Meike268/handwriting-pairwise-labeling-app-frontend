@@ -131,9 +131,9 @@ const BatchLabelingMain: React.FC = () => {
             descriptionText={<QuestionDescription question={batch.question}/>}
 
             image={
-                <div style={{display: "flex", flexDirection: "column", width: "100%", height: "100%"}}>
+                <div style={{ display: "flex", flexDirection: "column", width: "100%", height: "100%" }}>
                     {/* Image Row */}
-                    <div style={{display: "flex", flexDirection: "row", gap: "2%", width: "100%", height: "100%"}}>
+                    <div style={{ display: "flex", flexDirection: "row", gap: "2%", width: "100%", height: "100%" }}>
                         {[currentSample1, currentSample2].map((sample, idx) => (
                             <div
                                 key={sample.id}
@@ -144,72 +144,73 @@ const BatchLabelingMain: React.FC = () => {
                                     height: "100%",
                                 }}
                             >
-                                <Image src={sample.image} alt={`sample-${idx + 1}`}/>
+                                <Image src={sample.image} alt={`sample-${idx + 1}`} />
                             </div>
                         ))}
                     </div>
 
-                    {/* Shared Buttons Row */}
+                    {/* Shared Buttons Row: Example + Report */}
                     <div
                         className="popups-container"
                         style={{
                             display: "flex",
                             flexDirection: "row",
                             justifyContent: "space-between",
-                            margin: "10px auto 0",
-                            width: "100%",
+                            marginTop: "10px",
                             gap: "1rem",
                         }}
                     >
                         <div
                             className="exampleButton"
+                            onClick={() => setShowExamplePopup(true)}
                             style={{
                                 display: "flex",
                                 alignItems: "center",
                                 gap: "0.5rem",
                                 padding: "0.5rem 1rem",
-                                backgroundColor: "#e8f5e9", // light green background
-                                color: "#2e7d32", // darker green text/icon
+                                backgroundColor: "#e8f5e9",
+                                color: "#2e7d32",
                                 borderRadius: "6px",
                                 cursor: "pointer",
                                 fontSize: "0.9rem",
                                 transition: "background-color 0.2s ease",
                                 border: "1px solid #c8e6c9",
                             }}
-                            onClick={() => setShowExamplePopup(true)}
                             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#dcedc8")}
                             onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#e8f5e9")}
                         >
-                            <ImageSearch sx={{fontSize: "1.5rem"}}/>
+                            <ImageSearch sx={{ fontSize: "1.5rem" }} />
                             <div>Beispiele ansehen</div>
                         </div>
 
                         <div
                             className="reportButton"
+                            onClick={() => setShowReportPopup(true)}
                             style={{
                                 display: "flex",
                                 alignItems: "center",
                                 gap: "0.5rem",
                                 padding: "0.5rem 1rem",
-                                backgroundColor: "#fff3e0", // light orange background
-                                color: "#ef6c00", // darker orange for alert tone
+                                backgroundColor: "#fff3e0",
+                                color: "#ef6c00",
                                 borderRadius: "6px",
                                 cursor: "pointer",
                                 fontSize: "0.9rem",
                                 transition: "background-color 0.2s ease",
                                 border: "1px solid #ffe0b2",
                             }}
-                            onClick={() => setShowReportPopup(true)}
                             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#ffe0b2")}
                             onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#fff3e0")}
                         >
-                            <Flag sx={{fontSize: "1.5rem"}}/>
+                            <Flag sx={{ fontSize: "1.5rem" }} />
                             <div>Problem melden</div>
                         </div>
                     </div>
 
+
                 </div>
             }
+
 
 
             actions={
